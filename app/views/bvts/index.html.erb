@@ -1,0 +1,29 @@
+<h1>Listing bvts</h1>
+
+<table>
+  <tr>
+    <th>Build date</th>
+    <th>Build time</th>
+    <th>Duration</th>
+    <th>Duration converted</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bvts.each do |bvt| %>
+  <tr>
+    <td><%= bvt.build_date %></td>
+    <td><%= bvt.build_time %></td>
+    <td><%= bvt.duration %></td>
+    <td><%= bvt.duration_converted %></td>
+    <td><%= link_to 'Show', bvt %></td>
+    <td><%= link_to 'Edit', edit_bvt_path(bvt) %></td>
+    <td><%= link_to 'Destroy', bvt, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Bvt', new_bvt_path %>
