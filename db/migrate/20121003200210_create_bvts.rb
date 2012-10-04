@@ -3,7 +3,7 @@ class CreateBvts < ActiveRecord::Migration
     create_table :bvts do |t|
       t.string :build_date
       t.string :build_time
-      t.integer :duration
+      t.integer :duration, :limit => 8
       t.string :duration_converted
 
       t.timestamps
