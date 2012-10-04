@@ -1,6 +1,11 @@
 class BvtsController < ApplicationController
   # GET /bvts
   # GET /bvts.json
+  
+  def auto_create
+  	
+  end
+  
   def index
     @bvts = Bvt.all
 

@@ -1,6 +1,9 @@
 CukePerformance::Application.routes.draw do
   resources :bvts
-
+  
+  match 'auto_create/bvts' => 'bvts#auto_create', :as => :auto_create_bvts
+  match 'performance/bvts' => 'bvts#performance', :as => :performace_bvts
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -50,7 +53,7 @@ CukePerformance::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'bvts#index'
 
   # See how all your routes lay out with "rake routes"
 

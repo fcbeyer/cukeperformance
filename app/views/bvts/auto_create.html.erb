@@ -1,0 +1,10 @@
+<% require 'C:/local/projects/Git/CukePerformance/Performance/performance.rb' %>
+<h1>Auto generate new BVT data</h1>
+
+	<% build_list = getBuildList %>
+	<%= build_list[0].to_s %>
+
+
+
+<br />
+<%= link_to 'BVT Index', bvts_path %>
