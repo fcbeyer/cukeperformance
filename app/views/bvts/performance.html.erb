@@ -1,5 +1,4 @@
 <h1>BVT Performance Charts</h1>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
@@ -11,15 +10,15 @@
 	  
       function drawVisualization() {
         // Create and populate the data table.
-        var data = google.visualization.arrayToDataTable(<%= @buildData.to_json.html_safe %>);
+        var data = google.visualization.arrayToDataTable(<%= @bvtData.to_json.html_safe %>);
       
         // Create and draw the visualization.
         new google.visualization.BarChart(document.getElementById('visualization')).
             draw(data,
                  {title:"BVT Performance",
-                  width:1280, height:1024,
+                  width:900, height:700,
                   vAxis: {title: "Build"},
-                  hAxis: {title: "Duration in Nanoseconds"}}
+                  hAxis: {title: "Duration in Nanoseconds", minValue: 200000000000}}
             );
       }
       
@@ -28,8 +27,21 @@
     </script>
   </head>
   <body style="font-family: Arial;border: 0 none;">
-    <div id="visualization" style="width: 1280px; height: 1024px;"></div>
+    <div id="visualization" style="width: 900px; height: 700px;"></div>
   </body>
 </html>
+
+<table>
+	<tr>
+		<th colspan="5">Links to graphed BVT builds</th>
+	</tr>
+	<% @bvtBuilds.each do |bvt| %>
+	<tr>
+		<td style="padding-right: 5px"><%= link_to bvt.getFullName(bvt.id), bvt %></td>
+	</tr>
+	<% end %>
+</table>
+
+<br />
 
 <%= link_to 'BVT Index', bvts_path %>

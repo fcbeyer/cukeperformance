@@ -27,21 +27,19 @@ class BvtsController < ApplicationController
   end
   
   def performance
-		@buildData = Array.new
+		@bvtData = Array.new
 		categories = ["Build Date","Duration"]
-		@buildData.push(categories)
-		@build_list = Bvt.all
-		@build_list.each do |bvt_build|
-			@buildData.push(build_bvt_bar(bvt_build))
+		@bvtData.push(categories)
+		@bvtBuilds = Bvt.all
+		@bvtBuilds.each do |bvt|
+			@bvtData.push(build_bvt_bar(bvt))
 		end
-		puts @buildData.to_s
   end
   
-  def build_bvt_bar(bvt_build)
+  def build_bvt_bar(bvt)
   	entry = Array.new
-  	fullName = bvt_build.build_date + "_" + bvt_build.build_time
-  	entry.push(fullName)
-  	entry.push(bvt_build.duration)
+  	entry.push(bvt.getFullName(bvt.id))
+  	entry.push(bvt.duration)
   	return entry
   end
   
