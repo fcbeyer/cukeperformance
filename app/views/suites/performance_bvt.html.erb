@@ -37,7 +37,7 @@
 	</tr>
 	<% @bvtBuilds.each do |bvt| %>
 	<tr>
-		<td style="padding-right: 5px"><%= link_to bvt.getFullName(bvt.id), bvt %></td>
+		<td style="padding-right: 5px"><%= link_to 'BVT build ' + bvt.getFullName(bvt.id).to_s, bvt %></td>
 	</tr>
 	<% end %>
 </table>
