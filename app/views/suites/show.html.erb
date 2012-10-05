@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Build date:</b>
+  <%= @suite.build_date %>
+</p>
+
+<p>
+  <b>Build time:</b>
+  <%= @suite.build_time %>
+</p>
+
+<p>
+  <b>Duration:</b>
+  <%= @suite.duration %>
+</p>
+
+<p>
+  <b>Duration converted:</b>
+  <%= @suite.duration_converted %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @suite.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_suite_path(@suite) %> |
+<%= link_to 'Back', suites_path %>

@@ -1,0 +1,13 @@
+<h1>Auto generate new BVT data</h1>
+
+<br />
+	
+<% if @haveNewBVTData %>
+	<h5>New data was found and added to the database</h5>
+<% else %>
+	<h5>No new data was found</h5>
+<% end %>
+
+
+<br />
+<%= link_to 'BVT Index', suites_path %>

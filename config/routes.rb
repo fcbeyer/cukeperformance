@@ -1,10 +1,10 @@
-CukePerformance::Application.routes.draw do
-  resources :bvts
-  
+CukePerformance::Application.routes.draw do  
+  resources :suites
+
   #custom routes for auto generating data and then going to the graphs for each automation suite
-  # => 		url you want						model#action						   path
-  match 'auto_create/bvts' => 'bvts#auto_create', :as => :auto_create_bvts
-  match 'performance/bvts' => 'bvts#performance', :as => :performance_bvts
+  # => 				url you want								model#action						  				 path
+  match 'auto_create/bvt/suites' => 'suites#auto_create_bvt', :as => :auto_create_bvt_suites
+  match 'performance/bvt/suites' => 'suites#performance_bvt', :as => :performance_bvt_suites
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -55,7 +55,7 @@ CukePerformance::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'bvts#index'
+  root :to => 'suites#index'
 
   # See how all your routes lay out with "rake routes"
 

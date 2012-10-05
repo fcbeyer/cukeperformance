@@ -194,11 +194,13 @@ end
 
 def dirPurge(dirPath, build_stamp)
 	#get rid of directories we already have data for
-	dropNum = 0
+	dropNum = 2
 	dir = Dir.entries(dirPath)
-	dir.each do |buildFolder|
-		if buildFolder == build_stamp
-			dropNum = dir.index(buildFolder) + 1
+	if build_stamp != "empty"
+		dir.each do |buildFolder|
+			if buildFolder == build_stamp
+				dropNum = dir.index(buildFolder) + 1
+			end
 		end
 	end
 	dir = dir.drop(dropNum)
