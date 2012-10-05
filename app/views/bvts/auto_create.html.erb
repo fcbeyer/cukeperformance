@@ -1,9 +1,12 @@
-<% require 'C:/local/projects/Git/CukePerformance/Performance/performance.rb' %>
 <h1>Auto generate new BVT data</h1>
 
-	<% build_list = getBuildList %>
-	<%= build_list[0].to_s %>
-
+<br />
+	
+<% if @haveNewBVTData %>
+	<h5>New data was found and added to the database</h5>
+<% else %>
+	<h5>No new data was found</h5>
+<% end %>
 
 
 <br />

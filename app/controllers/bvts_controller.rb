@@ -1,9 +1,29 @@
+require 'C:/local/projects/Git/CukePerformance/BVT/jsonParse.rb'
+
 class BvtsController < ApplicationController
   # GET /bvts
   # GET /bvts.json
   
+  #runs script to grab build data from json dump
+  #then manually create entries in the Bvt model each new one
   def auto_create
-  	
+  	lastBvt = Bvt.last
+  	build_stamp = lastBvt.build_date + "_" + lastBvt.build_time
+  	@haveNewData = false
+  	@build_list = getBuildList("BVT",build_stamp)
+  	if @build_list.empty?
+  		@haveNewBVTData = false
+  	else
+  		@haveNewBVTData = true
+  		@build_list.each do |build|
+	  		@bvt = Bvt.new
+	  		@bvt.build_date = build.date
+	  		@bvt.build_time = build.time
+	  		@bvt.duration = build.duration
+	  		@bvt.duration_converted = build.convertedDuration
+	  		@bvt.save
+  		end
+  	end
   end
   
   def index
