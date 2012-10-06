@@ -1,4 +1,5 @@
 class Suite < ActiveRecord::Base
+	
 	#date and time need to be unique but only when strung together?
 	def getFullName(suite_id)
 		suite_build = Suite.find(suite_id)

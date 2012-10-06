@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Keyword:</b>
+  <%= @feature.keyword %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @feature.name %>
+</p>
+
+<p>
+  <b>Duration:</b>
+  <%= @feature.duration %>
+</p>
+
+<p>
+  <b>Duration converted:</b>
+  <%= @feature.duration_converted %>
+</p>
+
+<p>
+  <b>Suite:</b>
+  <%= @feature.suite_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_feature_path(@feature) %> |
+<%= link_to 'Back', features_path %>
