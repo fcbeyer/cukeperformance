@@ -26,5 +26,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_feature_path(@feature) %> |
-<%= link_to 'Back', features_path %>
+<%= link_to 'Edit', edit_suite_feature_path(@current_suite, @feature) %> |
+<%= link_to 'Back', suite_features_path(@current_suite) %>

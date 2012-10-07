@@ -1,7 +1,8 @@
 CukePerformance::Application.routes.draw do  
-  resources :features
 
-  resources :suites
+  resources :suites do
+    resources :features
+  end
 
   #custom routes for auto generating data and then going to the graphs for each automation suite
   # => 				url you want								model#action						  				 path

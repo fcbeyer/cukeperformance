@@ -1,4 +1,4 @@
-require 'C:/local/projects/Git/CukePerformance/BVT/jsonParse.rb'
+require_relative '../../BVT/jsonParse.rb'
 
 class SuitesController < ApplicationController
 	

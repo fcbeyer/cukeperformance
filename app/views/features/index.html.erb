@@ -1,4 +1,4 @@
-<h1>Listing features</h1>
+<h1>Listing the features for <%= @current_suite.name %> from <%= @current_suite.build_date + "_" + @current_suite.build_time %></h1>
 
 <table>
   <tr>
@@ -6,7 +6,6 @@
     <th>Name</th>
     <th>Duration</th>
     <th>Duration converted</th>
-    <th>Suite</th>
     <th></th>
     <th></th>
     <th></th>
@@ -18,7 +17,6 @@
     <td><%= feature.name %></td>
     <td><%= feature.duration %></td>
     <td><%= feature.duration_converted %></td>
-    <td><%= feature.suite_id %></td>
     <td><%= link_to 'Show', feature %></td>
     <td><%= link_to 'Edit', edit_feature_path(feature) %></td>
     <td><%= link_to 'Destroy', feature, confirm: 'Are you sure?', method: :delete %></td>
@@ -28,4 +26,4 @@
 
 <br />
 
-<%= link_to 'New Feature', new_feature_path %>
+<%= link_to 'New Feature', new_suite_feature_path(@current_suite) %>

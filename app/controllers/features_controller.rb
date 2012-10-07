@@ -1,8 +1,15 @@
 class FeaturesController < ApplicationController
   # GET /features
   # GET /features.json
+  
+  before_filter :get_suite
+  
+  def get_suite
+    @current_suite = Suite.find(params[:suite_id])
+  end
+  
   def index
-    @features = Feature.all
+    @features = @current_suite.features
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,10 +48,11 @@ class FeaturesController < ApplicationController
   # POST /features.json
   def create
     @feature = Feature.new(params[:feature])
+    @feature.suite_id = params[:suite_id]
 
     respond_to do |format|
       if @feature.save
-        format.html { redirect_to @feature, notice: 'Feature was successfully created.' }
+        format.html { redirect_to [@current_suite, @feature], notice: 'Feature was successfully created.' }
         format.json { render json: @feature, status: :created, location: @feature }
       else
         format.html { render action: "new" }
@@ -60,7 +68,7 @@ class FeaturesController < ApplicationController
 
     respond_to do |format|
       if @feature.update_attributes(params[:feature])
-        format.html { redirect_to @feature, notice: 'Feature was successfully updated.' }
+        format.html { redirect_to [@current_suite, @feature], notice: 'Feature was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
