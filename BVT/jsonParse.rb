@@ -11,11 +11,7 @@ class Build
 		@convertedDuration = 0
 		@features = []
 	end
-
-	def to_s
-		"#@date      #@time     #@duration       #@convertedDuration"
-	end
-
+	
 	def to_csv
 		#prints pretty csv format
 		"#@date #@time,#@duration"
@@ -25,10 +21,6 @@ class Build
 		#returns keyword + name
 		fullName = @date + "_" + @time
 		return fullName
-	end
-
-	def to_bar
-		#prints data into format for a bar graph
 	end
 end
 
@@ -42,14 +34,6 @@ class Feature
 		@duration = 0
 		@convertedDuration = 0
 		@scenarios = []
-	end
-
-	def to_s
-		"
-		 #@keyword
-		 #@name
-		 #@duration
-		 #@convertedDuration"
 	end
 
 	def to_csv
@@ -81,10 +65,6 @@ class Scenario
 		@steps = []
 	end
 
-	def to_s
-		"#@keyword     #@name     #@duration       #@convertedDuration"
-	end
-
 	def to_csv
 		#prints csv format
 		"#@keyword,#@name,#@duration,#@convertedDuration"
@@ -112,10 +92,6 @@ class Step
 		@duration = duration
 		@convertedDuration = convertedDuration
 		@status = status
-	end
-
-	def to_s
-		"#@keyword     #@name     #@duration       #@convertedDuration       #@status"
 	end
 
 	def to_csv
