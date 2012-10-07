@@ -1,0 +1,13 @@
+<h1>Auto generate new Suite data</h1>
+
+<br />
+	
+<% if @haveNewSuiteData %>
+	<h5>New data was found and added to the database</h5>
+<% else %>
+	<h5>No new data was found</h5>
+<% end %>
+
+
+<br />
+<%= link_to 'Suite Index', suites_path %>

@@ -4,31 +4,39 @@ class SuitesController < ApplicationController
 	
 	#runs script to grab build data from json dump
   #then manually create entries in the Bvt model each new one
-  def auto_create_bvt
-  	lastBvt = Suite.last
-  	if !lastBvt.nil?
-  		build_stamp = lastBvt.build_date + "_" + lastBvt.build_time
+  def auto_create
+  	lastSuite = Suite.last
+  	if !lastSuite.nil?
+  		build_stamp = lastSuite.build_date + "_" + lastSuite.build_time
   	else
   		build_stamp = "empty"
   	end
-  	@haveNewData = false
+  	@haveNewSuiteData = false
   	@build_list = getBuildList("BVT",build_stamp)
   	if @build_list.empty?
-  		@haveNewBVTData = false
+  		@haveNewSuiteData = false
   	else
-  		@haveNewBVTData = true
+  		@haveNewSuiteData = true
   		@build_list.each do |build|
-	  		@bvt = Suite.new
-	  		@bvt.build_date = build.date
-	  		@bvt.build_time = build.time
-	  		@bvt.duration = build.duration
-	  		@bvt.duration_converted = build.convertedDuration
-	  		@bvt.name = "BuildVerificationTest"
-	  		@bvt.save
-	  		#build features?
-  		end
-  	end
-  end
+	  		@newSuite = Suite.new
+	  		@newSuite.build_date = build.date
+	  		@newSuite.build_time = build.time
+	  		@newSuite.duration = build.duration
+	  		@newSuite.duration_converted = build.convertedDuration
+	  		@newSuite.name = "BuildVerificationTest"
+	  		@newSuite.save
+	  		# build.features.each do |feature|
+	  		  # @newFeature = Feature.new
+	  		  # @newFeature.keyword = feature.keyword
+	  		  # @newFeature.name = feature.name
+	  		  # @newFeature.duration = feature.duration
+	  		  # @newFeature.duration_converted = feature.convertedDuration
+	  		  # @newFeature.suite_id = @newSuite.id
+	  		  # @newFeature.save
+	  		# end #end feature
+  		end #end build
+  	end #end else
+  end #end auto_create
   
   def performance_bvt
 		@bvtData = Array.new
