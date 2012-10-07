@@ -25,7 +25,15 @@ class SuitesController < ApplicationController
 	  		@newSuite.duration_converted = build.convertedDuration
 	  		@newSuite.name = "BuildVerificationTest"
 	  		@newSuite.save
-	  		puts build.features.to_s
+	  		build.features.each do |feature|
+	  		  @newFeat = Feature.new
+  		    @newFeat.keyword = feature.keyword
+  		    @newFeat.name = feature.name
+  		    @newFeat.duration = feature.duration
+  		    @newFeat.duration_converted = feature.convertedDuration
+  		    @newFeat.suite_id = @newSuite.id
+	  		  @newFeat.save
+	  		end
   		end #end build
   	end #end else
   end #end auto_create

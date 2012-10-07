@@ -24,7 +24,7 @@ class Build
 	end
 end
 
-class Feature
+class JsonFeature
 	#this will store all of our features
 	attr_reader :keyword, :name, :duration, :convertedDuration, :scenarios
 	attr_writer :duration, :convertedDuration, :scenarios
@@ -53,7 +53,7 @@ class Feature
 	end
 end
 
-class Scenario
+class JsonScenario
 	#this will store all the info for a scenario
 	attr_reader :keyword, :name, :duration, :convertedDuration, :steps
 	attr_writer :duration, :convertedDuration, :steps
@@ -82,7 +82,7 @@ class Scenario
 	end
 end
 
-class Step
+class JsonStep
 	#this will be where we track step information
 	attr_reader :keyword, :name, :duration, :convertedDuration, :status
 	attr_writer :duration, :convertedDuration, :status
@@ -209,18 +209,18 @@ def getBuildList(jobName,build_stamp)
 			featureTotal = 0
 
 			document.each do |feature|
-				current_feature = Feature.new(feature['keyword'],feature['name'])
+				current_feature = JsonFeature.new(feature['keyword'],feature['name'])
 				scenarioTotal = 0
 				scenario_list = []
 				feature['elements'].each do |scenario|
-					current_scenario = Scenario.new(scenario['keyword'],scenario['name'])		
+					current_scenario = JsonScenario.new(scenario['keyword'],scenario['name'])		
 					stepTotal = 0
 					step_list = []
 					scenario['steps'].each do |step|
 						stepTotal = stepTotal + step['result']['duration']
 						dur = step['result']['duration']
 						convDur = Time.at((dur / 1000000000.00)).gmtime.strftime('%R:%S:%L')
-						step_list.push(Step.new(step['keyword'],step['name'],dur,convDur,step['result']['status']))
+						step_list.push(JsonStep.new(step['keyword'],step['name'],dur,convDur,step['result']['status']))
 					end
 					current_scenario.duration = stepTotal
 					current_scenario.convertedDuration = Time.at((stepTotal / 1000000000.00)).gmtime.strftime('%R:%S:%L')
