@@ -23,7 +23,9 @@ class SuitesController < ApplicationController
 	  		@bvt.build_time = build.time
 	  		@bvt.duration = build.duration
 	  		@bvt.duration_converted = build.convertedDuration
+	  		@bvt.name = "BuildVerificationTest"
 	  		@bvt.save
+	  		#build features?
   		end
   	end
   end
