@@ -1,0 +1,19 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Duration</th>
+    <th>Duration converted</th>
+  </tr>
+
+<% @current_suite.features.each do |feature| %>
+  <tr>
+    <td><%= link_to feature.name, [@current_suite,feature] %></td>
+    <td><%= feature.duration %></td>
+    <td><%= feature.duration_converted %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Feature', new_suite_feature_path(@current_suite) %>

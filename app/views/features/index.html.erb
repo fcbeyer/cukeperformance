@@ -2,7 +2,6 @@
 
 <table>
   <tr>
-    <th>Keyword</th>
     <th>Name</th>
     <th>Duration</th>
     <th>Duration converted</th>
@@ -13,7 +12,6 @@
 
 <% @features.each do |feature| %>
   <tr>
-    <td><%= feature.keyword %></td>
     <td><%= feature.name %></td>
     <td><%= feature.duration %></td>
     <td><%= feature.duration_converted %></td>
@@ -27,3 +25,4 @@
 <br />
 
 <%= link_to 'New Feature', new_suite_feature_path(@current_suite) %>
+<%= render 'suites/put_suites' %>

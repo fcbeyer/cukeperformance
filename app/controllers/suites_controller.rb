@@ -70,7 +70,7 @@ class SuitesController < ApplicationController
   # GET /suites/1
   # GET /suites/1.json
   def show
-    @suite = Suite.find(params[:id])
+    @current_suite = Suite.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
