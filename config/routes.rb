@@ -1,7 +1,9 @@
 CukePerformance::Application.routes.draw do  
 
   resources :suites do
-    resources :features
+    resources :features do
+    	resources :scenarios
+    end
   end
 
   #custom routes for auto generating data and then going to the graphs for each automation suite

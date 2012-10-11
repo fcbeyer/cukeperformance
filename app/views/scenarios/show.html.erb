@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Keyword:</b>
+  <%= @scenario.keyword %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @scenario.name %>
+</p>
+
+<p>
+  <b>Duration:</b>
+  <%= @scenario.duration %>
+</p>
+
+<p>
+  <b>Duration converted:</b>
+  <%= @scenario.duration_converted %>
+</p>
+
+<p>
+  <b>Feature:</b>
+  <%= @scenario.feature_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_scenario_path(@scenario) %> |
+<%= link_to 'Back', scenarios_path %>

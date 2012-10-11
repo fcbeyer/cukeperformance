@@ -1,0 +1,31 @@
+<h1>Listing scenarios</h1>
+
+<table>
+  <tr>
+    <th>Keyword</th>
+    <th>Name</th>
+    <th>Duration</th>
+    <th>Duration converted</th>
+    <th>Feature</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @scenarios.each do |scenario| %>
+  <tr>
+    <td><%= scenario.keyword %></td>
+    <td><%= scenario.name %></td>
+    <td><%= scenario.duration %></td>
+    <td><%= scenario.duration_converted %></td>
+    <td><%= scenario.feature_id %></td>
+    <td><%= link_to 'Show', scenario %></td>
+    <td><%= link_to 'Edit', edit_scenario_path(scenario) %></td>
+    <td><%= link_to 'Destroy', scenario, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Scenario', new_scenario_path %>
