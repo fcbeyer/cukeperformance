@@ -1,8 +1,16 @@
 class ScenariosController < ApplicationController
   # GET /scenarios
   # GET /scenarios.json
+  
+  before_filter :get_suite_and_feature
+  
+  def get_suite_and_feature
+    @current_suite = Suite.find(params[:suite_id])
+    @current_feature = Feature.find(params[:feature_id])
+  end
+  
   def index
-    @scenarios = Scenario.all
+    @scenarios = @current_feature.scenarios
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,10 +49,11 @@ class ScenariosController < ApplicationController
   # POST /scenarios.json
   def create
     @scenario = Scenario.new(params[:scenario])
+    @scenario.feature_id = params[:feature_id]
 
     respond_to do |format|
       if @scenario.save
-        format.html { redirect_to @scenario, notice: 'Scenario was successfully created.' }
+        format.html { redirect_to [@current_suite, @current_feature, @scenario], notice: 'Scenario was successfully created.' }
         format.json { render json: @scenario, status: :created, location: @scenario }
       else
         format.html { render action: "new" }
@@ -60,7 +69,7 @@ class ScenariosController < ApplicationController
 
     respond_to do |format|
       if @scenario.update_attributes(params[:scenario])
-        format.html { redirect_to @scenario, notice: 'Scenario was successfully updated.' }
+        format.html { redirect_to [@current_suite, @current_feature, @scenario], notice: 'Scenario was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

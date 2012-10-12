@@ -33,7 +33,16 @@ class SuitesController < ApplicationController
   		    @newFeat.duration_converted = feature.convertedDuration
   		    @newFeat.suite_id = @newSuite.id
 	  		  @newFeat.save
-	  		end
+	  		  feature.scenarios.each do |scenario|
+	  		  	@newScenario = Scenario.new
+	  		  	@newScenario.keyword = scenario.keyword
+  		    	@newScenario.name = scenario.name
+  		    	@newScenario.duration = scenario.duration
+  		    	@newScenario.duration_converted = scenario.convertedDuration
+  		    	@newScenario.feature_id = @newFeat.id
+	  		  	@newScenario.save
+	  		  end #end scenario
+	  		end #end feature
   		end #end build
   	end #end else
   end #end auto_create

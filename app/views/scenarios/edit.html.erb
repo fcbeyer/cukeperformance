@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @scenario %> |
-<%= link_to 'Back', scenarios_path %>
+<%= link_to 'Show', [@current_suite,@current_feature,@scenario] %> |
+<%= link_to 'Back', suite_feature_scenarios_path(@current_suite,@current_feature) %>
