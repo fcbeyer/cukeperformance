@@ -1,30 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Keyword:</b>
-  <%= @feature.keyword %>
-</p>
-
-<p>
-  <b>Name:</b>
-  <%= @feature.name %>
-</p>
-
-<p>
-  <b>Duration:</b>
-  <%= @feature.duration %>
-</p>
-
-<p>
-  <b>Duration converted:</b>
-  <%= @feature.duration_converted %>
-</p>
-
-<p>
-  <b>Suite:</b>
-  <%= @current_suite.name %>
-</p>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Duration</th>
+    <th>Duration converted</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <!-- <td><%= @current_feature_name %></td> -->
+    <td><%= @current_feature.duration %></td>
+    <td><%= @current_feature.duration_converted %></td>
+    <td><%= link_to 'Edit', edit_suite_feature_path(@current_suite, @current_feature) %></td>
+    <td><%= link_to 'Destroy', [@current_suite,@current_feature], confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+</table>
 
 
-<%= link_to 'Edit', edit_suite_feature_path(@current_suite, @feature) %> |
+<%= link_to 'Edit', edit_suite_feature_path(@current_suite, @current_feature) %> |
 <%= link_to 'Back', suite_features_path(@current_suite) %>
+<%= link_to 'Scenarios', suite_feature_scenarios_path(@current_suite,@current_feature) %>

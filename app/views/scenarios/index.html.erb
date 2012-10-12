@@ -1,12 +1,10 @@
-<h1>Listing scenarios</h1>
+<h1>Listing the scenarios for <%= @current_feature_name %> from the <%= @current_suite.name %> build on <%= @current_suite.build_date + "_" + @current_suite.build_time %></h1>
 
 <table>
   <tr>
-    <th>Keyword</th>
     <th>Name</th>
     <th>Duration</th>
     <th>Duration converted</th>
-    <th>Feature</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,11 +12,9 @@
 
 <% @scenarios.each do |scenario| %>
   <tr>
-    <td><%= scenario.keyword %></td>
     <td><%= scenario.name %></td>
     <td><%= scenario.duration %></td>
     <td><%= scenario.duration_converted %></td>
-    <td><%= @current_feature.name %></td>
     <td><%= link_to 'Show', [@current_suite,@current_feature,scenario] %></td>
     <td><%= link_to 'Edit', edit_suite_feature_scenario_path(@current_suite,@current_feature,scenario) %></td>
     <td><%= link_to 'Destroy', [@current_suite,@current_feature,scenario], confirm: 'Are you sure?', method: :delete %></td>

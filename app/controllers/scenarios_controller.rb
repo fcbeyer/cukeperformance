@@ -7,6 +7,7 @@ class ScenariosController < ApplicationController
   def get_suite_and_feature
     @current_suite = Suite.find(params[:suite_id])
     @current_feature = Feature.find(params[:feature_id])
+    #@current_feature_name = Feature.getFullName(params[:feature_id])
   end
   
   def index

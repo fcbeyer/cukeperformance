@@ -20,7 +20,8 @@ class FeaturesController < ApplicationController
   # GET /features/1
   # GET /features/1.json
   def show
-    @feature = Feature.find(params[:id])
+    @current_feature = Feature.find(params[:id])
+    #@current_feature_name = Feature.getFullName(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
