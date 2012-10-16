@@ -1,4 +1,4 @@
-<h1>Listing the scenarios for <%= @current_feature_name %> from the <%= @current_suite.name %> build on <%= @current_suite.build_date + "_" + @current_suite.build_time %></h1>
+<h1>Listing the scenarios for <%= @current_feature.name %> from the <%= @current_suite.name %> build on <%= @current_suite.build_date + "_" + @current_suite.build_time %></h1>
 
 <table>
   <tr>
@@ -12,7 +12,12 @@
 
 <% @scenarios.each do |scenario| %>
   <tr>
-    <td><%= scenario.name %></td>
+  	<% if scenario.name.length == 0
+  		displayName = scenario.keyword
+  	   else
+  	   	displayName = scenario.name
+  	   end %>
+    <td><%= displayName %></td>
     <td><%= scenario.duration %></td>
     <td><%= scenario.duration_converted %></td>
     <td><%= link_to 'Show', [@current_suite,@current_feature,scenario] %></td>

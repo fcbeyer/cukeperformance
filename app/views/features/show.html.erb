@@ -7,10 +7,9 @@
     <th>Duration converted</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
   <tr>
-    <!-- <td><%= @current_feature_name %></td> -->
+    <td><%= @current_feature.name %></td>
     <td><%= @current_feature.duration %></td>
     <td><%= @current_feature.duration_converted %></td>
     <td><%= link_to 'Edit', edit_suite_feature_path(@current_suite, @current_feature) %></td>
@@ -18,6 +17,9 @@
   </tr>
 </table>
 
+<%= render 'scenarios/put_scenarios' %>
+
+<br />
 
 <%= link_to 'Edit', edit_suite_feature_path(@current_suite, @current_feature) %> |
 <%= link_to 'Back', suite_features_path(@current_suite) %>

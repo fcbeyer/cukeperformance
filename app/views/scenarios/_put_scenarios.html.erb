@@ -1,0 +1,24 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Duration</th>
+    <th>Duration converted</th>
+  </tr>
+
+<% @current_feature.scenarios.each do |scenario| %>
+  <tr>
+  	<% if scenario.name.length == 0
+  		displayName = scenario.keyword
+  	   else
+  	   	displayName = scenario.name
+  	   end %>
+    <td><%= link_to displayName, [@current_suite,@current_feature,scenario] %></td>
+    <td><%= scenario.duration %></td>
+    <td><%= scenario.duration_converted %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Scenario', new_suite_feature_scenario_path(@current_suite,@current_feature) %>
