@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Keyword:</b>
+  <%= @step.keyword %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @step.name %>
+</p>
+
+<p>
+  <b>Duration:</b>
+  <%= @step.duration %>
+</p>
+
+<p>
+  <b>Duration converted:</b>
+  <%= @step.duration_converted %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @step.status %>
+</p>
+
+<p>
+  <b>Scenario:</b>
+  <%= @step.scenario_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_step_path(@step) %> |
+<%= link_to 'Back', steps_path %>

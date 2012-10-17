@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  keyword: MyString
+  name: MyString
+  duration: 1
+  duration_converted: MyString
+  status: MyString
+  scenario_id: 1
+
+two:
+  keyword: MyString
+  name: MyString
+  duration: 1
+  duration_converted: MyString
+  status: MyString
+  scenario_id: 1

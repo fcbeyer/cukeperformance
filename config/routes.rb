@@ -1,5 +1,7 @@
 CukePerformance::Application.routes.draw do  
 
+  resources :steps
+
   resources :suites do
     resources :features do
     	resources :scenarios

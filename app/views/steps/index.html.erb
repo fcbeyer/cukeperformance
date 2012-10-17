@@ -1,0 +1,33 @@
+<h1>Listing steps</h1>
+
+<table>
+  <tr>
+    <th>Keyword</th>
+    <th>Name</th>
+    <th>Duration</th>
+    <th>Duration converted</th>
+    <th>Status</th>
+    <th>Scenario</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @steps.each do |step| %>
+  <tr>
+    <td><%= step.keyword %></td>
+    <td><%= step.name %></td>
+    <td><%= step.duration %></td>
+    <td><%= step.duration_converted %></td>
+    <td><%= step.status %></td>
+    <td><%= step.scenario_id %></td>
+    <td><%= link_to 'Show', step %></td>
+    <td><%= link_to 'Edit', edit_step_path(step) %></td>
+    <td><%= link_to 'Destroy', step, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Step', new_step_path %>
