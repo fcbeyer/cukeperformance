@@ -1,13 +1,11 @@
-<h1>Listing steps</h1>
+<h1>Listing the steps for <%@current_scenario.name %> from the <%= @current_feature.name %> feature of <%= @current_suite.name %> build on <%= @current_suite.build_date + "_" + @current_suite.build_time %></h1>
 
 <table>
   <tr>
-    <th>Keyword</th>
     <th>Name</th>
     <th>Duration</th>
     <th>Duration converted</th>
     <th>Status</th>
-    <th>Scenario</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,19 +13,22 @@
 
 <% @steps.each do |step| %>
   <tr>
-    <td><%= step.keyword %></td>
-    <td><%= step.name %></td>
+  	<% if scenario.name.length == 0
+  		displayName = step.keyword
+  	   else
+  	   	displayName = step.name
+  	   end %>
+    <td><%= displayName %></td>
     <td><%= step.duration %></td>
     <td><%= step.duration_converted %></td>
     <td><%= step.status %></td>
-    <td><%= step.scenario_id %></td>
-    <td><%= link_to 'Show', step %></td>
-    <td><%= link_to 'Edit', edit_step_path(step) %></td>
-    <td><%= link_to 'Destroy', step, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', [@current_suite,@current_feature,@current_scenario,step] %></td>
+    <td><%= link_to 'Edit', edit_step_path(@current_suite,@current_feature,@current_scenario,step) %></td>
+    <td><%= link_to 'Destroy', [@current_suite,@current_feature,@current_scenario,step], confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Step', new_step_path %>
+<%= link_to 'New Step', new_suite_feature_scenario_step_path(@current_suite,@current_feature,@current_scenario) %>

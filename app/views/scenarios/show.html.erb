@@ -1,30 +1,26 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Keyword:</b>
-  <%= @scenario.keyword %>
-</p>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Duration</th>
+    <th>Duration converted</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td><%= @current_scenario.name %></td>
+    <td><%= @current_scenario.duration %></td>
+    <td><%= @current_scenario.duration_converted %></td>
+    <td><%= link_to 'Edit', edit_suite_feature_scenario_path(@current_suite, @current_feature,@current_scenario) %></td>
+    <td><%= link_to 'Destroy', [@current_suite,@current_feature,@current_scenario], confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+</table>
 
-<p>
-  <b>Name:</b>
-  <%= @scenario.name %>
-</p>
+<%= render 'steps/put_steps' %>
 
-<p>
-  <b>Duration:</b>
-  <%= @scenario.duration %>
-</p>
+<br />
 
-<p>
-  <b>Duration converted:</b>
-  <%= @scenario.duration_converted %>
-</p>
-
-<p>
-  <b>Feature:</b>
-  <%= @scenario.feature_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_suite_feature_scenario_path(@current_suite,@current_feature,@scenario) %> |
+<%= link_to 'Edit', edit_suite_feature_scenario_path(@current_suite,@current_feature,@current_scenario) %> |
 <%= link_to 'Back', suite_feature_scenarios_path(@current_suite,@current_feature) %>
+<%= link_to 'Steps', suite_feature_scenario_steps_path(@current_suite,@current_feature,@current_scenario) %>
