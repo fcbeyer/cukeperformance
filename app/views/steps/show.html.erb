@@ -31,5 +31,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_step_path(@step) %> |
-<%= link_to 'Back', steps_path %>
+<%= link_to 'Edit', edit_suite_feature_scenario_step_path(@current_suite,@current_feature,@current_scenario,@step) %> |
+<%= link_to 'Back', suite_feature_scenario_steps_path(@current_suite,@current_feature,@current_scenario) %>

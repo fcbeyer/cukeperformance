@@ -41,6 +41,16 @@ class SuitesController < ApplicationController
   		    	@newScenario.duration_converted = scenario.convertedDuration
   		    	@newScenario.feature_id = @newFeat.id
 	  		  	@newScenario.save
+	  		  	scenario.steps.each do |step|
+	  		  		@newStep = Step.new
+	  		  		@newStep.keyword = step.keyword
+  		    		@newStep.name = step.name
+  		    		@newStep.duration = step.duration
+  		    		@newStep.duration_converted = step.convertedDuration
+  		    		@newStep.status = step.status
+  		    		@newStep.scenario_id = @newScenario.id
+	  		  		@newStep.save
+	  		  	end #end step
 	  		  end #end scenario
 	  		end #end feature
   		end #end build

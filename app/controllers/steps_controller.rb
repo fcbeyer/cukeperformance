@@ -1,8 +1,17 @@
 class StepsController < ApplicationController
   # GET /steps
   # GET /steps.json
+  
+  before_filter :get_suite_feature_and_scenario
+  
+  def get_suite_and_feature
+    @current_suite = Suite.find(params[:suite_id])
+    @current_feature = Feature.find(params[:feature_id])
+    @current_scenario = Scenario.find(params[:scenario_id])
+  end
+  
   def index
-    @steps = Step.all
+    @steps = @current_scenario.steps
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,10 +50,11 @@ class StepsController < ApplicationController
   # POST /steps.json
   def create
     @step = Step.new(params[:step])
+    @step.scenario_id = params[:scenario_id]
 
     respond_to do |format|
       if @step.save
-        format.html { redirect_to @step, notice: 'Step was successfully created.' }
+        format.html { redirect_to [@current_suite, @current_feature, @current_scenario, @step], notice: 'Step was successfully created.' }
         format.json { render json: @step, status: :created, location: @step }
       else
         format.html { render action: "new" }
@@ -60,7 +70,7 @@ class StepsController < ApplicationController
 
     respond_to do |format|
       if @step.update_attributes(params[:step])
-        format.html { redirect_to @step, notice: 'Step was successfully updated.' }
+        format.html { redirect_to [@current_suite, @current_feature, @current_scenario, @step], notice: 'Step was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
