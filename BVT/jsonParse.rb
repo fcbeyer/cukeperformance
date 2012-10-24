@@ -2,7 +2,7 @@ require 'json'
 
 class Build
 	#this will store all the elements for a specific feature
-	attr_reader :date, :time, :duration, :convertedDuration, :features
+	attr_reader :date, :time, :duration, :convertedDuration, :features, :browser, :os, :mobilizer, :mobilizer_build_tag, :url
 	attr_writer :duration, :convertedDuration, :features
 	def initialize(date, time)
 		@date = date
@@ -10,6 +10,11 @@ class Build
 		@duration = 0
 		@convertedDuration = 0
 		@features = []
+		@browser = ""
+		@os = ""
+		@mobilizer = ""
+		@mobilizer_build_tag = ""
+		@url = ""
 	end
 	
 	def to_csv
