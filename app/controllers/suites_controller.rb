@@ -11,8 +11,9 @@ class SuitesController < ApplicationController
   	else
   		build_stamp = "empty"
   	end
+  	jobname = params[:jobname]
   	@haveNewSuiteData = false
-  	@build_list = getBuildList(params[:jobname],build_stamp)
+  	@build_list = getBuildList(jobname,build_stamp)
   	if @build_list.empty?
   		@haveNewSuiteData = false
   	else
@@ -28,7 +29,7 @@ class SuitesController < ApplicationController
 	  		@newSuite.mobilizer = build.mobilizer
 	  		@newSuite.mobilizer_build_tag = build.mobilizer_build_tag
 	  		@newSuite.url = build.url
-	  		@newSuite.name = "BuildVerificationTest"
+	  		@newSuite.name = jobname
 	  		@newSuite.save
 	  		build.features.each do |feature|
 	  		  @newFeat = Feature.new
