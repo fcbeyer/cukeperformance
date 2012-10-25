@@ -4,7 +4,7 @@ class StepsController < ApplicationController
   
   before_filter :get_suite_feature_and_scenario
   
-  def get_suite_and_feature
+  def get_suite_feature_and_scenario
     @current_suite = Suite.find(params[:suite_id])
     @current_feature = Feature.find(params[:feature_id])
     @current_scenario = Scenario.find(params[:scenario_id])
