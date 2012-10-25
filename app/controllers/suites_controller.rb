@@ -12,7 +12,7 @@ class SuitesController < ApplicationController
   		build_stamp = "empty"
   	end
   	@haveNewSuiteData = false
-  	@build_list = getBuildList("BVT",build_stamp)
+  	@build_list = getBuildList(params[:jobname],build_stamp)
   	if @build_list.empty?
   		@haveNewSuiteData = false
   	else
