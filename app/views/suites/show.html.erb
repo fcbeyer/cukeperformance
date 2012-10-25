@@ -7,6 +7,11 @@
     <th>Duration</th>
     <th>Duration converted</th>
     <th>Name</th>
+    <th>Browser</th>
+    <th>OS</th>
+    <th>Mobilizer</th>
+    <th>Mobilizer Build Tag</th>
+    <th>URL</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,6 +22,11 @@
     <td><%= @current_suite.duration %></td>
     <td><%= @current_suite.duration_converted %></td>
     <td><%= @current_suite.name %></td>
+    <td><%= @current_suite.browser %></td>
+    <td><%= @current_suite.os %></td>
+    <td><%= @current_suite.mobilizer %></td>
+    <td><%= @current_suite.mobilizer_build_tag %></td>
+    <td><%= @current_suite.url %></td>
     <td><%= link_to 'Edit', edit_suite_path(@current_suite) %></td>
     <td><%= link_to 'Destroy', @current_suite, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
