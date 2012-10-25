@@ -3,7 +3,7 @@ require_relative '../../performance/jsonParse.rb'
 class SuitesController < ApplicationController
 	
 	#runs script to grab build data from json dump
-  #then manually create entries in the Bvt model each new one
+  #then manually create entries in the jobname model each new one
   def auto_create
   	lastSuite = Suite.last
   	if !lastSuite.nil?
