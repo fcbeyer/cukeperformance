@@ -21,7 +21,7 @@ class ScenariosController < ApplicationController
   # GET /scenarios/1
   # GET /scenarios/1.json
   def show
-    @scenario = Scenario.find(params[:id])
+    @current_scenario = Scenario.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
