@@ -4,17 +4,17 @@ class Build
 	#this will store all the elements for a specific feature
 	attr_reader :date, :time, :duration, :convertedDuration, :features, :browser, :os, :mobilizer, :mobilizer_build_tag, :url
 	attr_writer :duration, :convertedDuration, :features
-	def initialize(date, time)
+	def initialize(date, time, browser, os, mobilizer, mobilizer_build_tag, url)
 		@date = date
 		@time = time
 		@duration = 0
 		@convertedDuration = 0
 		@features = []
-		@browser = ""
-		@os = ""
-		@mobilizer = ""
-		@mobilizer_build_tag = ""
-		@url = ""
+		@browser = browser
+		@os = os
+		@mobilizer = mobilizer
+		@mobilizer_build_tag = mobilizer_build_tag
+		@url = url
 	end
 	
 	def to_csv
@@ -194,7 +194,7 @@ end
 def getBuildList(jobName,build_stamp)
 	build_list = []
 	#step through file directory and find cucumber.json
-	dirPath = Dir.pwd + "/" + jobName + "/builds"
+	dirPath = "C:/Program Files (x86)/Jenkins/jobs/" + jobName + "/builds"
 	#dirPath = "C:/local/projects/Git/CukePerformance/Performance/builds"
 	dir = dirPurge(dirPath,build_stamp)
 	dir.each do |buildFolder|
@@ -203,10 +203,14 @@ def getBuildList(jobName,build_stamp)
 			build = buildFolder.split("_")
 			date = build[0]
 			time = build[1]
-			current_build = Build.new(date,time)
+			systemDatafilePath = dirPath + "/" + buildFolder + "/archive/systemData.json"
+			systemData = JSON.parse(systemDatafilePath)
+			#systemData is always in the same order
+			#browser, :os, :mobilizer, :mobilizer_build_tag, :url
+			current_build = Build.new(date,time,systemData[0],systemData[1],systemData[2],systemData[3],systemData[4])
 
 			#now we have the cucumber.json file location, lets process it
-			filePath = dirPath + "/" + buildFolder + "/cucumber-html-reports/cucumber.json"
+			filePath = dirPath + "/" + buildFolder + "/archive/cucumber.json"
 			file = File.read(filePath)
 			document = JSON.parse(file)
 

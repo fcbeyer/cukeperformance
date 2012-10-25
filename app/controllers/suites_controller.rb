@@ -1,4 +1,4 @@
-require_relative '../../BVT/jsonParse.rb'
+require_relative '../../performance/jsonParse.rb'
 
 class SuitesController < ApplicationController
 	
@@ -23,6 +23,11 @@ class SuitesController < ApplicationController
 	  		@newSuite.build_time = build.time
 	  		@newSuite.duration = build.duration
 	  		@newSuite.duration_converted = build.convertedDuration
+	  		@newSuite.browser = build.browser
+	  		@newSuite.os = build.os
+	  		@newSuite.mobilizer = build.mobilizer
+	  		@newSuite.mobilizer_build_tag = build.mobilizer_build_tag
+	  		@newSuite.url = build.url
 	  		@newSuite.name = "BuildVerificationTest"
 	  		@newSuite.save
 	  		build.features.each do |feature|
