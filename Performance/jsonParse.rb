@@ -204,7 +204,8 @@ def getBuildList(jobName,build_stamp)
 			date = build[0]
 			time = build[1]
 			systemDatafilePath = dirPath + "/" + buildFolder + "/archive/systemData.json"
-			systemData = JSON.parse(systemDatafilePath)
+			systemDataFile = File.read(systemDatafilePath)
+			systemData = JSON.parse(systemDataFile)
 			#systemData is always in the same order
 			#browser, :os, :mobilizer, :mobilizer_build_tag, :url
 			current_build = Build.new(date,time,systemData[0],systemData[1],systemData[2],systemData[3],systemData[4])
