@@ -65,19 +65,8 @@ class SuitesController < ApplicationController
   
   def performance_bvt
 		@bvtData = Array.new
-		categories = ["Build Date","Duration"]
-		@bvtData.push(categories)
 		@bvtBuilds = Suite.all
-		@bvtBuilds.each do |bvt|
-			@bvtData.push(build_bvt_bar(bvt))
-		end
-  end
-  
-  def build_bvt_bar(bvt)
-  	entry = Array.new
-  	entry.push(bvt.getFullName(bvt.id))
-  	entry.push(bvt.duration)
-  	return entry
+		@bvtData = @bvtBuilds
   end
   
   
