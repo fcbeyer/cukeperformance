@@ -4,7 +4,7 @@ class Build
 	#this will store all the elements for a specific feature
 	attr_reader :date, :time, :duration, :convertedDuration, :features, :browser, :os, :mobilizer, :mobilizer_build_tag, :url
 	attr_writer :duration, :convertedDuration, :features
-	def initialize(date, time, browser, os, mobilizer, mobilizer_build_tag, url)
+	def initialize(date, time, mobilizer_build_tag, mobilizer, os, url, browser)
 		@date = date
 		@time = time
 		@duration = 0
