@@ -5,15 +5,18 @@ class SuitesController < ApplicationController
 	#runs script to grab build data from json dump
   #then manually create entries in the jobname model each new one
   def auto_create
-  	lastSuite = Suite.last
-  	if !lastSuite.nil?
-  		build_stamp = lastSuite.build_date + "_" + lastSuite.build_time
-  	else
-  		build_stamp = "empty"
-  	end
+  	jobname = ""
   	jobname = params[:jobname]
   	@haveNewSuiteData = false
-  	@build_list = getBuildList(jobname,build_stamp)
+  	if !jobname.empty?
+  		lastSuite = Suite.where(name: jobname).last
+	  	if !lastSuite.nil?
+	  		build_stamp = lastSuite.build_date + "_" + lastSuite.build_time
+	  	else
+	  		build_stamp = "empty"
+	  	end
+  		@build_list = getBuildList(jobname,build_stamp)
+  	end
   	if @build_list.empty?
   		@haveNewSuiteData = false
   	else
@@ -65,8 +68,14 @@ class SuitesController < ApplicationController
   
   def performance_bvt
 		@bvtData = Array.new
-		@bvtBuilds = Suite.all
+		@bvtBuilds = Suite.where(name: "BVT")
 		@bvtData = @bvtBuilds
+  end
+  
+  def performance_portalsmoke
+  	@portal_smoke_data = Array.new
+  	@portal_smoke_builds = Suite.where(name: "PortalSmoke")
+  	@portal_smoke_data = @portal_smoke_builds
   end
   
   
