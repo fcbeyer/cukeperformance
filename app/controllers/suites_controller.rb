@@ -2,18 +2,6 @@ require_relative '../../performance/jsonParse.rb'
 
 class SuitesController < ApplicationController
 	
-	# #need before filter to check for jobname on auto_create and performance actions
-	# before_filter :check_jobname, :only => [:auto_create, :performance]
-#   
-  # def check_jobname
-  	# jobname = ""
-  	# jobname params[:jobname]
-    # if jobname.empty?
-      # redirect_to games_url, :notice => "You cannot look at another player's game!"
-    # end
-  # end
-	
-	
 	#runs script to grab build data from json dump
   #then manually create entries in the jobname model each new one
   def auto_create
