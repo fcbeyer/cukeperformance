@@ -2,6 +2,9 @@ require_relative '../../performance/jsonParse.rb'
 
 class SuitesController < ApplicationController
 	
+	#need before filter to check for jobname on auto_create and performance actions
+	
+	
 	#runs script to grab build data from json dump
   #then manually create entries in the jobname model each new one
   def auto_create
@@ -66,18 +69,10 @@ class SuitesController < ApplicationController
   	end #end else
   end #end auto_create
   
-  def performance_bvt
-		@bvtData = Array.new
-		@bvtBuilds = Suite.where(name: "BVT")
-		@bvtData = @bvtBuilds
-  end
-  
-  def performance_portalsmoke
-  	@portal_smoke_data = Array.new
-  	@portal_smoke_builds = Suite.where(name: "PortalSmoke")
-  	@portal_smoke_data = @portal_smoke_builds
-  end
-  
+  def performance
+  	@jobname = params[:jobname]
+		@suiteBuilds = Suite.where(name: @jobname)
+  end  
   
   # GET /suites
   # GET /suites.json

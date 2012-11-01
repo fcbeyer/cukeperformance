@@ -9,7 +9,7 @@
       google.load('visualization', '1', {packages: ['corechart']});
     </script>
     <script type="text/javascript">
-	  var data = <%= @bvtData.to_json.html_safe %>;
+	  var data = <%= @suiteBuilds.to_json.html_safe %>;
       function drawVisualization() {
         // Create and populate the data table.
         var dataTable = new google.visualization.DataTable();
@@ -42,11 +42,11 @@
 
 <table>
 	<tr>
-		<th colspan="5">Links to graphed BVT builds</th>
+		<th colspan="5">Links to graphed <%=@jobname %> builds</th>
 	</tr>
-	<% @bvtBuilds.each do |bvt| %>
+	<% @suiteBuilds.each do |suite| %>
 	<tr>
-		<td style="padding-right: 5px"><%= link_to 'BVT build ' + bvt.getFullName(bvt.id).to_s, suite_path(bvt.id) %></td>
+		<td style="padding-right: 5px"><%= link_to @jobname + ' build ' + suite.getFullName(suite.id).to_s, suite_path(suite.id) %></td>
 	</tr>
 	<% end %>
 </table>

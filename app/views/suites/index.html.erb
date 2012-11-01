@@ -30,6 +30,10 @@
 
 <%= link_to 'Manually Add New Suite', new_suite_path %>
 <br />
-<%= link_to 'Generate New BVT Suite', auto_create_suites_path + "?jobname=BVT" %>
+<%= link_to 'Generate New BVT Suite(s)', auto_create_suites_path + "?jobname=BVT" %>
 <br />
-<%= link_to 'BVT Performance', performance_bvt_suites_path %>
+<%= link_to 'Generate New Portal Smoke Suite(s)', auto_create_suites_path + "?jobname=PortalSmoke" %>
+<br />
+<%= link_to 'BVT Performance Graph', suite_performance_path + "?jobname=BVT" %>
+<br />
+<%= link_to 'Portal Smoke Performance Graph', suite_performance_path + "?jobname=PortalSmoke" %>
