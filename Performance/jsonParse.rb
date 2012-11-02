@@ -239,11 +239,19 @@ def getBuildList(jobName,build_stamp)
 						end
 						step_list.push(JsonStep.new(step['keyword'],step['name'],dur,convDur,step['result']['status']))
 					end
+					if current_scenario.status.empty?
+						#all the steps passed
+						current_scenario.status = "passed"
+					end
 					current_scenario.duration = stepTotal
 					current_scenario.convertedDuration = Time.at((stepTotal / 1000000000.00)).gmtime.strftime('%R:%S:%L')
 					current_scenario.steps = step_list
 					scenario_list.push(current_scenario)
 					scenarioTotal = scenarioTotal + stepTotal
+				end
+				if current_feature.status.empty?
+						#all the steps passed
+						current_feature.status = "passed"
 				end
 				current_feature.duration = scenarioTotal
 				current_feature.convertedDuration = Time.at((scenarioTotal / 1000000000.00)).gmtime.strftime('%R:%S:%L')
@@ -256,7 +264,11 @@ def getBuildList(jobName,build_stamp)
 			feature_list.each do |feature|
 				totalTime = totalTime + feature.duration
 			end
-
+			
+			if current_build.status.empty?
+						#all the steps passed
+						current_build.status = "passed"
+			end
 			current_build.duration = totalTime
 			current_build.convertedDuration = Time.at(totalTime / 1000000000.00).gmtime.strftime('%R:%S:%L')
 			current_build.features = feature_list
