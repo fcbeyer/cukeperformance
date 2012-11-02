@@ -5,16 +5,7 @@ gem 'rails', '3.2.1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-platforms :ruby do
-	gem 'sqlite3'
-	gem 'activerecord-jdbc-adapter'
-end
-
-platforms :jruby do
-	gem 'jruby-openssl'
-	gem 'activerecord-jdbcsqlite3-adapter'
-	gem 'activerecord-jdbc-adapter'
-end
+gem 'sqlite3'
 
 
 # Gems used only for assets and not required
@@ -30,8 +21,6 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
-gem 'warbler'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
