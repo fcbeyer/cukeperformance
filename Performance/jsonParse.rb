@@ -209,9 +209,8 @@ def getBuildList(jobName,build_stamp)
 			systemDatafilePath = dirPath + "/" + buildFolder + "/archive/systemData.json"
 			systemDataFile = File.read(systemDatafilePath)
 			systemData = JSON.parse(systemDataFile)
-			#systemData is always in the same order
-			#browser, :os, :mobilizer, :mobilizer_build_tag, :url
-			current_build = Build.new(date,time,systemData[0],systemData[1],systemData[2],systemData[3],systemData[4])
+			#mobilizer_build_tag, mobilizer, os, url, browser
+			current_build = Build.new(date,time,systemData['mobilizer_build_tag'],systemData['mobilizer'],systemData['os'],systemData['url'],systemData['browser'])
 
 			#now we have the cucumber.json file location, lets process it
 			filePath = dirPath + "/" + buildFolder + "/archive/cucumber.json"
