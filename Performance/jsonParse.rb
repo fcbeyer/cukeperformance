@@ -2,8 +2,8 @@ require 'json'
 
 class Build
 	#this will store all the elements for a specific feature
-	attr_reader :date, :time, :duration, :convertedDuration, :features, :browser, :os, :mobilizer, :mobilizer_build_tag, :url
-	attr_writer :duration, :convertedDuration, :features
+	attr_reader :date, :time, :duration, :convertedDuration, :features, :browser, :os, :mobilizer, :mobilizer_build_tag, :url, :status
+	attr_writer :duration, :convertedDuration, :features, :status
 	def initialize(date, time, mobilizer_build_tag, mobilizer, os, url, browser)
 		@date = date
 		@time = time
@@ -15,6 +15,7 @@ class Build
 		@mobilizer = mobilizer
 		@mobilizer_build_tag = mobilizer_build_tag
 		@url = url
+		@status = "" 
 	end
 	
 	def to_csv
@@ -31,14 +32,15 @@ end
 
 class JsonFeature
 	#this will store all of our features
-	attr_reader :keyword, :name, :duration, :convertedDuration, :scenarios
-	attr_writer :duration, :convertedDuration, :scenarios
+	attr_reader :keyword, :name, :duration, :convertedDuration, :scenarios, :status
+	attr_writer :duration, :convertedDuration, :scenarios, :status
 	def initialize(keyword, name)
 		@keyword = keyword
 		@name = name
 		@duration = 0
 		@convertedDuration = 0
 		@scenarios = []
+		@status = ""
 	end
 
 	def to_csv
@@ -60,14 +62,15 @@ end
 
 class JsonScenario
 	#this will store all the info for a scenario
-	attr_reader :keyword, :name, :duration, :convertedDuration, :steps
-	attr_writer :duration, :convertedDuration, :steps
+	attr_reader :keyword, :name, :duration, :convertedDuration, :steps, :status
+	attr_writer :duration, :convertedDuration, :steps, :status
 	def initialize(keyword, name)
 		@keyword = keyword
 		@name = name
 		@duration = 0
 		@convertedDuration = 0
 		@steps = []
+		@status = ""
 	end
 
 	def to_csv
@@ -230,6 +233,11 @@ def getBuildList(jobName,build_stamp)
 						stepTotal = stepTotal + step['result']['duration']
 						dur = step['result']['duration']
 						convDur = Time.at((dur / 1000000000.00)).gmtime.strftime('%R:%S:%L')
+						if step['result']['status'] == "failed"
+							current_scenario.status = "failed"
+							current_feature.status = "failed"
+							current_build.status = "failed"
+						end
 						step_list.push(JsonStep.new(step['keyword'],step['name'],dur,convDur,step['result']['status']))
 					end
 					current_scenario.duration = stepTotal

@@ -30,6 +30,7 @@ class SuitesController < ApplicationController
 	  		@newSuite.mobilizer_build_tag = build.mobilizer_build_tag
 	  		@newSuite.url = build.url
 	  		@newSuite.name = jobname
+	  		@newSuite.status = build.status
 	  		@newSuite.save
 	  		build.features.each do |feature|
 	  		  @newFeat = Feature.new
@@ -38,6 +39,7 @@ class SuitesController < ApplicationController
   		    @newFeat.duration = feature.duration
   		    @newFeat.duration_converted = feature.convertedDuration
   		    @newFeat.suite_id = @newSuite.id
+  		    @newFeat.status = feature.status
 	  		  @newFeat.save
 	  		  feature.scenarios.each do |scenario|
 	  		  	@newScenario = Scenario.new
@@ -46,6 +48,7 @@ class SuitesController < ApplicationController
   		    	@newScenario.duration = scenario.duration
   		    	@newScenario.duration_converted = scenario.convertedDuration
   		    	@newScenario.feature_id = @newFeat.id
+  		    	@newScenario.status = scenario.status
 	  		  	@newScenario.save
 	  		  	scenario.steps.each do |step|
 	  		  		@newStep = Step.new
@@ -55,6 +58,7 @@ class SuitesController < ApplicationController
   		    		@newStep.duration_converted = step.convertedDuration
   		    		@newStep.status = step.status
   		    		@newStep.scenario_id = @newScenario.id
+  		    		@newStep.status = step.status
 	  		  		@newStep.save
 	  		  	end #end step
 	  		  end #end scenario
