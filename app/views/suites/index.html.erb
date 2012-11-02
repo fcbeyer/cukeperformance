@@ -7,6 +7,7 @@
     <th>Duration</th>
     <th>Duration converted</th>
     <th>Name</th>
+    <th>Status</th>
     <th></th>
     <th></th>
     <th></th>
@@ -19,6 +20,11 @@
     <td><%= suite.duration %></td>
     <td><%= suite.duration_converted %></td>
     <td><%= suite.name %></td>
+    <% if suite.status == "failed" %>
+    	<td style="background-color: red;color: white" align="center"><%= suite.status %></td>
+    <% else %>
+    	<td><%= suite.status %></td>
+    <% end %>
     <td><%= link_to 'Show', suite %></td>
     <td><%= link_to 'Edit', edit_suite_path(suite) %></td>
     <td><%= link_to 'Destroy', suite, confirm: 'Are you sure?', method: :delete %></td>

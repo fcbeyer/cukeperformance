@@ -1,8 +1,9 @@
-<table>
+<table id="scenarioSteps">
   <tr>
     <th>Name</th>
     <th>Duration</th>
     <th>Duration converted</th>
+    <th>Status</th>
   </tr>
 
 <% @current_scenario.steps.each do |step| %>
@@ -15,6 +16,11 @@
     <td><%= link_to displayName, [@current_suite,@current_feature,@current_scenario,step] %></td>
     <td><%= step.duration %></td>
     <td><%= step.duration_converted %></td>
+    <% if step.status == "failed" %>
+    	<td style="background-color: red;color: white" align="center"><%= step.status %></td>
+    <% else %>
+    	<td><%= step.status %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

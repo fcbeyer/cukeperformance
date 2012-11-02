@@ -1,8 +1,9 @@
-<table>
+<table id="suiteFeatures">
   <tr>
     <th>Name</th>
     <th>Duration</th>
     <th>Duration converted</th>
+    <th>Status</th>
   </tr>
 
 <% @current_suite.features.each do |feature| %>
@@ -10,6 +11,11 @@
     <td><%= link_to feature.name, [@current_suite,feature] %></td>
     <td><%= feature.duration %></td>
     <td><%= feature.duration_converted %></td>
+    <% if feature.status == "failed" %>
+    	<td style="background-color: red;color: white" align="center"><%= feature.status %></td>
+    <% else %>
+    	<td><%= feature.status %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
