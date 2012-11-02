@@ -7,13 +7,13 @@ gem 'rails', '3.2.1'
 
 platforms :ruby do
 	gem 'sqlite3'
-	gem 'jruby-openssl'
-	gem 'activerecord-jdbcsqlite3-adapter'
+	gem 'activerecord-jdbc-adapter'
 end
 
 platforms :jruby do
 	gem 'jruby-openssl'
 	gem 'activerecord-jdbcsqlite3-adapter'
+	gem 'activerecord-jdbc-adapter'
 end
 
 
@@ -32,9 +32,6 @@ end
 gem 'jquery-rails'
 
 gem 'warbler'
-
-gem 'jruby-openssl'
-gem 'activerecord-jdbcsqlite3-adapter'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
