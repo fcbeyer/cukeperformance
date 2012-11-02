@@ -13,7 +13,7 @@
 
 <% @steps.each do |step| %>
   <tr>
-  	<% if scenario.name.length == 0
+  	<% if step.name.length == 0
   		displayName = step.keyword
   	   else
   	   	displayName = step.name
@@ -23,7 +23,7 @@
     <td><%= step.duration_converted %></td>
     <td><%= step.status %></td>
     <td><%= link_to 'Show', [@current_suite,@current_feature,@current_scenario,step] %></td>
-    <td><%= link_to 'Edit', edit_step_path(@current_suite,@current_feature,@current_scenario,step) %></td>
+    <td><%= link_to 'Edit', edit_suite_feature_scenario_step_path(@current_suite,@current_feature,@current_scenario,step) %></td>
     <td><%= link_to 'Destroy', [@current_suite,@current_feature,@current_scenario,step], confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
