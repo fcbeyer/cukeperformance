@@ -7,6 +7,8 @@ gem 'rails', '3.2.1'
 
 platforms :ruby do
 	gem 'sqlite3'
+	gem 'jruby-openssl'
+	gem 'activerecord-jdbcsqlite3-adapter'
 end
 
 platforms :jruby do
