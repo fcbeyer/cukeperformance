@@ -22,5 +22,4 @@
 <br />
 
 <%= link_to 'Edit', edit_suite_feature_scenario_path(@current_suite,@current_feature,@current_scenario) %> |
-<%= link_to 'Back', suite_feature_scenarios_path(@current_suite,@current_feature) %>
-<%= link_to 'Steps', suite_feature_scenario_steps_path(@current_suite,@current_feature,@current_scenario) %>
+<%= link_to 'Back', [@current_suite,@current_feature] %>
