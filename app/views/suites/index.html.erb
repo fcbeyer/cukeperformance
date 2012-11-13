@@ -1,17 +1,9 @@
 <h1>Listing suites</h1>
 
-<div class="dropdown">
-<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-  <li><a tabindex="-1" href="#">BVT</a></li>
-  <li><a tabindex="-1" href="#">Portal Smoke</a></li>
-</ul>
-</div>
-
-<table class="index">
+<table class="table table-bordered table-condensed">
   <tr>
     <th>Build date</th>
     <th>Build time</th>
-    <th>Duration</th>
     <th>Duration converted</th>
     <th>Name</th>
     <th>Status</th>
@@ -24,7 +16,6 @@
   <tr>
     <td><%= suite.build_date %></td>
     <td><%= suite.build_time %></td>
-    <td><%= suite.duration %></td>
     <td><%= suite.duration_converted %></td>
     <td><%= suite.name %></td>
     <% if suite.status == "failed" %>
@@ -40,13 +31,3 @@
 </table>
 
 <br />
-
-<%= link_to 'Manually Add New Suite', new_suite_path %>
-<br />
-<%= link_to 'Generate New BVT Suite(s)', auto_create_suites_path(:jobname => "BVT")%>
-<br />
-<%= link_to 'Generate New Portal Smoke Suite(s)', auto_create_suites_path(:jobname => "PortalSmoke")%>
-<br />
-<%= link_to 'BVT Performance Graph', suite_performance_path(:jobname => "BVT")%>
-<br />
-<%= link_to 'Portal Smoke Performance Graph', suite_performance_path(:jobname => "PortalSmoke")%>
