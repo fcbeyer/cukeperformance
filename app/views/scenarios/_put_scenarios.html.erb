@@ -17,7 +17,7 @@
     <td><%= scenario.duration %></td>
     <td><%= scenario.duration_converted %></td>
     <% if scenario.status == "failed" %>
-    	<td style="background-color: red;color: white" align="center"><%= scenario.status %></td>
+    	<td class="failed"><%= scenario.status %></td>
     <% else %>
     	<td><%= scenario.status %></td>
     <% end %>

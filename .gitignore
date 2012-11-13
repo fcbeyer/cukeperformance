@@ -16,3 +16,5 @@
 
 #don't want to check in schema.rb
 /db/schema.rb
+
+ugly.txt

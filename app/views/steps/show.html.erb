@@ -20,7 +20,11 @@
   <%= @step.duration_converted %>
 </p>
 
-<p>
+<% if @step.status == "failed" %>
+	<p class="failed">
+<% else %>
+	<p>
+<% end %>
   <b>Status:</b>
   <%= @step.status %>
 </p>

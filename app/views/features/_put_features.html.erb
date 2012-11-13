@@ -1,4 +1,4 @@
-<table id="suiteFeatures">
+<table id="suiteFeatures" class="index">
   <tr>
     <th>Name</th>
     <th>Duration</th>
@@ -12,7 +12,7 @@
     <td><%= feature.duration %></td>
     <td><%= feature.duration_converted %></td>
     <% if feature.status == "failed" %>
-    	<td style="background-color: red;color: white" align="center"><%= feature.status %></td>
+    	<td class="failed"><%= feature.status %></td>
     <% else %>
     	<td><%= feature.status %></td>
     <% end %>

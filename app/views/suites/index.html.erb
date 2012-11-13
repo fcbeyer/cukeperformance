@@ -1,6 +1,6 @@
 <h1>Listing suites</h1>
 
-<table>
+<table class="index">
   <tr>
     <th>Build date</th>
     <th>Build time</th>
@@ -21,7 +21,7 @@
     <td><%= suite.duration_converted %></td>
     <td><%= suite.name %></td>
     <% if suite.status == "failed" %>
-    	<td style="background-color: red;color: white" align="center"><%= suite.status %></td>
+    	<td class="failed"><%= suite.status %></td>
     <% else %>
     	<td><%= suite.status %></td>
     <% end %>

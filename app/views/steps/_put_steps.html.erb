@@ -17,7 +17,7 @@
     <td><%= step.duration %></td>
     <td><%= step.duration_converted %></td>
     <% if step.status == "failed" %>
-    	<td style="background-color: red;color: white" align="center"><%= step.status %></td>
+    	<td class="failed"><%= step.status %></td>
     <% else %>
     	<td><%= step.status %></td>
     <% end %>
