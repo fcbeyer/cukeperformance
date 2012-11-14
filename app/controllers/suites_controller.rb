@@ -76,6 +76,8 @@ class SuitesController < ApplicationController
   # GET /suites.json
   def index
     @suites = Suite.all
+    @bvtSuites = Suite.where(name: "BVT")
+    @psSuites = Suite.where(name: "PortalSmoke")
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,12 +1,11 @@
 <h1> <%= @jobname %> Performance Charts</h1>
-<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
     
     <script type="text/javascript">
-      google.load('visualization', '1', {packages: ['corechart']});
+      google.load('visualization', '1.1', {packages: ['controls']});
     </script>
     <script type="text/javascript">
 	  var data = <%= @suiteBuilds.to_json.html_safe %>;
@@ -15,20 +14,60 @@
         var dataTable = new google.visualization.DataTable();
         dataTable.addColumn('string', 'Build Date');
         dataTable.addColumn('number', 'Duration');
+        dataTable.addColumn('string', 'Status');
         dataTable.addColumn({type:'string', role:'tooltip'});
         
         for(var i=0; i < data.length; i++) {
-        	dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration, data[i].duration_converted]);
+        	dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration, data[i].status, data[i].duration_converted]);
         }
       
-        // Create and draw the visualization.
-        new google.visualization.BarChart(document.getElementById('visualization')).
-            draw(dataTable,
-                 {title:"Suite Performance",
-                  width:900, height:700,
-                  vAxis: {title: "Build"},
-                  hAxis: {title: "Duration in Nanoseconds", minValue: 200000000000}}
-            );
+        var statusPicker = new google.visualization.ControlWrapper({
+          'controlType': 'CategoryFilter',
+          'containerId': 'control1',
+          'options': {
+            'filterColumnLabel': 'Status',
+            'ui': {
+              'labelStacking': 'vertical',
+              'allowTyping': false,
+              'allowMultiple': false
+            }
+          }
+        });
+        
+        // Define a slider control for the 'Build Date' column
+	  	var slider = new google.visualization.ControlWrapper({
+	    	'controlType': 'StringFilter',
+	    	'containerId': 'control2',
+	    	'options': {
+	    		'filterColumnLabel': 'Build Date',
+	      		'ui': {'labelStacking': 'vertical'}
+	    	}
+	  	});
+	      	
+        var barChart = new google.visualization.ChartWrapper({
+          'chartType': 'BarChart',
+          'containerId': 'chart1',
+          'options': {
+            'width': 900,
+            'height': 700,
+            
+            'chartArea': {top: 0, right: 0, bottom: 0}
+          },
+          // Configure the barchart to use columns 0 (Build Date/Time Stamp) and 1 (Duration)
+          'view': {'columns': [0, 1]}
+        });
+        barChart.setOption('tooltip', {'column':2})
+      
+        // Create the dashboard.
+        new google.visualization.Dashboard(document.getElementById('dashboard')).
+          bind(statusPicker, barChart).
+          bind(slider, barChart).
+          // Draw the dashboard
+          draw(dataTable,
+          	{title:"Suite Performance",
+             vAxis: {title: "Build"},
+             hAxis: {title: "Duration in Nanoseconds", minValue: 200000000000}}
+          );
       }
       
 
@@ -36,9 +75,21 @@
     </script>
   </head>
   <body style="font-family: Arial;border: 0 none;">
-    <div id="visualization" style="width: 900px; height: 700px;"></div>
+    <div id="dashboard">
+      <table>
+        <tr style='vertical-align: top'>
+          <td style='width: 300px; font-size: 0.9em;'>
+            <div id="control1"></div>
+            <div id="control2"></div>
+          </td>
+          <td style='width: 600px'>
+            <div style="float: left;" id="chart1"></div>
+            <div style="float: left;" id="chart2"></div>
+          </td>
+        </tr>
+      </table>
+    </div>
   </body>
-</html>
 
 <table>
 	<tr>
