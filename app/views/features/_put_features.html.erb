@@ -12,9 +12,9 @@
     <td><%= feature.duration %></td>
     <td><%= feature.duration_converted %></td>
     <% if feature.status == "failed" %>
-    	<td class="failed"><%= feature.status %></td>
+    	<td><span class="label label-important"><%= feature.status %></span></td>
     <% else %>
-    	<td><%= feature.status %></td>
+    	<td><span class="label label-success"><%= feature.status %></span></td>
     <% end %>
   </tr>
 <% end %>

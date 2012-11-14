@@ -21,13 +21,14 @@
 </p>
 
 <% if @step.status == "failed" %>
-	<p class="failed">
+	<p><b>Status:</b><span class="label label-important">
+<% elsif @step.status == "skipped" %>
+	<p><b>Status:</b><span class="label label-info">
 <% else %>
-	<p>
+	<p><b>Status:</b><span class="label label-success">
 <% end %>
-  <b>Status:</b>
   <%= @step.status %>
-</p>
+</span></p>
 
 <p>
   <b>Scenario:</b>

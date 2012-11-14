@@ -19,9 +19,9 @@
     <td><%= suite.duration_converted %></td>
     <td><%= suite.name %></td>
     <% if suite.status == "failed" %>
-    	<td class="failed"><%= suite.status %></td>
+    	<td><span class="label label-important"><%= suite.status %></span></td>
     <% else %>
-    	<td><%= suite.status %></td>
+    	<td><span class="label label-success"><%= suite.status %></span></td>
     <% end %>
     <td><%= link_to 'Show', suite %></td>
     <td><%= link_to 'Edit', edit_suite_path(suite) %></td>

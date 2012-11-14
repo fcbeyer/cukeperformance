@@ -20,8 +20,3 @@ table.index{
 table.showHeader{
 	width: 900px;
 }
-
-td.failed {
-	background-color: red;
-	color: white;
-}
