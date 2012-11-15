@@ -205,13 +205,15 @@ def getBuildList(jobName,build_stamp)
 		curPath = dirPath + "/" + buildFolder
 		if Dir.exists?(curPath)#get the date time stamp from the name of this directory
 			build = buildFolder.split("_")
-			date = build[0].split("-")
-			time = build[1].split("-")
+			date = build[0]
+			time = build[1]
+			dateArray = date.split("-")
+			timeArray = time.split("-")
 			dt = []
-			date.each do |d|
+			dateArray.each do |d|
 				dt.push(d.to_i)
 			end
-			time.each do |t|
+			timeArray.each do |t|
 				dt.push(t.to_i)
 			end
 			runstamp = Time.new(dt[0],dt[1],dt[2],dt[3],dt[4],dt[5])
