@@ -20,6 +20,10 @@
     <%= f.text_field :build_time %>
   </div>
   <div class="field">
+    <%= f.label :runstamp %><br />
+    <%= f.datetime_select :runstamp, :start_year => Time.now.year - 10, :end_year => Time.now.year %>
+  </div>
+  <div class="field">
     <%= f.label :duration %><br />
     <%= f.number_field :duration %>
   </div>
