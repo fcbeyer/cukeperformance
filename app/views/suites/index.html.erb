@@ -22,6 +22,7 @@
 		  <tr>
 		    <th>Build date</th>
 		    <th>Build time</th>
+		    <th>runstamp</th>
 		    <th>Duration</th>
 		    <th>Name</th>
 		    <th>Status</th>
@@ -34,6 +35,7 @@
 		  <tr>
 		    <td><%= suite.build_date %></td>
 		    <td><%= suite.build_time %></td>
+		    <td><%= suite.runstamp %></td>
 		    <td><%= suite.duration_converted %></td>
 		    <td><%= suite.name %></td>
 		    <% if suite.status == "failed" %>
