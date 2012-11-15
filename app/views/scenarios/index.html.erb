@@ -4,7 +4,6 @@
   <tr>
     <th>Name</th>
     <th>Duration</th>
-    <th>Duration converted</th>
     <th></th>
     <th></th>
     <th></th>
@@ -18,7 +17,6 @@
   	   	displayName = scenario.name
   	   end %>
     <td><%= displayName %></td>
-    <td><%= scenario.duration %></td>
     <td><%= scenario.duration_converted %></td>
     <td><%= link_to 'Show', [@current_suite,@current_feature,scenario] %></td>
     <td><%= link_to 'Edit', edit_suite_feature_scenario_path(@current_suite,@current_feature,scenario) %></td>

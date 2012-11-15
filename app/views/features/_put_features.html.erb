@@ -2,7 +2,6 @@
   <tr>
     <th>Name</th>
     <th>Duration</th>
-    <th>Duration converted</th>
     <th>Status</th>
   </tr>
 
@@ -10,7 +9,6 @@
   <tr>
     <td><%= link_to feature.name, [@current_suite,feature] %></td>
     <td><%= feature.duration %></td>
-    <td><%= feature.duration_converted %></td>
     <% if feature.status == "failed" %>
     	<td><span class="label label-important"><%= feature.status %></span></td>
     <% else %>

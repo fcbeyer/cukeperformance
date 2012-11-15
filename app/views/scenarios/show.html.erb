@@ -4,13 +4,11 @@
   <tr>
     <th>Name</th>
     <th>Duration</th>
-    <th>Duration converted</th>
     <th></th>
     <th></th>
   </tr>
   <tr>
     <td><%= @current_scenario.name %></td>
-    <td><%= @current_scenario.duration %></td>
     <td><%= @current_scenario.duration_converted %></td>
     <td><%= link_to 'Edit', edit_suite_feature_scenario_path(@current_suite, @current_feature,@current_scenario) %></td>
     <td><%= link_to 'Destroy', [@current_suite,@current_feature,@current_scenario], confirm: 'Are you sure?', method: :delete %></td>

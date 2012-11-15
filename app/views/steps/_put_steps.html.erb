@@ -2,7 +2,6 @@
   <tr>
     <th>Name</th>
     <th>Duration</th>
-    <th>Duration converted</th>
     <th>Status</th>
   </tr>
 
@@ -14,7 +13,6 @@
   	   	displayName = step.name
   	   end %>  	
     <td><%= link_to displayName, [@current_suite,@current_feature,@current_scenario,step] %></td>
-    <td><%= step.duration %></td>
     <td><%= step.duration_converted %></td>
     <% if step.status == "failed" %>
     	<td><span class="label label-important"><%= step.status %></span></td>

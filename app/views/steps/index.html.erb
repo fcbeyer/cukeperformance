@@ -4,7 +4,6 @@
   <tr>
     <th>Name</th>
     <th>Duration</th>
-    <th>Duration converted</th>
     <th>Status</th>
     <th></th>
     <th></th>
@@ -19,7 +18,6 @@
   	   	displayName = step.name
   	   end %>
     <td><%= displayName %></td>
-    <td><%= step.duration %></td>
     <td><%= step.duration_converted %></td>
     <td><%= step.status %></td>
     <td><%= link_to 'Show', [@current_suite,@current_feature,@current_scenario,step] %></td>

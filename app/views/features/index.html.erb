@@ -4,7 +4,6 @@
   <tr>
     <th>Name</th>
     <th>Duration</th>
-    <th>Duration converted</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,7 +12,6 @@
 <% @features.each do |feature| %>
   <tr>
     <td><%= feature.name %></td>
-    <td><%= feature.duration %></td>
     <td><%= feature.duration_converted %></td>
     <td><%= link_to 'Show', [@current_suite,feature] %></td>
     <td><%= link_to 'Edit', edit_suite_feature_path(@current_suite, feature) %></td>
