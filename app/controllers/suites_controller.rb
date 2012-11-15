@@ -79,8 +79,11 @@ class SuitesController < ApplicationController
     @suites = Suite.all
     @suites.sort! { |a,b| a.name <=> b.name}
     @bvtSuites = Suite.where(name: "BVT")
+    @bvtSuites.sort! { |a,b| a.runstamp <=> b.runstamp}
     @psSuites = Suite.where(name: "PortalSmoke")
+    @psSuites.sort! { |a,b| a.runstamp <=> b.runstamp}
     @cmhsSuites = Suite.where(name: "CMHSLoadTest")
+    @cmhsSuites.sort! { |a,b| a.runstamp <=> b.runstamp}
 
     respond_to do |format|
       format.html # index.html.erb
