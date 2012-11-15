@@ -8,7 +8,7 @@
 <% @current_suite.features.each do |feature| %>
   <tr>
     <td><%= link_to feature.name, [@current_suite,feature] %></td>
-    <td><%= feature.duration %></td>
+    <td><%= feature.duration_converted %></td>
     <% if feature.status == "failed" %>
     	<td><span class="badge badge-warning"><%= feature.status %></span></td>
     <% else %>
