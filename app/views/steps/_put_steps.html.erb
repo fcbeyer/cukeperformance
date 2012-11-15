@@ -15,11 +15,11 @@
     <td><%= link_to displayName, [@current_suite,@current_feature,@current_scenario,step] %></td>
     <td><%= step.duration_converted %></td>
     <% if step.status == "failed" %>
-    	<td><span class="badge badge-important"><%= step.status %></span></td>
+    	<td><span class="badge badge-warning"><%= step.status %></span></td>
     <% elsif step.status == "skipped" %>
     	<td><span class="label label-info"><%= step.status %></span></td>
     <% else %>
-    	<td><span class="label label-default"><%= step.status %></span></td>
+    	<td><span class="label label-inverse"><%= step.status %></span></td>
     <% end %>
   </tr>
 <% end %>

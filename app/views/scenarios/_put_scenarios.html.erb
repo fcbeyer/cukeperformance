@@ -15,9 +15,9 @@
     <td><%= link_to displayName, [@current_suite,@current_feature,scenario] %></td>
     <td><%= scenario.duration_converted %></td>
     <% if scenario.status == "failed" %>
-    	<td><span class="badge badge-important"><%= scenario.status %></span></td>
+    	<td><span class="badge badge-warning"><%= scenario.status %></span></td>
     <% else %>
-    	<td><span class="label label-default"><%= scenario.status %></span></td>
+    	<td><span class="label label-inverse"><%= scenario.status %></span></td>
     <% end %>
   </tr>
 <% end %>

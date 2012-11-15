@@ -10,9 +10,9 @@
     <td><%= link_to feature.name, [@current_suite,feature] %></td>
     <td><%= feature.duration %></td>
     <% if feature.status == "failed" %>
-    	<td><span class="badge badge-important"><%= feature.status %></span></td>
+    	<td><span class="badge badge-warning"><%= feature.status %></span></td>
     <% else %>
-    	<td><span class="label label-default"><%= feature.status %></span></td>
+    	<td><span class="label label-inverse"><%= feature.status %></span></td>
     <% end %>
   </tr>
 <% end %>
