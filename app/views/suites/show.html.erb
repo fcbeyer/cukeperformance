@@ -2,8 +2,7 @@
 
 <table class="table table-bordered table-hover">
   <tr>
-    <th>Build date</th>
-    <th>Build time</th>
+    <th>Build Timestamp</th>
     <th>Duration</th>
     <th>Name</th>
     <th>Browser</th>
@@ -16,8 +15,7 @@
     <th></th>
   </tr>
   <tr>
-    <td><%= @current_suite.build_date %></td>
-    <td><%= @current_suite.build_time %></td>
+    <td><%= @current_suite.runstamp %></td>
     <td><%= @current_suite.duration_converted %></td>
     <td><%= @current_suite.name %></td>
     <td><%= @current_suite.browser %></td>

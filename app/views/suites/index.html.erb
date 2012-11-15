@@ -20,9 +20,7 @@
 	<div class="tab-pane active" id="allSuites">
 		<table class="table table-bordered table-condensed">
 		  <tr>
-		    <th>Build date</th>
-		    <th>Build time</th>
-		    <th>runstamp</th>
+		    <th>Build Timestamp</th>
 		    <th>Duration</th>
 		    <th>Name</th>
 		    <th>Status</th>
@@ -33,8 +31,6 @@
 		
 		<% @suites.each do |suite| %>
 		  <tr>
-		    <td><%= suite.build_date %></td>
-		    <td><%= suite.build_time %></td>
 		    <td><%= suite.runstamp %></td>
 		    <td><%= suite.duration_converted %></td>
 		    <td><%= suite.name %></td>
@@ -53,8 +49,7 @@
 	<div class="tab-pane" id="bvt">
 		<table class="table table-bordered table-condensed">
 		  <tr>
-		    <th>Build date</th>
-		    <th>Build time</th>
+			<th>Build Timestamp</th>
 		    <th>Duration</th>
 		    <th>Name</th>
 		    <th>Status</th>
@@ -65,8 +60,7 @@
 		
 		<% @bvtSuites.each do |suite| %>
 		  <tr>
-		    <td><%= suite.build_date %></td>
-		    <td><%= suite.build_time %></td>
+		    <td><%= suite.runstamp %></td>
 		    <td><%= suite.duration_converted %></td>
 		    <td><%= suite.name %></td>
 		    <% if suite.status == "failed" %>
@@ -84,8 +78,7 @@
 	<div class="tab-pane" id="portalsmoke">
 		<table class="table table-bordered table-condensed">
 		  <tr>
-		    <th>Build date</th>
-		    <th>Build time</th>
+		    <th>Build Timestamp</th>
 		    <th>Duration</th>
 		    <th>Name</th>
 		    <th>Status</th>
@@ -96,8 +89,7 @@
 		
 		<% @psSuites.each do |suite| %>
 		  <tr>
-		    <td><%= suite.build_date %></td>
-		    <td><%= suite.build_time %></td>
+		    <td><%= suite.runstamp %></td>
 		    <td><%= suite.duration_converted %></td>
 		    <td><%= suite.name %></td>
 		    <% if suite.status == "failed" %>
@@ -115,8 +107,7 @@
 	<div class="tab-pane" id="cmhsloadtest">
 		<table class="table table-bordered table-condensed">
 		  <tr>
-		    <th>Build date</th>
-		    <th>Build time</th>
+		    <th>Build Timestamp</th>
 		    <th>Duration</th>
 		    <th>Name</th>
 		    <th>Status</th>
@@ -127,8 +118,7 @@
 		
 		<% @cmhsSuites.each do |suite| %>
 		  <tr>
-		    <td><%= suite.build_date %></td>
-		    <td><%= suite.build_time %></td>
+		    <td><%= suite.runstamp %></td>
 		    <td><%= suite.duration_converted %></td>
 		    <td><%= suite.name %></td>
 		    <% if suite.status == "failed" %>
