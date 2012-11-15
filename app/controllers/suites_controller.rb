@@ -78,6 +78,7 @@ class SuitesController < ApplicationController
     @suites = Suite.all
     @bvtSuites = Suite.where(name: "BVT")
     @psSuites = Suite.where(name: "PortalSmoke")
+    @cmhsSuites = Suite.where(name: "CMHSLoadTest")
 
     respond_to do |format|
       format.html # index.html.erb

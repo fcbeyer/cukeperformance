@@ -13,6 +13,7 @@
   <li class="active"><a href="#allSuites" data-toggle="tab">All Suites</a></li>
   <li><a href="#bvt" data-toggle="tab">BVT Builds</a></li>
   <li><a href="#portalsmoke" data-toggle="tab">Portal Smoke Builds</a></li>
+  <li><a href="#cmhsloadtest" data-toggle="tab">CMHS Load Test Builds</a></li>
 </ul>
 
 <div class="tab-content">
@@ -92,6 +93,37 @@
 		  </tr>
 		
 		<% @psSuites.each do |suite| %>
+		  <tr>
+		    <td><%= suite.build_date %></td>
+		    <td><%= suite.build_time %></td>
+		    <td><%= suite.duration_converted %></td>
+		    <td><%= suite.name %></td>
+		    <% if suite.status == "failed" %>
+		    	<td><span class="badge badge-warning"><%= suite.status %></span></td>
+		    <% else %>
+		    	<td><span class="label label-inverse"><%= suite.status %></span></td>
+		    <% end %>
+		    <td><%= link_to 'Show', suite %></td>
+		    <td><%= link_to 'Edit', edit_suite_path(suite) %></td>
+		    <td><%= link_to 'Destroy', suite, confirm: 'Are you sure?', method: :delete %></td>
+		  </tr>
+		<% end %>
+		</table>
+	</div>
+	<div class="tab-pane" id="cmhsloadtest">
+		<table class="table table-bordered table-condensed">
+		  <tr>
+		    <th>Build date</th>
+		    <th>Build time</th>
+		    <th>Duration</th>
+		    <th>Name</th>
+		    <th>Status</th>
+		    <th></th>
+		    <th></th>
+		    <th></th>
+		  </tr>
+		
+		<% @cmhsSuites.each do |suite| %>
 		  <tr>
 		    <td><%= suite.build_date %></td>
 		    <td><%= suite.build_time %></td>
