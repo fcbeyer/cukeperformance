@@ -22,6 +22,7 @@ class SuitesController < ApplicationController
 	  		@newSuite = Suite.new
 	  		@newSuite.build_date = build.date
 	  		@newSuite.build_time = build.time
+	  		@newSuite.runstamp = build.runstamp
 	  		@newSuite.duration = build.duration
 	  		@newSuite.duration_converted = build.convertedDuration
 	  		@newSuite.browser = build.browser

@@ -2,11 +2,12 @@ require 'json'
 
 class Build
 	#this will store all the elements for a specific feature
-	attr_reader :date, :time, :duration, :convertedDuration, :features, :browser, :os, :mobilizer, :mobilizer_build_tag, :url, :status
+	attr_reader :date, :time, :runstamp, :duration, :convertedDuration, :features, :browser, :os, :mobilizer, :mobilizer_build_tag, :url, :status
 	attr_writer :duration, :convertedDuration, :features, :status
-	def initialize(date, time, mobilizer_build_tag, mobilizer, os, url, browser)
+	def initialize(date, time, runstamp, mobilizer_build_tag, mobilizer, os, url, browser)
 		@date = date
 		@time = time
+		@runstamp = runstamp
 		@duration = 0
 		@convertedDuration = 0
 		@features = []
@@ -204,13 +205,21 @@ def getBuildList(jobName,build_stamp)
 		curPath = dirPath + "/" + buildFolder
 		if Dir.exists?(curPath)#get the date time stamp from the name of this directory
 			build = buildFolder.split("_")
-			date = build[0]
-			time = build[1]
+			date = build[0].split("-")
+			time = build[1].split("-")
+			dt = []
+			date.each do |d|
+				dt.push(d.to_i)
+			end
+			time.each do |t|
+				dt.push(t.to_i)
+			end
+			runstamp = Time.new(dt[0],dt[1],dt[2],dt[3],dt[4],dt[5])
 			systemDatafilePath = dirPath + "/" + buildFolder + "/archive/systemData.json"
 			systemDataFile = File.read(systemDatafilePath)
 			systemData = JSON.parse(systemDataFile)
 			#mobilizer_build_tag, mobilizer, os, url, browser
-			current_build = Build.new(date,time,systemData['mobilizer_build_tag'],systemData['mobilizer'],systemData['os'],systemData['url'],systemData['browser'])
+			current_build = Build.new(date,time,runstamp,systemData['mobilizer_build_tag'],systemData['mobilizer'],systemData['os'],systemData['url'],systemData['browser'])
 
 			#now we have the cucumber.json file location, lets process it
 			filePath = dirPath + "/" + buildFolder + "/archive/cucumber.json"
