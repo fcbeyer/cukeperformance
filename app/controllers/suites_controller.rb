@@ -77,6 +77,7 @@ class SuitesController < ApplicationController
   # GET /suites.json
   def index
     @suites = Suite.all
+    @suites.sort! { |a,b| a.name <=> b.name}
     @bvtSuites = Suite.where(name: "BVT")
     @psSuites = Suite.where(name: "PortalSmoke")
     @cmhsSuites = Suite.where(name: "CMHSLoadTest")
