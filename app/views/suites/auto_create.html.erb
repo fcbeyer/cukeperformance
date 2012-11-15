@@ -1,9 +1,11 @@
-<h1>Auto generate new Suite data</h1>
+<h3>Auto generate new Suite data</h3>
 
 <br />
 	
 <% if @haveNewSuiteData %>
 	<h5>New data was found and added to the database</h5>
+<% elsif @directoryDoesNotExist %>
+	<h1>THE DIRECTORY DOES NOT EXIST!</h1>
 <% else %>
 	<h5>No new data was found</h5>
 <% end %>

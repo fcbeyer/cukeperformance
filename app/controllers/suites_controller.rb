@@ -14,7 +14,10 @@ class SuitesController < ApplicationController
   		build_stamp = "empty"
   	end
 		@build_list = getBuildList(jobname,build_stamp)
-  	if @build_list.empty?
+		if @build_list.kind_of?(FalseClass)
+			@haveNewSuiteData = false
+			@directoryDoesNotExist = true
+  	elsif @build_list.empty?
   		@haveNewSuiteData = false
   	else
   		@haveNewSuiteData = true

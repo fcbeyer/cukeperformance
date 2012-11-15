@@ -180,16 +180,21 @@ end
 def dirPurge(dirPath, build_stamp)
 	#get rid of directories we already have data for
 	dropNum = 2
-	dir = Dir.entries(dirPath)
-	if build_stamp != "empty"
-		dir.each do |buildFolder|
-			if buildFolder == build_stamp
-				dropNum = dir.index(buildFolder) + 1
+	if Dir.exists?(dirPath)
+		dir = Dir.entries(dirPath)
+		if build_stamp != "empty"
+			dir.each do |buildFolder|
+				if buildFolder == build_stamp
+					dropNum = dir.index(buildFolder) + 1
+				end
 			end
 		end
+		dir = dir.drop(dropNum)
+		return dir
+	else
+		#not a valid directory (does not exist must let App know so User can be notified)
+		return false
 	end
-	dir = dir.drop(dropNum)
-	return dir
 end
 
 #goes through jobs and pulls out performance information from json dumps
@@ -201,93 +206,96 @@ def getBuildList(jobName,build_stamp)
 	dirPath = "C:/Program Files (x86)/Jenkins/jobs/" + jobName + "/builds"
 	#dirPath = "C:/local/projects/Git/CukePerformance/Performance/builds"
 	dir = dirPurge(dirPath,build_stamp)
-	dir.each do |buildFolder|
-		curPath = dirPath + "/" + buildFolder
-		if Dir.exists?(curPath)#get the date time stamp from the name of this directory
-			build = buildFolder.split("_")
-			date = build[0]
-			time = build[1]
-			dateArray = date.split("-")
-			timeArray = time.split("-")
-			dt = []
-			dateArray.each do |d|
-				dt.push(d.to_i)
-			end
-			timeArray.each do |t|
-				dt.push(t.to_i)
-			end
-			runstamp = Time.new(dt[0],dt[1],dt[2],dt[3],dt[4],dt[5])
-			systemDatafilePath = dirPath + "/" + buildFolder + "/archive/systemData.json"
-			systemDataFile = File.read(systemDatafilePath)
-			systemData = JSON.parse(systemDataFile)
-			#mobilizer_build_tag, mobilizer, os, url, browser
-			current_build = Build.new(date,time,runstamp,systemData['mobilizer_build_tag'],systemData['mobilizer'],systemData['os'],systemData['url'],systemData['browser'])
-
-			#now we have the cucumber.json file location, lets process it
-			filePath = dirPath + "/" + buildFolder + "/archive/cucumber.json"
-			file = File.read(filePath)
-			document = JSON.parse(file)
-
-			feature_list = []
-			featureTotal = 0
-
-			document.each do |feature|
-				current_feature = JsonFeature.new(feature['keyword'],feature['name'])
-				scenarioTotal = 0
-				scenario_list = []
-				feature['elements'].each do |scenario|
-					current_scenario = JsonScenario.new(scenario['keyword'],scenario['name'])		
-					stepTotal = 0
-					step_list = []
-					scenario['steps'].each do |step|
-						stepTotal = stepTotal + step['result']['duration']
-						dur = step['result']['duration']
-						convDur = Time.at((dur / 1000000000.00)).gmtime.strftime('%R:%S:%L')
-						if step['result']['status'] == "failed"
-							current_scenario.status = "failed"
-							current_feature.status = "failed"
-							current_build.status = "failed"
+	if dir.kind_of?(Array)
+		dir.each do |buildFolder|
+			curPath = dirPath + "/" + buildFolder
+			if Dir.exists?(curPath)#get the date time stamp from the name of this directory
+				build = buildFolder.split("_")
+				date = build[0]
+				time = build[1]
+				dateArray = date.split("-")
+				timeArray = time.split("-")
+				dt = []
+				dateArray.each do |d|
+					dt.push(d.to_i)
+				end
+				timeArray.each do |t|
+					dt.push(t.to_i)
+				end
+				runstamp = Time.new(dt[0],dt[1],dt[2],dt[3],dt[4],dt[5])
+				systemDatafilePath = dirPath + "/" + buildFolder + "/archive/systemData.json"
+				systemDataFile = File.read(systemDatafilePath)
+				systemData = JSON.parse(systemDataFile)
+				#mobilizer_build_tag, mobilizer, os, url, browser
+				current_build = Build.new(date,time,runstamp,systemData['mobilizer_build_tag'],systemData['mobilizer'],systemData['os'],systemData['url'],systemData['browser'])
+	
+				#now we have the cucumber.json file location, lets process it
+				filePath = dirPath + "/" + buildFolder + "/archive/cucumber.json"
+				file = File.read(filePath)
+				document = JSON.parse(file)
+	
+				feature_list = []
+				featureTotal = 0
+	
+				document.each do |feature|
+					current_feature = JsonFeature.new(feature['keyword'],feature['name'])
+					scenarioTotal = 0
+					scenario_list = []
+					feature['elements'].each do |scenario|
+						current_scenario = JsonScenario.new(scenario['keyword'],scenario['name'])		
+						stepTotal = 0
+						step_list = []
+						scenario['steps'].each do |step|
+							stepTotal = stepTotal + step['result']['duration']
+							dur = step['result']['duration']
+							convDur = Time.at((dur / 1000000000.00)).gmtime.strftime('%R:%S:%L')
+							if step['result']['status'] == "failed"
+								current_scenario.status = "failed"
+								current_feature.status = "failed"
+								current_build.status = "failed"
+							end
+							step_list.push(JsonStep.new(step['keyword'],step['name'],dur,convDur,step['result']['status']))
 						end
-						step_list.push(JsonStep.new(step['keyword'],step['name'],dur,convDur,step['result']['status']))
+						if current_scenario.status.empty?
+							#all the steps passed
+							current_scenario.status = "passed"
+						end
+						current_scenario.duration = stepTotal
+						current_scenario.convertedDuration = Time.at((stepTotal / 1000000000.00)).gmtime.strftime('%R:%S:%L')
+						current_scenario.steps = step_list
+						scenario_list.push(current_scenario)
+						scenarioTotal = scenarioTotal + stepTotal
 					end
-					if current_scenario.status.empty?
-						#all the steps passed
-						current_scenario.status = "passed"
+					if current_feature.status.empty?
+							#all the steps passed
+							current_feature.status = "passed"
 					end
-					current_scenario.duration = stepTotal
-					current_scenario.convertedDuration = Time.at((stepTotal / 1000000000.00)).gmtime.strftime('%R:%S:%L')
-					current_scenario.steps = step_list
-					scenario_list.push(current_scenario)
-					scenarioTotal = scenarioTotal + stepTotal
+					current_feature.duration = scenarioTotal
+					current_feature.convertedDuration = Time.at((scenarioTotal / 1000000000.00)).gmtime.strftime('%R:%S:%L')
+					current_feature.scenarios = scenario_list
+					feature_list.push(current_feature)
+					featureTotal = featureTotal + scenarioTotal
 				end
-				if current_feature.status.empty?
-						#all the steps passed
-						current_feature.status = "passed"
+	
+				totalTime = 0
+				feature_list.each do |feature|
+					totalTime = totalTime + feature.duration
 				end
-				current_feature.duration = scenarioTotal
-				current_feature.convertedDuration = Time.at((scenarioTotal / 1000000000.00)).gmtime.strftime('%R:%S:%L')
-				current_feature.scenarios = scenario_list
-				feature_list.push(current_feature)
-				featureTotal = featureTotal + scenarioTotal
+				
+				if current_build.status.empty?
+							#all the steps passed
+							current_build.status = "passed"
+				end
+				current_build.duration = totalTime
+				current_build.convertedDuration = Time.at(totalTime / 1000000000.00).gmtime.strftime('%R:%S:%L')
+				current_build.features = feature_list
+				build_list.push(current_build)
 			end
-
-			totalTime = 0
-			feature_list.each do |feature|
-				totalTime = totalTime + feature.duration
-			end
-			
-			if current_build.status.empty?
-						#all the steps passed
-						current_build.status = "passed"
-			end
-			current_build.duration = totalTime
-			current_build.convertedDuration = Time.at(totalTime / 1000000000.00).gmtime.strftime('%R:%S:%L')
-			current_build.features = feature_list
-			build_list.push(current_build)
 		end
+		return build_list
+	else
+		return false
 	end
-
-	return build_list
 end
 
 # output = File.new("bar.txt","w+")
