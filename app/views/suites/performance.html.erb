@@ -60,9 +60,9 @@
 	            'chartArea': {top: 0, right: 0, bottom: 0}
 	          },
 	          // Configure the barchart to use columns 0 (Build Date/Time Stamp) and 1 (Duration)
-	          'view': {'columns': [0, 1]}
+	          'view': {'columns': [0, 1, 3]}
 	        });
-	        barChart.setOption('tooltip', {'column':2})
+	        barChart.setOption('tooltip', {'column':3})
 	      
 	        // Create the dashboard.
 	        new google.visualization.Dashboard(document.getElementById('dashboard')).
@@ -145,9 +145,9 @@
 	            'chartArea': {top: 0, right: 0, bottom: 0}
 	          },
 	          // Configure the barchart to use columns 0 (Build Date/Time Stamp) and 1 (Duration)
-	          'view': {'columns': [0, 1]}
+	          'view': {'columns': [0, 1, 3]}
 	        });
-	        lineChart.setOption('tooltip', {'column':2})
+	        lineChart.setOption('tooltip', {'column':3})
 	      
 	        // Create the dashboard.
 	        new google.visualization.Dashboard(document.getElementById('dashboard2')).
