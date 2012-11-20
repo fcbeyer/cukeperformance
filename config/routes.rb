@@ -1,5 +1,13 @@
 CukePerformance::Application.routes.draw do  
 
+  get "graph/suites"
+
+  get "graph/features"
+
+  get "graph/scenarios"
+
+  get "graph/steps"
+
   resources :suites do
     resources :features do
     	resources :scenarios do
@@ -11,7 +19,6 @@ CukePerformance::Application.routes.draw do
   #custom routes for auto generating data and then going to the graphs for each automation suite
   # => 				url you want								model#action						  				 path
   match 'auto_create/suites/:jobname' => 'suites#auto_create', :as => :auto_create_suites
-  match 'performance/suites/:jobname' => 'suites#performance', :as => :suite_performance
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
