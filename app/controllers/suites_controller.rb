@@ -71,12 +71,6 @@ class SuitesController < ApplicationController
   	end #end else
   end #end auto_create
   
-  def performance
-  	@jobname = params[:jobname]
-		@suiteBuilds = Suite.where(name: @jobname)
-		@suiteBuilds.sort! { |a,b| a.name <=> b.name}
-  end  
-  
   # GET /suites
   # GET /suites.json
   def index
