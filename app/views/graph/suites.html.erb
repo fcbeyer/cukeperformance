@@ -48,10 +48,12 @@
 	            'filterColumnLabel': 'Suite',
 	            'ui': {
 	              'labelStacking': 'vertical',
+	              'allowNone': false,
 	              'allowTyping': false,
 	              'allowMultiple': false
-	            }
-	          }
+	            },
+	          },
+	          'state': {'selectedValues': ['BVT']}
 	        });
 	        
 	        // Define a slider control for the 'Build Date' column
@@ -128,7 +130,7 @@
 	        	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration, data3[i].status, data3[i].name, data3[i].duration_converted]);
 	        }
 		  	
-		  	var dateFilter = new google.visualization.ControlWrapper({
+		  	var datePicker = new google.visualization.ControlWrapper({
 	           'controlType': 'ChartRangeFilter',
 	           'containerId': 'suiteRangeFilter',
 	           'options': {
@@ -158,10 +160,12 @@
 	            'filterColumnLabel': 'Suite',
 	            'ui': {
 	              'labelStacking': 'vertical',
+	              'allowNone': false,
 	              'allowTyping': false,
 	              'allowMultiple': false
 	            }
-	          }
+	          },
+	          'state': {'selectedValues': ['BVT']}
 	        });
 	        
 	        var statusLinePicker = new google.visualization.ControlWrapper({
@@ -194,9 +198,9 @@
 	      	
 	        // Create the dashboard.
 	        new google.visualization.Dashboard(document.getElementById('dashboard3')).
-	          bind(statusLinePicker, lineChart).
-	          bind(suiteLinePicker, lineChart).
-	          bind(dateFilter, lineChart).
+	          bind(statusLinePicker, [lineChart, datePicker]).
+	          bind(suiteLinePicker, [lineChart, datePicker]).
+	          bind(datePicker, lineChart).
 	          // Draw the dashboard
 	          draw(dataTable3,
 	          	{title:"Suite Performance",
