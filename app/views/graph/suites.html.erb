@@ -72,13 +72,15 @@
 	          'options': {
 	            'width': 900,
 	            'height': 700,
-	            
+	            'tooltip': {'column':4},
+	            'hAxis': {
+	            	'viewWindow': {'min':200000000000,
+	            				'max':900000000000}},
 	            'chartArea': {top: 0, right: 0, bottom: 0}
 	          },
 	          // Configure the barchart to use columns 0 (Build Date/Time Stamp) and 1 (Duration)
 	          'view': {'columns': [0, 1, 4]}
 	        });
-	        barChart.setOption('tooltip', {'column':4})
 	      
 	        // Create the dashboard.
 	        new google.visualization.Dashboard(document.getElementById('dashboard')).
@@ -89,7 +91,7 @@
 	          draw(dataTable,
 	          	{title:"Suite Performance",
 	             vAxis: {title: "Build"},
-	             hAxis: {title: "Duration in Nanoseconds", minValue: 200000000000}}
+	             hAxis: {title: "Duration in Nanoseconds"}}
 	          );
 	      }
 	      
@@ -140,8 +142,7 @@
 	               'chartType': 'LineChart',
 	               'chartOptions': {
 	                 'chartArea': {'width': '90%'},
-	                 'hAxis': {'baselineColor': 'none',
-	                 		   'slantedText': true}
+	                 'hAxis': {'slantedText': true}
 	               },
 	               // Display a single series that shows the closing value of the stock.
 	               // Thus, this view has two columns: the date (axis) and the stock value (line series).
@@ -149,10 +150,8 @@
 	                 'columns': [0, 1]
 	               }
 	           }},
-	           // Initial range: 2012-02-09 to 2012-03-20.
-	           'state': {'range': {'start': new Date(2012, 1, 9), 'end': new Date(2012, 11, 20)}}
 	         });
-	         
+
 	        var suiteLinePicker = new google.visualization.ControlWrapper({
 	          'controlType': 'CategoryFilter',
 	          'containerId': 'suiteLineFilter',
@@ -187,14 +186,17 @@
 	          'options': {
 	            'width': 900,
 	            'height': 700,
+	            'pointSize': 6,
+	            'tooltip': {'column':4},
+	            'hAxis': {
+	            	'slantedText': true
+	            },
 	            
 	            'chartArea': {top: 0, right: 0, bottom: 0}
 	          },
 	          // Configure the barchart to use columns 0 (Build Date/Time Stamp) and 1 (Duration)
 	          'view': {'columns': [0, 1, 4]}
 	        });
-	        lineChart.setOption('tooltip', {'column':4})
-	      	lineChart.setOption('hAxis.slantedText', true)
 	      	
 	        // Create the dashboard.
 	        new google.visualization.Dashboard(document.getElementById('dashboard3')).
@@ -202,11 +204,7 @@
 	          bind(suiteLinePicker, [lineChart, datePicker]).
 	          bind(datePicker, lineChart).
 	          // Draw the dashboard
-	          draw(dataTable3,
-	          	{title:"Suite Performance",
-	             vAxis: {title: "Build"},
-	             hAxis: {title: "Duration in Nanoseconds", minValue: 200000000000}}
-	          );
+	          draw(dataTable3);
 	      }
 	      
 	
@@ -223,7 +221,7 @@
 	            <div id="suiteRangeFilter"></div>
 	          </td>
 	          <td style='width: 600px'>
-	            <div style="float: left;" id="linechart"></div>
+	            <div id="linechart"></div>
 	          </td>
 	        </tr>
 	      </table>
