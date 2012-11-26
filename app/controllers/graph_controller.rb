@@ -25,6 +25,18 @@ class GraphController < ApplicationController
   end
 
   def scenarios
+  	suite_name = params[:suite_name]
+		# @scenarios = Scenario.joins(:suite).where(:suites => {:name => suite_name}).select("scenarios.*,suites.runstamp,suites.build_time,suites.build_date")
+		@scenarios = Scenario.find_by_sql("select sce.name, sce.duration, sce.status, sce.duration_converted, f.name as feature_name , sui.runstamp, sui.build_date, sui.build_time " + 
+																			"from Scenarios sce " +
+																			"inner join Features f on f.id = sce.feature_id " +
+																			"inner join Suites sui on sui.id = f.suite_id " +
+																			"where sui.name = '#{suite_name}'")
+		@scenarios.sort! { |a,b| a.runstamp <=> b.runstamp}
+		respond_to do |format|
+			format.json {render json: @scenarios}
+			format.html {render html: @scenarios}
+  	end  	
   end
 
   def steps

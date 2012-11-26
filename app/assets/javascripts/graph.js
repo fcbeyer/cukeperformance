@@ -12,6 +12,11 @@ function getPortalSmokeData() {
 	$.getJSON(url, {'suite_name':'PortalSmoke'}, drawGraphs);
 }
 
+function getCMHSLoadTestData() {
+	var url = document.location.href;
+	$.getJSON(url, {'suite_name':'CMHSLoadTest'}, drawGraphs);
+}
+
 function drawGraphs(json) {
 	drawVisualization(json);
 	drawVisualization2(json);
