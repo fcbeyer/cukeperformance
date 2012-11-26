@@ -24,6 +24,8 @@ gem 'jquery-rails'
 
 gem 'json'
 
+gem 'thin'
+
 gem 'bootstrap-sass'
 
 # To use ActiveModel has_secure_password

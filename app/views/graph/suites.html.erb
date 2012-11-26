@@ -7,6 +7,10 @@
     <script type="text/javascript">
       google.load('visualization', '1.1', {packages: ['controls']});
     </script>
+<p>
+	<button class="btn btn-mini btn-primary" onclick="getBvtData()" type="button">Get BVT Data</button>
+	<button class="btn btn-mini btn-primary" onclick="getPortalSmokeData()" type="button">Get Portal Smoke Data</button>
+</p>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#barChart" data-toggle="tab">Bar Chart</a></li>
   <li><a href="#lineChart" data-toggle="tab">Line Chart</a></li>
@@ -14,8 +18,9 @@
 <div class="tab-content">
 	<div class="tab-pane active" id="barChart">
 	    <script type="text/javascript">
-		  var data = <%= @suites.to_json.html_safe %>;
-	      function drawVisualization() {
+	      function drawVisualization(d) {
+	      	
+	      	var data = d
 	        // Create and populate the data table.
 	        var dataTable = new google.visualization.DataTable();
 	        dataTable.addColumn('string', 'Build Date');
@@ -39,21 +44,6 @@
 	              'allowMultiple': false
 	            }
 	          }
-	        });
-	        
-	        var suiteBarPicker = new google.visualization.ControlWrapper({
-	          'controlType': 'CategoryFilter',
-	          'containerId': 'suiteBarFilter',
-	          'options': {
-	            'filterColumnLabel': 'Suite',
-	            'ui': {
-	              'labelStacking': 'vertical',
-	              'allowNone': false,
-	              'allowTyping': false,
-	              'allowMultiple': false
-	            },
-	          },
-	          'state': {'selectedValues': ['BVT']}
 	        });
 	        
 	        // Define a slider control for the 'Build Date' column
@@ -84,7 +74,6 @@
 	        // Create the dashboard.
 	        new google.visualization.Dashboard(document.getElementById('dashboard')).
 	          bind(statusBarPicker, barChart).
-	          bind(suiteBarPicker, barChart).
 	          bind(slider, barChart).
 	          // Draw the dashboard
 	          draw(dataTable,
@@ -103,7 +92,6 @@
 	      <table>
 	        <tr style='vertical-align: top'>
 	          <td style='width: 300px; font-size: 0.9em;'>
-	          	<div id="suiteBarFilter"></div>
 	            <div id="control1"></div>
 	            <div id="control2"></div>
 	          </td>
@@ -117,8 +105,10 @@
 	</div>
 	<div class="tab-pane" id="lineChart">
 		<script type="text/javascript">
-		  var data3 = <%= @suites.to_json.html_safe %>;
-	      function drawVisualization3() {
+	      function drawVisualization2(d2) {
+	      	
+	      	var data3 = d2
+	      	
 	        // Create and populate the data table.
 	        var dataTable3 = new google.visualization.DataTable();
 	        dataTable3.addColumn('date', 'Build Date');
@@ -150,21 +140,6 @@
 	               }
 	           }},
 	         });
-
-	        var suiteLinePicker = new google.visualization.ControlWrapper({
-	          'controlType': 'CategoryFilter',
-	          'containerId': 'suiteLineFilter',
-	          'options': {
-	            'filterColumnLabel': 'Suite',
-	            'ui': {
-	              'labelStacking': 'vertical',
-	              'allowNone': false,
-	              'allowTyping': false,
-	              'allowMultiple': false
-	            }
-	          },
-	          'state': {'selectedValues': ['BVT']}
-	        });
 	        
 	        var statusLinePicker = new google.visualization.ControlWrapper({
 	          'controlType': 'CategoryFilter',
@@ -200,14 +175,13 @@
 	        // Create the dashboard.
 	        new google.visualization.Dashboard(document.getElementById('dashboard3')).
 	          bind(statusLinePicker, [lineChart, datePicker]).
-	          bind(suiteLinePicker, [lineChart, datePicker]).
 	          bind(datePicker, lineChart).
 	          // Draw the dashboard
 	          draw(dataTable3);
 	      }
 	      
 	
-	      google.setOnLoadCallback(drawVisualization3);
+	      google.setOnLoadCallback(drawVisualization2);
 	    </script>
 	  </head>
 	  <body style="font-family: Arial;border: 0 none;">
