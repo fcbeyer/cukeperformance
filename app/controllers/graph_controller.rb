@@ -26,12 +26,13 @@ class GraphController < ApplicationController
 
   def scenarios
   	suite_name = params[:suite_name]
-		# @scenarios = Scenario.joins(:suite).where(:suites => {:name => suite_name}).select("scenarios.*,suites.runstamp,suites.build_time,suites.build_date")
-		@scenarios = Scenario.find_by_sql("select sce.name, sce.duration, sce.status, sce.duration_converted, f.name as feature_name , sui.runstamp, sui.build_date, sui.build_time " + 
-																			"from Scenarios sce " +
-																			"inner join Features f on f.id = sce.feature_id " +
-																			"inner join Suites sui on sui.id = f.suite_id " +
-																			"where sui.name = '#{suite_name}'")
+		# @scenarios = Scenario.find_by_sql("select sce.name, sce.duration, sce.status, sce.duration_converted, f.name as feature_name , sui.runstamp, sui.build_date, sui.build_time " + 
+																			# "from Scenarios sce " +
+																			# "inner join Features f on f.id = sce.feature_id " +
+																			# "inner join Suites sui on sui.id = f.suite_id " +
+																			# "where sui.name = '#{suite_name}'")
+		@scenarios = Scenario.joins(:feature => :suite).where(:suites => {:name => suite_name}).
+			select("scenarios.*,suites.runstamp,suites.build_time,suites.build_date,features.name as feature_name")
 		@scenarios.sort! { |a,b| a.runstamp <=> b.runstamp}
 		respond_to do |format|
 			format.json {render json: @scenarios}
@@ -41,13 +42,14 @@ class GraphController < ApplicationController
 
   def steps
   	suite_name = params[:suite_name]
-		# @scenarios = Scenario.joins(:suite).where(:suites => {:name => suite_name}).select("scenarios.*,suites.runstamp,suites.build_time,suites.build_date")
-		@steps = Step.find_by_sql("select ste.name, ste.duration, ste.status, ste.duration_converted, f.name as feature_name, sce.name as scenario_name, sui.runstamp, sui.build_date, sui.build_time " + 
-																			"from Steps ste " +
-																			"inner join Scenarios sce on sce.id = ste.scenario_id " +
-																			"inner join Features f on f.id = sce.feature_id " +
-																			"inner join Suites sui on sui.id = f.suite_id " +
-																			"where sui.name = '#{suite_name}'")
+		# @steps = Step.find_by_sql("select ste.name, ste.duration, ste.status, ste.duration_converted, f.name as feature_name, sce.name as scenario_name, sui.runstamp, sui.build_date, sui.build_time " + 
+																			# "from Steps ste " +
+																			# "inner join Scenarios sce on sce.id = ste.scenario_id " +
+																			# "inner join Features f on f.id = sce.feature_id " +
+																			# "inner join Suites sui on sui.id = f.suite_id " +
+																			# "where sui.name = '#{suite_name}'")
+		@steps = Step.joins(:scenario => {:feature => :suite}).where(:suites => {:name => suite_name}).
+			select("steps.*,suites.runstamp,suites.build_time,suites.build_date, features.name as feature_name, scenarios.name as scenario_name")
 		@steps.sort! { |a,b| a.runstamp <=> b.runstamp}
 		respond_to do |format|
 			format.json {render json: @steps}
