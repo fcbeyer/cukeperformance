@@ -15,3 +15,15 @@
 //= require bootstrap
 //= require jquery_ujs
 //= require_tree .
+
+jQuery.fn.getFormValues = function(){
+    var formvals = {};
+    jQuery.each(jQuery(':input',this).serializeArray(),function(i,obj){        
+        if (formvals[obj.name] == undefined)
+            formvals[obj.name] = obj.value;
+        else if (typeof formvals[obj.name] == Array) 
+            formvals[obj.name].push(obj.value);
+        else formvals[obj.name] = [formvals[obj.name],obj.value];
+    });    
+    return formvals;
+}

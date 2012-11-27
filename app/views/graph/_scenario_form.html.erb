@@ -3,19 +3,19 @@
     <h3 id="myModalLabel">BVT Data Retrieval Form</h3>
 </div>
 <div class="modal-body">
-	<%=form_tag do %>
+	<%= form_tag 'none', :id => 'bvtScenarioData' do %>
 		<fieldset>
 			<div class="field">
-			    <%= label_tag :feature_name, "Feature Name:" %>
-			    <%= text_field_tag :feature_name, params[:feature_name] %>
+			    <%= label_tag :f_name, "Feature Name:" %>
+			    <%= text_field_tag :f_name %>
 			</div>
 			<div class="field">
 			    <%= label_tag :begin_date, "Begin Date: " %>
-			    <%= date_select :begin_date, :start_year => Time.now.year - 10, :end_year => Time.now.year %>
+			    <%= select_date(Time.now.year - 10, :prefix => "begin_date")%>
 			</div>
 			<div class="field">
 			    <%= label_tag :end_date, "End Date: " %>
-			    <%= date_select :end_date, :start_year => Time.now.year - 10, :end_year => Time.now.year %>
+			    <%= select_date(Time.now, :prefix => "end_date")%>
 			</div>
 		</fieldset>
 	<% end %>
