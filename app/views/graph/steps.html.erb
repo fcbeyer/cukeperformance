@@ -1,2 +1,90 @@
-<h1>Graph#steps</h1>
-<p>Find me in app/views/graph/steps.html.erb</p>
+<h1> Step Performance Charts</h1>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
+    
+    <script type="text/javascript">
+      google.load('visualization', '1.1', {packages: ['controls']});
+    </script>
+ <!-- Button layout at top of page -->
+<p>
+	<a href="#bvtModal" role="button" class="btn btn-mini btn-primary" data-toggle="modal">Get BVT Data</a>
+	<button class="btn btn-mini btn-primary" onclick="getData('PortalSmoke','Steps')" type="button">Get Portal Smoke Data</button>
+	<button class="btn btn-mini btn-primary" onclick="getData('CMHSLoadTest','Steps')" type="button">Get CMHS Load Test Data</button>
+</p>
+
+<!-- Modal information -->
+<div id="bvtModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">BVT Data Retrieval Form</h3>
+  </div>
+  <div class="modal-body">
+    <p>
+    	Data here will be used to return a smaller subset of data
+    </p>
+  </div>
+  <div class="modal-footer">
+  	<button class="btn btn-mini btn-success" data-dismiss="modal" onclick="getData('BVT','Steps')" type="button">Fetch</button>
+    <button class="btn btn-mini btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#barChart" data-toggle="tab">Bar Chart</a></li>
+  <li><a href="#lineChart" data-toggle="tab">Line Chart</a></li>
+</ul>
+<div class="tab-content">
+	<div class="tab-pane active" id="barChart">
+	    <script type="text/javascript">	
+	      google.setOnLoadCallback(drawStepBarVisualization);
+	    </script>
+	  </head>
+	  <body style="font-family: Arial;border: 0 none;">
+	    <div id="dashboard">
+	      <table>
+	        <tr style='vertical-align: top'>
+	          <td style='width: 300px; font-size: 0.9em;'>
+	          	<div id="featureBarFilter"></div>
+	          	<div id="scenarioBarFilter"></div>
+	          	<div id="stepBarFilter"></div>
+	            <div id="control1"></div>
+	            <div id="control2"></div>
+	          </td>
+	          <td style='width: 600px'>
+	            <div style="float: left;" id="chart1"></div>
+	          </td>
+	        </tr>
+	      </table>
+	    </div>
+	  </body>
+	</div>
+	<div class="tab-pane" id="lineChart">
+		<script type="text/javascript">	
+	      google.setOnLoadCallback(drawStepLineVisualization);
+	    </script>
+	  </head>
+	  <body style="font-family: Arial;border: 0 none;">
+	    <div id="dashboard3">
+	      <table>
+	        <tr style='vertical-align: top'>
+	          <td style='width: 300px; font-size: 0.9em;'>
+	            <div id="featureLineFilter"></div>
+	            <div id="scenarioLineFilter"></div>
+	            <div id="stepLineFilter"></div>
+	            <div id="statusLineFilter"></div>
+	            <div id="suiteRangeFilter"></div>
+	          </td>
+	          <td style='width: 600px'>
+	            <div id="linechart"></div>
+	          </td>
+	        </tr>
+	      </table>
+	    </div>
+	  </body>
+	</div>
+</div>
+
+<br />

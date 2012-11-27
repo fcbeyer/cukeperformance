@@ -80,8 +80,8 @@ function drawScenarioBarVisualization(d) {
     // Create the dashboard.
     new google.visualization.Dashboard(document.getElementById('dashboard')).
       bind(statusBarPicker, barChart).
-      bind(featureBarPicker, [barChart, scenarioBarPicker]).
-      bind(scenarioBarPicker, barChart).
+      bind(featureBarPicker, [barChart, scenarioBarPicker, statusBarPicker]).
+      bind(scenarioBarPicker, [barChart, statusBarPicker]).
       bind(slider, barChart).
       // Draw the dashboard
       draw(dataTable,
@@ -188,8 +188,8 @@ function drawScenarioLineVisualization(d2) {
     // Create the dashboard.
     new google.visualization.Dashboard(document.getElementById('dashboard3')).
       bind(statusLinePicker, [lineChart, datePicker]).
-      bind(scenarioLinePicker, [lineChart, datePicker]).
-      bind(featureLinePicker, [lineChart, datePicker, scenarioLinePicker]).
+      bind(scenarioLinePicker, [lineChart, datePicker, statusLinePicker]).
+      bind(featureLinePicker, [lineChart, datePicker, scenarioLinePicker, statusLinePicker]).
       bind(datePicker, lineChart).
       // Draw the dashboard
       draw(dataTable3);
