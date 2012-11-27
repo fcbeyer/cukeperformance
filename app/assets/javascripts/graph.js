@@ -2,22 +2,38 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-function getBvtData() {
+function getData(suite,view) {
 	var url = document.location.href;
-	$.getJSON(url, {'suite_name':'BVT'}, drawGraphs);
+	if (view == "Suites"){
+		$.getJSON(url, {'suite_name':suite}, drawSuiteGraphs);
+	}
+	else if (view == "Features") {
+		$.getJSON(url, {'suite_name':suite}, drawFeatureGraphs);
+	}
+	else if (view == "Scenarios") {
+		$.getJSON(url, {'suite_name':suite}, drawScenarioGraphs);
+	}
+	else {
+		$.getJSON(url, {'suite_name':suite}, drawStepGraphs);	
+	}
 }
 
-function getPortalSmokeData() {
-	var url = document.location.href;
-	$.getJSON(url, {'suite_name':'PortalSmoke'}, drawGraphs);
+function drawSuiteGraphs(json) {
+	drawSuiteBarVisualization(json);
+	drawSuiteLineVisualization(json);
 }
 
-function getCMHSLoadTestData() {
-	var url = document.location.href;
-	$.getJSON(url, {'suite_name':'CMHSLoadTest'}, drawGraphs);
+function drawFeatureGraphs(json) {
+	drawFeatureBarVisualization(json);
+	drawFeatureLineVisualization(json);
 }
 
-function drawGraphs(json) {
-	drawVisualization(json);
-	drawVisualization2(json);
+function drawScenarioGraphs(json) {
+	drawScenarioBarVisualization(json);
+	drawScenarioLineVisualization(json);
+}
+
+function drawStepGraphs(json) {
+	drawStepBarVisualization(json);
+	drawStepLineVisualization(json);
 }
