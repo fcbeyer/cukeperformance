@@ -144,10 +144,11 @@
 	        dataTable3.addColumn('number', 'Duration');
 	        dataTable3.addColumn('string', 'Status');
 	        dataTable3.addColumn('string', 'Feature');
+	        dataTable3.addColumn('string', 'Scenario');
 	        dataTable3.addColumn({type:'string', role:'tooltip'});
 	        
 	        for(var i=0; i < data3.length; i++) {
-	        	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration, data3[i].status, data3[i].name, data3[i].duration_converted]);
+	        	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration, data3[i].status, data3[i].feature_name, data3[i].name, data3[i].duration_converted]);
 	        }
 		  	
 		  	var datePicker = new google.visualization.ControlWrapper({
@@ -184,6 +185,20 @@
 	          },
 	        });
 	        
+	        var scenarioLinePicker = new google.visualization.ControlWrapper({
+	          'controlType': 'CategoryFilter',
+	          'containerId': 'scenarioLineFilter',
+	          'options': {
+	            'filterColumnLabel': 'Scenario',
+	            'ui': {
+	              'labelStacking': 'vertical',
+	              'allowNone': false,
+	              'allowTyping': false,
+	              'allowMultiple': false
+	            }
+	          },
+	        })
+	        
 	        var statusLinePicker = new google.visualization.ControlWrapper({
 	          'controlType': 'CategoryFilter',
 	          'containerId': 'statusLineFilter',
@@ -204,7 +219,7 @@
 	            'width': 900,
 	            'height': 700,
 	            'pointSize': 6,
-	            'tooltip': {'column':4},
+	            'tooltip': {'column':5},
 	            'hAxis': {
 	            	'slantedText': true
 	            },
@@ -212,13 +227,14 @@
 	            'chartArea': {top: 0, right: 0, bottom: 0}
 	          },
 	          // Configure the barchart to use columns 0 (Build Date/Time Stamp) and 1 (Duration)
-	          'view': {'columns': [0, 1, 4]}
+	          'view': {'columns': [0, 1, 5]}
 	        });
 	      	
 	        // Create the dashboard.
 	        new google.visualization.Dashboard(document.getElementById('dashboard3')).
 	          bind(statusLinePicker, [lineChart, datePicker]).
-	          bind(featureLinePicker, [lineChart, datePicker]).
+	          bind(scenarioLinePicker, [lineChart, datePicker]).
+	          bind(featureLinePicker, [lineChart, datePicker, scenarioLinePicker]).
 	          bind(datePicker, lineChart).
 	          // Draw the dashboard
 	          draw(dataTable3);
@@ -234,6 +250,7 @@
 	        <tr style='vertical-align: top'>
 	          <td style='width: 300px; font-size: 0.9em;'>
 	            <div id="featureLineFilter"></div>
+	            <div id="scenarioLineFilter"></div>
 	            <div id="statusLineFilter"></div>
 	            <div id="suiteRangeFilter"></div>
 	          </td>
