@@ -9,18 +9,13 @@
     </script>
  <!-- Button layout at top of page -->
 <p>
-	<a href="#bvtModal" role="button" class="btn btn-mini btn-primary" data-toggle="modal">Get BVT Data</a>
-	<button class="btn btn-mini btn-primary" onclick="getData('PortalSmoke','Scenarios')" type="button">Get Portal Smoke Data</button>
-	<button class="btn btn-mini btn-primary" onclick="getData('CMHSLoadTest','Scenarios')" type="button">Get CMHS Load Test Data</button>
+	<a href="#scenarioModal" role="button" class="btn btn-primary" data-toggle="modal">Get Data</a>
 </p>
 
 <!-- Modal information -->
-<div id="bvtModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="scenarioModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<%= render 'graph/scenario_form' %>
 </div>
-
-
-
 
 <!-- tab and graph display code -->
 <ul class="nav nav-tabs">

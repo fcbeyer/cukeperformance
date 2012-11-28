@@ -4,7 +4,7 @@
 
 function getData(suite,view) {
 	var url = document.location.href;
-	var formData = $('#bvtScenarioData').getFormValues();
+	var formData = $('#graphParameterData').getFormValues();
 	formData['suite_name'] = suite;
 	if (view == "Suites"){
 		$.getJSON(url, {'suite_name':suite}, drawSuiteGraphs);
@@ -16,7 +16,7 @@ function getData(suite,view) {
 		$.getJSON(url, formData, drawScenarioGraphs);
 	}
 	else {
-		$.getJSON(url, {'suite_name':suite}, drawStepGraphs);	
+		$.getJSON(url, formData, drawStepGraphs);	
 	}
 }
 

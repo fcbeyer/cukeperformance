@@ -20,11 +20,16 @@ class GraphController < ApplicationController
   end
 
   def scenarios
+  	@begin_date = Suite.first.runstamp
   	fname = params[:f_name]
-  	begin_date = params[:begin_date]
-  	end_date = params[:end_date]
+  	start_date = params[:begin_date]
+  	finish_date = params[:end_date]
   	suite_name = params[:suite_name]
-		@scenarios = Scenario.joins(:feature => :suite).where(:suites => {:name => suite_name}).
+  	
+  	start = (start_date.nil? ? Suite.first.runstamp : Time.new(start_date['year'],start_date['month'],start_date['day']))
+  	finish = (finish_date.nil? ? Time.now : Time.new(finish_date['year'],finish_date['month'],finish_date['day'],23,59,59))
+  	
+		@scenarios = Scenario.joins(:feature => :suite).where(:suites => {:name => suite_name},:suites => {:runstamp => start..finish}).
 			select("scenarios.*,suites.runstamp,suites.build_time,suites.build_date,features.name as feature_name")
 		@scenarios.sort! { |a,b| a.runstamp <=> b.runstamp}
 		respond_to do |format|
@@ -34,8 +39,17 @@ class GraphController < ApplicationController
   end
 
   def steps
+  	@begin_date = Suite.first.runstamp
+  	fname = params[:f_name]
+  	sname = params[:s_name]
+  	start_date = params[:begin_date]
+  	finish_date = params[:end_date]
   	suite_name = params[:suite_name]
-		@steps = Step.joins(:scenario => {:feature => :suite}).where(:suites => {:name => suite_name}).
+  	
+  	start = (start_date.nil? ? Suite.first.runstamp : Time.new(start_date['year'],start_date['month'],start_date['day']))
+  	finish = (finish_date.nil? ? Time.now : Time.new(finish_date['year'],finish_date['month'],finish_date['day'],23,59,59))
+  	
+		@steps = Step.joins(:scenario => {:feature => :suite}).where(:suites => {:name => suite_name},:suites => {:runstamp => start..finish}).
 			select("steps.*,suites.runstamp,suites.build_time,suites.build_date, features.name as feature_name, scenarios.name as scenario_name")
 		@steps.sort! { |a,b| a.runstamp <=> b.runstamp}
 		respond_to do |format|
