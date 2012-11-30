@@ -5,7 +5,6 @@
     <th>Name</th>
     <th>Duration</th>
     <th></th>
-    <th></th>
   </tr>
   <tr>
   	<% if @current_scenario.name.length == 0
@@ -15,7 +14,6 @@
   	   end %>
     <td><%= displayName %></td>
     <td><%= @current_scenario.duration_converted %></td>
-    <td><%= link_to 'Edit', edit_suite_feature_scenario_path(@current_suite, @current_feature,@current_scenario) %></td>
     <td><%= link_to 'Destroy', [@current_suite,@current_feature,@current_scenario], confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 </table>
@@ -24,5 +22,4 @@
 
 <br />
 
-<%= link_to 'Edit', edit_suite_feature_scenario_path(@current_suite,@current_feature,@current_scenario) %> |
 <%= link_to 'Back', [@current_suite,@current_feature] %>

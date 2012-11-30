@@ -6,7 +6,6 @@
     <th>Duration</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @scenarios.each do |scenario| %>
@@ -19,12 +18,9 @@
     <td><%= displayName %></td>
     <td><%= scenario.duration_converted %></td>
     <td><%= link_to 'Show', [@current_suite,@current_feature,scenario] %></td>
-    <td><%= link_to 'Edit', edit_suite_feature_scenario_path(@current_suite,@current_feature,scenario) %></td>
     <td><%= link_to 'Destroy', [@current_suite,@current_feature,scenario], confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Scenario', new_suite_feature_scenario_path(@current_suite,@current_feature) %>
