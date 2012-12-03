@@ -7,6 +7,8 @@ CukePerformance::Application.routes.draw do
   get "graph/scenarios"
 
   get "graph/steps"
+  
+  get "graph/summary"
 
   resources :suites do
     resources :features do
@@ -16,7 +18,7 @@ CukePerformance::Application.routes.draw do
     end
   end
 
-  #custom routes for auto generating data and then going to the graphs for each automation suite
+  #custom route for auto generating data
   # => 				url you want								model#action						  				 path
   match 'auto_create/suites/:jobname' => 'suites#auto_create', :as => :auto_create_suites
   
