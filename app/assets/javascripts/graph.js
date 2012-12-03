@@ -6,7 +6,10 @@ function getData(suite,view) {
 	var url = document.location.href;
 	var formData = $('#graphParameterData').getFormValues();
 	formData['suite_name'] = suite;
-	if (view == "Suites"){
+	if (view == "Summary"){
+		$.getJSON(url, {'suite_name':suite}, drawSummaryGraphs);
+	}
+	else if (view == "Suites"){
 		$.getJSON(url, {'suite_name':suite}, drawSuiteGraphs);
 	}
 	else if (view == "Features") {
@@ -38,4 +41,9 @@ function drawScenarioGraphs(json) {
 function drawStepGraphs(json) {
 	drawStepBarVisualization(json);
 	drawStepLineVisualization(json);
+}
+
+function drawSummaryGraphs(json){
+	drawSummaryBarVisualization(json);
+	drawSummaryLineVisualization(json);
 }

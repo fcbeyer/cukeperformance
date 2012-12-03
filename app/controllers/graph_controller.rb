@@ -55,7 +55,17 @@ class GraphController < ApplicationController
 		respond_to do |format|
 			format.json {render json: @steps}
 			format.html {render html: @steps}
-  	end  
+  end
+  end
+  
+  def summary
+  	suite_name = params[:suite_name]
+  	@summary = Suite.order("id desc").where(name: suite_name).limit(10)
+  	@summary.sort! { |a,b| a.runstamp <=> b.runstamp}
+  	respond_to do |format|
+  		format.json {render json: @summary}
+  		format.html {render html: @summary}
+  	end
   end
   
   
