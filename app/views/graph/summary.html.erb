@@ -13,11 +13,11 @@
 	<button class="btn btn-mini btn-primary" onclick="getData('CMHSLoadTest','Summary')" type="button">Get CMHS Load Test Data</button>
 </p>
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#barChart" data-toggle="tab">Bar Chart</a></li>
-  <li><a href="#lineChart" data-toggle="tab">Line Chart</a></li>
+  
+  <li class="active"><a href="#lineChart" data-toggle="tab">Line Chart</a></li>
 </ul>
 <div class="tab-content">
-	<div class="tab-pane active" id="barChart">
+	<div class="tab-pane" id="barChart">
 	    <script type="text/javascript">	
 	      google.setOnLoadCallback(drawSummaryBarVisualization);
 	    </script>
@@ -38,7 +38,7 @@
 	    </div>
 	  </body>
 	</div>
-	<div class="tab-pane" id="lineChart">
+	<div class="tab-pane active" id="lineChart">
 		<script type="text/javascript">	
 	      google.setOnLoadCallback(drawSummaryLineVisualization);
 	    </script>

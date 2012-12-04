@@ -179,7 +179,7 @@ function drawSummaryBarVisualization(d) {
     });
         
     var comboChart = new google.visualization.ChartWrapper({
-      'chartType': 'ComboChart',
+      'chartType': 'BarChart',
       'containerId': 'chart1',
       'options': {
         'width': 900,
@@ -219,26 +219,6 @@ function drawSummaryLineVisualization(d2) {
     for(var i=0; i < data3.length; i++) {
     	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration, data3[i].status, data3[i].name, data3[i].duration_converted]);
     }
-  	
-  	var datePicker = new google.visualization.ControlWrapper({
-       'controlType': 'ChartRangeFilter',
-       'containerId': 'suiteRangeFilter',
-       'options': {
-         // Filter by the date axis.
-         'filterColumnIndex': 0,
-         'ui': {
-           'chartType': 'LineChart',
-           'chartOptions': {
-             'chartArea': {'width': '90%'},
-             'hAxis': {'slantedText': true}
-           },
-           // Display a single series that shows the closing value of the stock.
-           // Thus, this view has two columns: the date (axis) and the stock value (line series).
-           'chartView': {
-             'columns': [0, 1]
-           }
-       }},
-     });
     
     var statusLinePicker = new google.visualization.ControlWrapper({
       'controlType': 'CategoryFilter',
@@ -273,8 +253,7 @@ function drawSummaryLineVisualization(d2) {
   	
     // Create the dashboard.
     new google.visualization.Dashboard(document.getElementById('dashboard3')).
-      bind(statusLinePicker, [lineChart, datePicker]).
-      bind(datePicker, lineChart).
+      bind(statusLinePicker, lineChart).
       // Draw the dashboard
       draw(dataTable3);
 }
