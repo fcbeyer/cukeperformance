@@ -32,6 +32,8 @@ gem 'json'
 
 gem 'thin'
 
+gem 'yaml_db'
+
 gem 'bootstrap-sass'
 
 # To use ActiveModel has_secure_password
