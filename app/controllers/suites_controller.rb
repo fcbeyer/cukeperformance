@@ -1,4 +1,4 @@
-require_relative '../../performance/jsonParse.rb'
+require_relative '../performance/jsonParse.rb'
 
 class SuitesController < ApplicationController
 	
