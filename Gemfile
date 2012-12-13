@@ -1,18 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.9'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-group :development do
-	gem 'mysql2'
-end
-
-group :production do
-	gem 'mysql2'
-end
-
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -26,11 +17,14 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+#gem 'activerecord-jdbc-adapter'
+gem 'activerecord-jdbcmysql-adapter'
+#gem 'jdbc-mysql'
 gem 'jquery-rails'
 
 gem 'json'
 
-gem 'thin'
+#gem 'thin'
 
 gem 'yaml_db'
 
