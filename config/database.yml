@@ -9,22 +9,30 @@
   # pool: 5
   # timeout: 5000
 development:
-  adapter: mysql2
+  #adapter: mysql2
+  port: 3306
+  adapter: jdbcmysql
   encoding: utf8
-  reconnect: false
+  #reconnect: false
   database: perf_reports
   pool: 5
   username: cukeperf
   password: cuke123
   host: allservers
+  timeout: 5000
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  adapter: sqlite3
-  database: db/test.sqlite3
+  port: 3306
+  adapter: jdbcmysql
+  encoding: utf8
+  database: perf_reports
   pool: 5
+  username: cukeperf
+  password: cuke123
+  host: allservers
   timeout: 5000
 
 # production:
@@ -34,11 +42,12 @@ test:
   # timeout: 5000
   
 production:
-  adapter: mysql2
+  port: 3306
+  adapter: jdbcmysql
   encoding: utf8
-  reconnect: false
   database: perf_reports
   pool: 5
   username: cukeperf
   password: cuke123
   host: allservers
+  timeout: 5000
