@@ -17,10 +17,8 @@ group :assets do
   #gem 'uglifier', '>= 1.0.3'
 end
 
-defined if defined?(JRUBY_VERSION)
-  gem 'activerecord-jdbc-adapter', '=1.1.3'
-  gem 'jdbc-mysql', :require=>false
-  gem 'activerecord-jdbcmysql-adapter', '=1.1.3'
+if defined?(JRUBY_VERSION)
+  gem 'activerecord-jdbcmysql-adapter'
 else
   gem 'mysql2'
   gem 'thin'
