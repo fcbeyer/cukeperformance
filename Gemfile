@@ -14,17 +14,20 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
 
-  gem 'uglifier', '>= 1.0.3'
+  #gem 'uglifier', '>= 1.0.3'
 end
 
-#gem 'activerecord-jdbc-adapter'
-gem 'activerecord-jdbcmysql-adapter'
-#gem 'jdbc-mysql'
+defined if defined?(JRUBY_VERSION)
+  gem 'activerecord-jdbc-adapter', '=1.1.3'
+  gem 'jdbc-mysql', :require=>false
+  gem 'activerecord-jdbcmysql-adapter', '=1.1.3'
+else
+  gem 'mysql2'
+  gem 'thin'
+end
 gem 'jquery-rails'
 
 gem 'json'
-
-#gem 'thin'
 
 gem 'yaml_db'
 
