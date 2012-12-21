@@ -5,10 +5,10 @@
 <div class="modal-body">
 	<%= form_tag 'none', :id => 'graphParameterData' do %>
 		<fieldset>
-			<div class="field">
+			<!-- <div class="field">
 			    <%= label_tag :f_name, "Feature Name:" %>
 			    <%= text_field_tag :f_name %>
-			</div>
+			</div> -->
 			<div class="field">
 			    <%= label_tag :begin_date, "Begin Date: " %>
 			    <%= select_date(@begin_date, :prefix => "begin_date")%>
@@ -24,5 +24,6 @@
   <button style="float:left" class="btn btn-mini btn-success" data-dismiss="modal" onclick="getData('BVT','Scenarios')" type="button">BVT</button>
   <button style="float:left" class="btn btn-mini btn-success" data-dismiss="modal" onclick="getData('PortalSmoke','Scenarios')" type="button">Portal Smoke</button>
   <button style="float:left" class="btn btn-mini btn-success" data-dismiss="modal" onclick="getData('CMHSLoadTest','Scenarios')" type="button">CMHS Load Test</button>
+  <button style="float:left" class="btn btn-mini btn-success" data-dismiss="modal" onclick="getData('CMHSLoadTestBVT','Scenarios')" type="button">CMHS Load Test BVT</button>
   <button class="btn btn-mini btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
 </div>

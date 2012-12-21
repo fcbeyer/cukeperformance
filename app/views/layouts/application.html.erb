@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/assets/bootstrap-responsive.css" rel="stylesheet">
 </head>
+
+<% if browser.ie? %>
+  <h5 class="alert-danger">This application is not designed to work in IE.  Please switch over to Chrome or Firefox for a better experience</h5>
+<% end %>
 <body>
 	
 <div class="navbar">
@@ -26,6 +30,7 @@
      				<li><a href="/auto_create/suites/BVT">Generate BVT Data</a></li>
      				<li><a href="/auto_create/suites/PortalSmoke">Generate Portal Smoke Data</a></li>
      				<li><a href="/auto_create/suites/CMHSLoadTest">Generate CMHS Load Test Data</a></li> 
+     				<li><a href="/auto_create/suites/CMHSLoadTestBVT">Generate CMHS Load Test BVT Data</a></li> 
     			</ul>  
   			</li>  
   			<li class="dropdown">  

@@ -78,6 +78,7 @@ class SuitesController < ApplicationController
     @bvtSuites = Suite.order("runstamp desc").where(name: "BVT")
     @psSuites = Suite.order("runstamp desc").where(name: "PortalSmoke")
     @cmhsSuites = Suite.order("runstamp desc").where(name: "CMHSLoadTest")
+    @cmhsBVTSuites = Suite.order("runstamp desc").where(name: "CMHSLoadTestBVT")
     #@cmhsSuites.sort! { |a,b| a.runstamp <=> b.runstamp}
 
     respond_to do |format|
