@@ -24,6 +24,7 @@ else
   gem 'thin'
 end
 gem 'jquery-rails'
+gem 'browser'
 
 gem 'json'
 
