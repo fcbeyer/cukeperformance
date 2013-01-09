@@ -17,8 +17,10 @@
     <div class="container">
       <a class="brand" href="/">Cuke Performance</a>
       <ul class="nav">
+      	<li class="divider-vertical"></li>
         <li><a href="/suites">Suites</a></li>
-        <ul class="nav">  
+        <ul class="nav"> 
+        	<li class="divider-vertical"></li> 
   			<li class="dropdown">
     			<a href="#"  
           			class="dropdown-toggle"  
@@ -32,7 +34,8 @@
      				<li><a href="/auto_create/suites/CMHSLoadTest">Generate CMHS Load Test Data</a></li> 
      				<li><a href="/auto_create/suites/CMHSLoadTestBVT">Generate CMHS Load Test BVT Data</a></li> 
     			</ul>  
-  			</li>  
+  			</li> 
+  			<li class="divider-vertical"></li> 
   			<li class="dropdown">  
     			<a href="#"  
           			class="dropdown-toggle"  
@@ -47,10 +50,72 @@
      				<li><a href="/graph/steps">Steps Graph</a></li>
     			</ul>  
   			</li>  
-		</ul> 
+		</ul>
+		<li class="divider-vertical"></li> 
+		<li><a href="#help_modal" data-toggle="modal">Help</a></li>
       </ul>
     </div>
   </div>
+</div>
+
+<div id="help_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+    	<h2 id="myModalLabel" align="center">How Do I Use This?</h2>
+	</div>
+	<div class="modal-body">
+		<div id="table_of_contents">
+			Table of Contents
+			<li><a href="#executive_help">Executive Summary/Home</a></li>
+			<li><a href="#suites_help">Suites</a></li>
+			<li><a href="#generate_help">Generate Data</a></li>
+			<li><a href="#graph_help">View Graphs</a></li>
+		</div>
+		<div id="executive_help">
+			<h4 align="center">Executive Summary/Home Page</h4>
+			<p>
+				Click the blue Get Data buttons to retrieve the last 10 entries for that Automation Suite.  The purpose of this screen is to show how the suite has been trending over the last 10 runs.
+				The scale on the left side of the graph is in <b>nanoseconds</b>.  Hovering over a data point will you show the duration in Hours:Minutes:Seconds:Milliseconds
+			</p>
+			<li><a href="#table_of_contents">return</a></li>
+		</div>
+		<div id="suites_help">
+			<h4 align="center">Suites</h4>
+			<p>
+				Click the Suites link in the Nav Bar to begin your dive into a specific Automation Suite run.  Upon initial loading you are presented with a tabbed page allowing you to view all Suites or
+				narrow down your choice to a specific Suite.  You Once you find the specific run you care to look at click the "Show" link on the right side of the table.  Now you are viewing all the Features
+				that were executed during this specific execution of the Suite.  Information specific to that Suite is presented at the top of this page as well as the duration for each Feature.  To continue
+				digging deeper click the name of the Feature you wish to explore.  At this level you are shown some relevant information for the Feature as a whole, as well as the various Scenarios that made up
+				this instance of the Feature.  Again if you would like to dig deeper click the name of the Scenario you wish to view.  At this point you can see a list of all Steps that made up this
+				Scenario.  You can dig deeper into the Step but not much else information is displayed there outside of the duration in <b>nanoseconds</b>.
+			</p>
+			<li><a href="#table_of_contents">return</a></li>
+		</div>
+		<div id="generate_help">
+			<h4 align="center">Generate Data</h4>
+			<p>
+				Each of these links will find new Automation Suite information created by Cukes (our Jenkins service for Automation).  If you click the BVT entry, a script launches that will find the 
+				datetime stamp of the last run recorded in the database for BVTs and use that stamp to look for new data in the corresponding Jenkins job directory.  It will return a failure notice if
+				cucumber.json or systemData.json are missing from the archive folder for a specific run it is trying to gather data for.
+			</p>
+			<li><a href="#table_of_contents">return</a></li>
+		</div>
+		<div id="graph_help">
+			<h4 align="center">View Graphs</h4>
+			<p>
+				Each of these pages allow you to graph the performance of individual components of our Automation suites.  For instance, if you select Scenario Graphs you are presented with a blank Chart.
+				Click the blue Get Data button and a form will appear to allow you to select what data you would like to display.  After you enter values for the fields, click one of the green
+				Buttons on the bottom left of the page to graph data for that specific Automation suite.  Now that data is displayed, you have the option of choosing a Bar Chart or Line Chart tab.
+				Filters exist so you can select which feature from the BVT you want to display.  After selecting a Feature you can drill down further and select a specific Scenario and the status (pass or fail).
+				On the Bar Chart you can filter the date range more by typing in the string representation of the build datetime stamp, for the Line Chart there is a date slider.
+				The scale on the left side of the graph is in <b>nanoseconds</b>.  Hovering over a data point will you show the duration in Hours:Minutes:Seconds:Milliseconds
+			</p>
+			<li><a href="#table_of_contents">return</a></li>
+		</div>
+	</div>
+	<div class="modal-footer">
+	  <button class="btn btn-small btn-inverse pull-right" data-dismiss="modal" aria-hidden="true">Close</button>
+	</div>
 </div>
 
 <%= yield %>
