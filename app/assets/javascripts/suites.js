@@ -4,13 +4,13 @@ function drawSuiteBarVisualization(d) {
     // Create and populate the data table.
     var dataTable = new google.visualization.DataTable();
     dataTable.addColumn('string', 'Build Date');
-    dataTable.addColumn('number', 'Duration');
+    dataTable.addColumn('number', 'Duration (milliseconds)');
     dataTable.addColumn('string', 'Status');
     dataTable.addColumn('string', 'Suite');
     dataTable.addColumn({type:'string', role:'tooltip'});
     
     for(var i=0; i < data.length; i++) {
-      dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration, data[i].status, data[i].name, data[i].duration_converted]);
+      dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration/1000000, data[i].status, data[i].name, data[i].duration_converted]);
     }
   
     var statusBarPicker = new google.visualization.ControlWrapper({
@@ -43,8 +43,14 @@ function drawSuiteBarVisualization(d) {
         'width': 900,
         'height': 700,
         'tooltip': {'column':4},
-
-        'chartArea': {top: 0, right: 0, bottom: 0}
+        'hAxis': {
+        	'slantedText': true,
+        	'title': "Duration (milliseconds)"
+        },
+        'vAxis': {
+        	'title': "Run Date"
+        },
+        'chartArea': {top: 10, right: 0, bottom: 0}
       },
       // Configure the barchart to use columns 0 (Build Date/Time Stamp) and 1 (Duration)
       'view': {'columns': [0, 1, 4]}
@@ -55,11 +61,7 @@ function drawSuiteBarVisualization(d) {
       bind(statusBarPicker, barChart).
       bind(slider, barChart).
       // Draw the dashboard
-      draw(dataTable,
-        {title:"Suite Performance",
-         vAxis: {title: "Build"},
-         hAxis: {title: "Duration in Nanoseconds"}}
-      );
+      draw(dataTable);
 }
 
 function drawSuiteLineVisualization(d2) {
@@ -69,13 +71,13 @@ function drawSuiteLineVisualization(d2) {
     // Create and populate the data table.
     var dataTable3 = new google.visualization.DataTable();
     dataTable3.addColumn('date', 'Build Date');
-    dataTable3.addColumn('number', 'Duration');
+    dataTable3.addColumn('number', 'Duration (milliseconds)');
     dataTable3.addColumn('string', 'Status');
     dataTable3.addColumn('string', 'Suite');
     dataTable3.addColumn({type:'string', role:'tooltip'});
     
     for(var i=0; i < data3.length; i++) {
-    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration, data3[i].status, data3[i].name, data3[i].duration_converted]);
+    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration/1000000, data3[i].status, data3[i].name, data3[i].duration_converted]);
     }
   	
   	var datePicker = new google.visualization.ControlWrapper({
@@ -115,17 +117,19 @@ function drawSuiteLineVisualization(d2) {
       'chartType': 'LineChart',
       'containerId': 'linechart',
       'options': {
-        'width': 900,
+        'width': 1000,
         'height': 700,
         'pointSize': 6,
         'tooltip': {'column':4},
         'hAxis': {
-        	'slantedText': true
+        	'slantedText': true,
+        	'title': "Run Date"
         },
-        
-        'chartArea': {top: 0, right: 0, bottom: 0}
+        'vAxis':{
+        	'title': "Duration (milliseconds)"
+        },        
+        'chartArea': {top: 10, right: 0, bottom: 0}
       },
-      // Configure the barchart to use columns 0 (Build Date/Time Stamp) and 1 (Duration)
       'view': {'columns': [0, 1, 4]}
     });
   	
@@ -140,19 +144,21 @@ function drawSuiteLineVisualization(d2) {
 
 // THIS IS FOR THE EXECUTIVE SUMMARY PAGE !!!!!!!!!!!!!!!!!!!
 
+
+//currently not used
 function drawSummaryBarVisualization(d) {
           
     var data = d
     // Create and populate the data table.
     var dataTable = new google.visualization.DataTable();
     dataTable.addColumn('string', 'Build Date');
-    dataTable.addColumn('number', 'Duration');
+    dataTable.addColumn('number', 'Duration (milliseconds)');
     dataTable.addColumn('string', 'Status');
     dataTable.addColumn('string', 'Suite');
     dataTable.addColumn({type:'string', role:'tooltip'});
     
     for(var i=0; i < data.length; i++) {
-      dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration, data[i].status, data[i].name, data[i].duration_converted]);
+      dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration/1000000, data[i].status, data[i].name, data[i].duration_converted]);
     }
   
     var statusBarPicker = new google.visualization.ControlWrapper({
@@ -185,8 +191,14 @@ function drawSummaryBarVisualization(d) {
         'width': 900,
         'height': 700,
         'tooltip': {'column':4},
-
-        'chartArea': {top: 0, right: 0, bottom: 0}
+        'hAxis': {
+        	'slantedText': true,
+        	'title': "Duration (milliseconds)"
+        },
+        'vAxis': {
+        	'title': "Run Date"
+        },
+        'chartArea': {top: 10, right: 0, bottom: 0}
       },
       // Configure the barchart to use columns 0 (Build Date/Time Stamp) and 1 (Duration)
       'view': {'columns': [0, 1, 4]}
@@ -211,13 +223,13 @@ function drawSummaryLineVisualization(d2) {
     // Create and populate the data table.
     var dataTable3 = new google.visualization.DataTable();
     dataTable3.addColumn('date', 'Build Date');
-    dataTable3.addColumn('number', 'Duration');
+    dataTable3.addColumn('number', 'Duration (milliseconds)');
     dataTable3.addColumn('string', 'Status');
     dataTable3.addColumn('string', 'Suite');
     dataTable3.addColumn({type:'string', role:'tooltip'});
     
     for(var i=0; i < data3.length; i++) {
-    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration, data3[i].status, data3[i].name, data3[i].duration_converted]);
+    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration/1000000, data3[i].status, data3[i].name, data3[i].duration_converted]);
     }
     
     var statusLinePicker = new google.visualization.ControlWrapper({
@@ -242,12 +254,15 @@ function drawSummaryLineVisualization(d2) {
         'pointSize': 6,
         'tooltip': {'column':4},
         'hAxis': {
-        	'slantedText': true
+        	'slantedText': true,
+        	'title': "Run Date"
         },
-        
-        'chartArea': {top: 0, right: 0, bottom: 0}
+        'vAxis':{
+        	'title': "Duration (milliseconds)"
+        },        
+        'chartArea': {top: 10, right: 0, bottom: 0}
       },
-      // Configure the barchart to use columns 0 (Build Date/Time Stamp) and 1 (Duration)
+      // Configure the linechart to use columns 0 (Build Date/Time Stamp), 1 (Duration) for the graph, and column 4 as a tooltip
       'view': {'columns': [0, 1, 4]}
     });
   	
