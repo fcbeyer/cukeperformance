@@ -1,7 +1,15 @@
 class GraphController < ApplicationController
   def suites
+  	@begin_date = Suite.first.runstamp
   	suite_name = params[:suite_name]
-  	@suites = Suite.where(name: suite_name)
+  	start_date = params[:begin_date]
+  	finish_date = params[:end_date]
+  	suite_name = params[:suite_name]
+  	
+  	start = (start_date.nil? ? Suite.first.runstamp : Time.new(start_date['year'],start_date['month'],start_date['day']))
+  	finish = (finish_date.nil? ? Time.now : Time.new(finish_date['year'],finish_date['month'],finish_date['day'],23,59,59))
+  	
+  	@suites = Suite.where({:name => suite_name, :runstamp => start..finish})
   	@suites.sort! { |a,b| a.runstamp <=> b.runstamp}
   	respond_to do |format|
   		format.json {render json: @suites}
@@ -10,8 +18,16 @@ class GraphController < ApplicationController
   end
 
   def features		
-		suite_name = params[:suite_name]
-		@features = Feature.joins(:suite).where(:suites => {:name => suite_name}).select("features.*,suites.runstamp,suites.build_time,suites.build_date")
+		@begin_date = Suite.first.runstamp
+  	suite_name = params[:suite_name]
+  	start_date = params[:begin_date]
+  	finish_date = params[:end_date]
+  	suite_name = params[:suite_name]
+  	
+  	start = (start_date.nil? ? Suite.first.runstamp : Time.new(start_date['year'],start_date['month'],start_date['day']))
+  	finish = (finish_date.nil? ? Time.now : Time.new(finish_date['year'],finish_date['month'],finish_date['day'],23,59,59))
+  	
+		@features = Feature.joins(:suite).where(:suites => {:name => suite_name, :runstamp => start..finish}).select("features.*,suites.runstamp,suites.build_time,suites.build_date")
 		@features.sort! { |a,b| a.runstamp <=> b.runstamp}
 		respond_to do |format|
 			format.json {render json: @features}

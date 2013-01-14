@@ -8,11 +8,15 @@
       google.load('visualization', '1.1', {packages: ['controls']});
     </script>
 <p>
-	<button class="btn btn-mini btn-primary" onclick="getData('BVT','Suites')" type="button">Get BVT Data</button>
-	<button class="btn btn-mini btn-primary" onclick="getData('PortalSmoke','Suites')" type="button">Get Portal Smoke Data</button>
-	<button class="btn btn-mini btn-primary" onclick="getData('CMHSLoadTest','Suites')" type="button">Get CMHS Load Test Data</button>
-	<button class="btn btn-mini btn-primary" onclick="getData('CMHSLoadTestBVT','Suites')" type="button">Get CMHS Load Test BVT Data</button>
+	<a href="#suiteModal" role="button" class="btn btn-primary" data-toggle="modal">Get Data</a>
 </p>
+
+<!-- Modal information -->
+<div id="suiteModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<%= render 'graph/suite_form' %>
+</div>
+
+<!-- tab and graph display code -->
 <ul class="nav nav-tabs">
   <li class="active"><a href="#barChart" data-toggle="tab">Bar Chart</a></li>
   <li><a href="#lineChart" data-toggle="tab">Line Chart</a></li>

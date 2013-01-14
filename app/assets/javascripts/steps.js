@@ -3,7 +3,7 @@ function drawStepBarVisualization(d) {
     // Create and populate the data table.
     var dataTable = new google.visualization.DataTable();
     dataTable.addColumn('string', 'Build Date');
-    dataTable.addColumn('number', 'Duration');
+    dataTable.addColumn('number', 'Duration (nanoseconds)');
     dataTable.addColumn('string', 'Status');
     dataTable.addColumn('string', 'Feature');
     dataTable.addColumn('string', 'Scenario');
@@ -86,7 +86,14 @@ function drawStepBarVisualization(d) {
         'width': 900,
         'height': 700,
         'tooltip': {'column':6},
-        'chartArea': {top: 0, right: 0, bottom: 0}
+        'hAxis': {
+        	'slantedText': true,
+        	'title': "Duration (nanoseconds)"
+        },
+        'vAxis': {
+        	'title': "Run Date"
+        },
+        'chartArea': {top: 10, right: 0, bottom: 0}
       },
       // Configure the barchart to use columns 0 (Build Date/Time Stamp) and 1 (Duration)
       'view': {'columns': [0, 1, 6]}
@@ -112,7 +119,7 @@ function drawStepLineVisualization(d2) {
     // Create and populate the data table.
     var dataTable3 = new google.visualization.DataTable();
     dataTable3.addColumn('date', 'Build Date');
-    dataTable3.addColumn('number', 'Duration');
+    dataTable3.addColumn('number', 'Duration (nanoseconds)');
     dataTable3.addColumn('string', 'Status');
     dataTable3.addColumn('string', 'Feature');
     dataTable3.addColumn('string', 'Scenario');
@@ -202,15 +209,18 @@ function drawStepLineVisualization(d2) {
       'chartType': 'LineChart',
       'containerId': 'linechart',
       'options': {
-        'width': 900,
+        'width': 1010,
         'height': 700,
         'pointSize': 6,
         'tooltip': {'column':6},
         'hAxis': {
-        	'slantedText': true
+        	'slantedText': true,
+        	'title': "Run Date"
         },
-        
-        'chartArea': {top: 0, right: 0, bottom: 0}
+        'vAxis':{
+        	'title': "Duration (nanoseconds)"
+        },        
+        'chartArea': {top: 10, right: 0, bottom: 0}
       },
       // Configure the barchart to use columns 0 (Build Date/Time Stamp) and 1 (Duration)
       'view': {'columns': [0, 1, 6]}

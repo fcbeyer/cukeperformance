@@ -10,10 +10,11 @@ function getData(suite,view) {
 		$.getJSON(url, {'suite_name':suite}, drawSummaryGraphs);
 	}
 	else if (view == "Suites"){
-		$.getJSON(url, {'suite_name':suite}, drawSuiteGraphs);
+		$.getJSON(url, formData, drawSuiteGraphs);
 	}
 	else if (view == "Features") {
-		$.getJSON(url, {'suite_name':suite}, drawFeatureGraphs);
+		// old way of getting data $.getJSON(url, {'suite_name':suite}, drawFeatureGraphs);
+		$.getJSON(url, formData, drawFeatureGraphs);
 	}
 	else if (view == "Scenarios") {
 		$.getJSON(url, formData, drawScenarioGraphs);
