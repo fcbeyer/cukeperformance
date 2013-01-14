@@ -10,7 +10,7 @@ function drawScenarioBarVisualization(d) {
     dataTable.addColumn({type:'string', role:'tooltip'});
     
     for(var i=0; i < data.length; i++) {
-    	dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration, data[i].status, data[i].feature_name, data[i].name, data[i].duration_converted]);
+    	dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration/1000, data[i].status, data[i].feature_name, data[i].name, data[i].duration_converted]);
     }
   
     var statusBarPicker = new google.visualization.ControlWrapper({
@@ -103,7 +103,7 @@ function drawScenarioLineVisualization(d2) {
     dataTable3.addColumn({type:'string', role:'tooltip'});
     
     for(var i=0; i < data3.length; i++) {
-    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration, data3[i].status, data3[i].feature_name, data3[i].name, data3[i].duration_converted]);
+    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration/1000, data3[i].status, data3[i].feature_name, data3[i].name, data3[i].duration_converted]);
     }
   	
   	var datePicker = new google.visualization.ControlWrapper({

@@ -44,6 +44,6 @@ function drawStepGraphs(json) {
 }
 
 function drawSummaryGraphs(json){
-	drawSummaryBarVisualization(json);
+	//drawSummaryBarVisualization(json);
 	drawSummaryLineVisualization(json);
 }

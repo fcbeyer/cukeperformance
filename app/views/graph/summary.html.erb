@@ -14,13 +14,12 @@
 	<button class="btn btn-mini btn-primary" onclick="getData('CMHSLoadTestBVT','Summary')" type="button">Get CMHS Load Test BVT Data</button>
 </p>
 <ul class="nav nav-tabs">
-  
   <li class="active"><a href="#lineChart" data-toggle="tab">Line Chart</a></li>
 </ul>
 <div class="tab-content">
 	<div class="tab-pane" id="barChart">
 	    <script type="text/javascript">	
-	      google.setOnLoadCallback(drawSummaryBarVisualization);
+	      // google.setOnLoadCallback(drawSummaryBarVisualization);
 	    </script>
 	  </head>
 	  <body style="font-family: Arial;border: 0 none;">
@@ -51,7 +50,6 @@
 	          <td style='width: 300px; font-size: 0.9em;'>
 	            <div id="suiteLineFilter"></div>
 	            <div id="statusLineFilter"></div>
-	            <div id="suiteRangeFilter"></div>
 	          </td>
 	          <td style='width: 600px'>
 	            <div id="linechart"></div>

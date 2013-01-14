@@ -10,7 +10,7 @@ function drawSuiteBarVisualization(d) {
     dataTable.addColumn({type:'string', role:'tooltip'});
     
     for(var i=0; i < data.length; i++) {
-      dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration, data[i].status, data[i].name, data[i].duration_converted]);
+      dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration/1000, data[i].status, data[i].name, data[i].duration_converted]);
     }
   
     var statusBarPicker = new google.visualization.ControlWrapper({
@@ -43,8 +43,12 @@ function drawSuiteBarVisualization(d) {
         'width': 900,
         'height': 700,
         'tooltip': {'column':4},
+        'hAxis': {
+        	'slantedText': true,
+        	'title': "Duration (milliseconds)"
+        },
 
-        'chartArea': {top: 0, right: 0, bottom: 0}
+        'chartArea': {top: 10, right: 0, bottom: 0}
       },
       // Configure the barchart to use columns 0 (Build Date/Time Stamp) and 1 (Duration)
       'view': {'columns': [0, 1, 4]}
@@ -75,7 +79,7 @@ function drawSuiteLineVisualization(d2) {
     dataTable3.addColumn({type:'string', role:'tooltip'});
     
     for(var i=0; i < data3.length; i++) {
-    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration, data3[i].status, data3[i].name, data3[i].duration_converted]);
+    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration/1000, data3[i].status, data3[i].name, data3[i].duration_converted]);
     }
   	
   	var datePicker = new google.visualization.ControlWrapper({
@@ -120,10 +124,11 @@ function drawSuiteLineVisualization(d2) {
         'pointSize': 6,
         'tooltip': {'column':4},
         'hAxis': {
-        	'slantedText': true
+        	'slantedText': true,
+        	'title': "Build"
         },
         
-        'chartArea': {top: 0, right: 0, bottom: 0}
+        'chartArea': {top: 5, right: 0, bottom: 0}
       },
       // Configure the barchart to use columns 0 (Build Date/Time Stamp) and 1 (Duration)
       'view': {'columns': [0, 1, 4]}
@@ -140,6 +145,8 @@ function drawSuiteLineVisualization(d2) {
 
 // THIS IS FOR THE EXECUTIVE SUMMARY PAGE !!!!!!!!!!!!!!!!!!!
 
+
+//currently not used
 function drawSummaryBarVisualization(d) {
           
     var data = d
@@ -152,7 +159,7 @@ function drawSummaryBarVisualization(d) {
     dataTable.addColumn({type:'string', role:'tooltip'});
     
     for(var i=0; i < data.length; i++) {
-      dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration, data[i].status, data[i].name, data[i].duration_converted]);
+      dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration/1000, data[i].status, data[i].name, data[i].duration_converted]);
     }
   
     var statusBarPicker = new google.visualization.ControlWrapper({
@@ -217,7 +224,7 @@ function drawSummaryLineVisualization(d2) {
     dataTable3.addColumn({type:'string', role:'tooltip'});
     
     for(var i=0; i < data3.length; i++) {
-    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration, data3[i].status, data3[i].name, data3[i].duration_converted]);
+    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration/1000, data3[i].status, data3[i].name, data3[i].duration_converted]);
     }
     
     var statusLinePicker = new google.visualization.ControlWrapper({
@@ -245,7 +252,7 @@ function drawSummaryLineVisualization(d2) {
         	'slantedText': true
         },
         
-        'chartArea': {top: 0, right: 0, bottom: 0}
+        'chartArea': {top: 10, right: 0, bottom: 0}
       },
       // Configure the barchart to use columns 0 (Build Date/Time Stamp) and 1 (Duration)
       'view': {'columns': [0, 1, 4]}
