@@ -2,10 +2,9 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-function getData(suite,view) {
+function getData(view) {
 	var url = document.location.href;
 	var formData = $('#graphParameterData').getFormValues();
-	formData['suite_name'] = suite;
 	if (view == "Summary"){
 		$.getJSON(url, {'suite_name':suite}, drawSummaryGraphs);
 	}

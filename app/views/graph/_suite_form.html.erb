@@ -13,13 +13,13 @@
 			    <%= label_tag :end_date, "End Date: " %>
 			    <%= select_date(Time.now, :prefix => "end_date")%>
 			</div>
+			<div class="field">
+				<%= label_tag "Select a Suite" %>
+				<%= select_tag :suite_name,options_from_collection_for_select(@suite_list,"name","name")  %>
+			</div>				
 		</fieldset>
 	<% end %>
 </div>
 <div class="modal-footer">
-  <button style="float:left" class="btn btn-mini btn-success" data-dismiss="modal" onclick="getData('BVT','Suites')" type="button">BVT</button>
-  <button style="float:left" class="btn btn-mini btn-success" data-dismiss="modal" onclick="getData('PortalSmoke','Suites')" type="button">Portal Smoke</button>
-  <button style="float:left" class="btn btn-mini btn-success" data-dismiss="modal" onclick="getData('CMHSLoadTest','Suites')" type="button">CMHS Load Test</button>
-  <button style="float:left" class="btn btn-mini btn-success" data-dismiss="modal" onclick="getData('CMHSLoadTestBVT','Suites')" type="button">CMHS Load Test BVT</button>
-  <button class="btn btn-mini btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
+  <button class="btn btn-large btn-block btn-success" data-dismiss="modal" onclick="getData('Suites')" type="button">Make It So!</button>
 </div>
