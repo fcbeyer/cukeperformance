@@ -2,6 +2,12 @@ require_relative '../performance/jsonParse.rb'
 
 class SuitesController < ApplicationController
 	
+	before_filter :get_suite_list
+	
+	def get_suite_list
+		@suite_list = Suite.select(:name).uniq
+	end
+	
 	#runs script to grab build data from json dump
   #then manually create entries in the jobname model each new one
   def auto_create

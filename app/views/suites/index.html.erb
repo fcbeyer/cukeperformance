@@ -17,6 +17,13 @@
   <li><a href="#cmhsloadtestbvt" data-toggle="tab">CMHS Load Test Builds</a></li>
 </ul>
 
+<!-- <ul class="nav nav-tabs">
+  <li class="active"><a href="#allSuites" data-toggle="tab">All Suites</a></li>
+  <% @suite_list.each do |suite| %>
+  <li><a href="#<%= suite.name %>" data-toggle="tab"><%= suite.name %> Builds</a></li>
+  <% end %>
+</ul> -->
+
 <div class="tab-content">
 	<div class="tab-pane active" id="allSuites">
 		<table class="table table-bordered table-condensed">
@@ -45,7 +52,7 @@
 		<% end %>
 		</table>
 	</div>
-	<div class="tab-pane" id="bvt">
+	<div class="tab-pane" id="BVT">
 		<table class="table table-bordered table-condensed">
 		  <tr>
 			<th>Build Timestamp</th>
@@ -153,4 +160,5 @@
 		<% end %>
 		</table>
 	</div>
+</div>
 <br />
