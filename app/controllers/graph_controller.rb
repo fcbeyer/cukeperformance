@@ -1,4 +1,10 @@
 class GraphController < ApplicationController
+	before_filter :get_suite_list
+	
+	def get_suite_list
+		@suite_list = Suite.select(:name).uniq
+	end
+	
   def suites
   	@begin_date = Suite.first.runstamp
   	suite_name = params[:suite_name]
