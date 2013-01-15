@@ -1,5 +1,7 @@
 CukePerformance::Application.routes.draw do  
 
+  resources :tasks
+
   get "graph/suites"
 
   get "graph/features"

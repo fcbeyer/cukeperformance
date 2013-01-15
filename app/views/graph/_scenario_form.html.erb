@@ -19,7 +19,7 @@
 			</div>
 			<div class="field">
 				<%= label_tag "Select a Suite" %>
-				<%= select_tag :suite_name,options_from_collection_for_select(@suite_list,"name","name")  %>
+				<%= select_tag :suite_name,options_from_collection_for_select(@suite_list,"name","display_name")  %>
 			</div>				
 		</fieldset>
 	<% end %>
