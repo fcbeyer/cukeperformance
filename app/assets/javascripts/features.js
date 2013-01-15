@@ -12,7 +12,7 @@ function drawFeatureBarVisualization(d) {
     
     for(var i=0; i < data.length; i++) {
     	dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration/1000000, data[i].status, data[i].name,
-    		data[i].duration_converted, data[i].browser, data[i].mobilizer]);
+    		data[i].duration_converted + "\n hrs:mins:secs:ms", data[i].browser, data[i].mobilizer]);
     }
   
     var statusBarPicker = new google.visualization.ControlWrapper({
@@ -123,7 +123,7 @@ function drawFeatureLineVisualization(d2) {
     
     for(var i=0; i < data3.length; i++) {
     	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration/1000000, data3[i].status, data3[i].name,
-    		data3[i].duration_converted, data3[i].browser, data3[i].mobilizer]);
+    		data3[i].duration_converted + "\n hrs:mins:secs:ms", data3[i].browser, data3[i].mobilizer]);
     }
   	
   	var datePicker = new google.visualization.ControlWrapper({
