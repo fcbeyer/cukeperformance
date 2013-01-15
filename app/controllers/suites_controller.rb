@@ -79,10 +79,6 @@ class SuitesController < ApplicationController
     @suite_list.each do |entry|
     	@suites[entry.name] = Suite.order("runstamp desc").where(name: entry.name)
     end
-    @BVTSuites = Suite.order("runstamp desc").where(name: "BVT")
-    @psSuites = Suite.order("runstamp desc").where(name: "PortalSmoke")
-    @cmhsSuites = Suite.order("runstamp desc").where(name: "CMHSLoadTest")
-    @cmhsBVTSuites = Suite.order("runstamp desc").where(name: "CMHSLoadTestBVT")
 
     respond_to do |format|
       format.html # index.html.erb
