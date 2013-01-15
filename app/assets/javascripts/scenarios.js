@@ -8,9 +8,12 @@ function drawScenarioBarVisualization(d) {
     dataTable.addColumn('string', 'Feature');
     dataTable.addColumn('string', 'Scenario');
     dataTable.addColumn({type:'string', role:'tooltip'});
+    dataTable.addColumn('string', 'Browser');
+    dataTable.addColumn('string', 'Mobilizer Version');
     
     for(var i=0; i < data.length; i++) {
-    	dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration/1000000, data[i].status, data[i].feature_name, data[i].name, data[i].duration_converted]);
+    	dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration/1000000, data[i].status, data[i].feature_name, data[i].name,
+    		data[i].duration_converted, data[i].browser, data[i].mobilizer]);
     }
   
     var statusBarPicker = new google.visualization.ControlWrapper({
@@ -18,6 +21,32 @@ function drawScenarioBarVisualization(d) {
       'containerId': 'control1',
       'options': {
         'filterColumnLabel': 'Status',
+        'ui': {
+          'labelStacking': 'vertical',
+          'allowTyping': false,
+          'allowMultiple': false
+        }
+      }
+    });
+    
+    var browserBarPicker = new google.visualization.ControlWrapper({
+      'controlType': 'CategoryFilter',
+      'containerId': 'browser1',
+      'options': {
+        'filterColumnLabel': 'Browser',
+        'ui': {
+          'labelStacking': 'vertical',
+          'allowTyping': false,
+          'allowMultiple': false
+        }
+      }
+    });
+    
+    var versionBarPicker = new google.visualization.ControlWrapper({
+      'controlType': 'CategoryFilter',
+      'containerId': 'version1',
+      'options': {
+        'filterColumnLabel': 'Mobilizer Version',
         'ui': {
           'labelStacking': 'vertical',
           'allowTyping': false,
@@ -90,12 +119,10 @@ function drawScenarioBarVisualization(d) {
       bind(featureBarPicker, [barChart, scenarioBarPicker, statusBarPicker]).
       bind(scenarioBarPicker, [barChart, statusBarPicker]).
       bind(slider, barChart).
+      bind(browserBarPicker, barChart).
+      bind(versionBarPicker, barChart).
       // Draw the dashboard
-      draw(dataTable,
-      	{title:"Feature Performance",
-         vAxis: {title: "Build"},
-         hAxis: {title: "Duration in Nanoseconds"}}
-      );
+      draw(dataTable);
 }
 
 function drawScenarioLineVisualization(d2) {
@@ -108,9 +135,12 @@ function drawScenarioLineVisualization(d2) {
     dataTable3.addColumn('string', 'Feature');
     dataTable3.addColumn('string', 'Scenario');
     dataTable3.addColumn({type:'string', role:'tooltip'});
+    dataTable3.addColumn('string', 'Browser');
+    dataTable3.addColumn('string', 'Mobilizer Version');
     
     for(var i=0; i < data3.length; i++) {
-    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration/1000000, data3[i].status, data3[i].feature_name, data3[i].name, data3[i].duration_converted]);
+    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration/1000000, data3[i].status, data3[i].feature_name, data3[i].name,
+    		data3[i].duration_converted, data3[i].browser, data3[i].mobilizer]);
     }
   	
   	var datePicker = new google.visualization.ControlWrapper({
@@ -173,6 +203,32 @@ function drawScenarioLineVisualization(d2) {
         }
       }
     });
+    
+    var browserLinePicker = new google.visualization.ControlWrapper({
+      'controlType': 'CategoryFilter',
+      'containerId': 'browser2',
+      'options': {
+        'filterColumnLabel': 'Browser',
+        'ui': {
+          'labelStacking': 'vertical',
+          'allowTyping': false,
+          'allowMultiple': false
+        }
+      }
+    });
+    
+    var versionLinePicker = new google.visualization.ControlWrapper({
+      'controlType': 'CategoryFilter',
+      'containerId': 'version2',
+      'options': {
+        'filterColumnLabel': 'Mobilizer Version',
+        'ui': {
+          'labelStacking': 'vertical',
+          'allowTyping': false,
+          'allowMultiple': false
+        }
+      }
+    });
       	
     var lineChart = new google.visualization.ChartWrapper({
       'chartType': 'LineChart',
@@ -201,6 +257,8 @@ function drawScenarioLineVisualization(d2) {
       bind(scenarioLinePicker, [lineChart, datePicker, statusLinePicker]).
       bind(featureLinePicker, [lineChart, datePicker, scenarioLinePicker, statusLinePicker]).
       bind(datePicker, lineChart).
+      bind(browserLinePicker, lineChart).
+      bind(versionLinePicker, lineChart).
       // Draw the dashboard
       draw(dataTable3);
 }

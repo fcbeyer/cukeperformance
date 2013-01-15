@@ -7,9 +7,12 @@ function drawFeatureBarVisualization(d) {
     dataTable.addColumn('string', 'Status');
     dataTable.addColumn('string', 'Feature');
     dataTable.addColumn({type:'string', role:'tooltip'});
+    dataTable.addColumn('string', 'Browser');
+    dataTable.addColumn('string', 'Mobilizer Version');
     
     for(var i=0; i < data.length; i++) {
-    	dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration/1000000, data[i].status, data[i].name, data[i].duration_converted]);
+    	dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration/1000000, data[i].status, data[i].name,
+    		data[i].duration_converted, data[i].browser, data[i].mobilizer]);
     }
   
     var statusBarPicker = new google.visualization.ControlWrapper({
@@ -17,6 +20,32 @@ function drawFeatureBarVisualization(d) {
       'containerId': 'control1',
       'options': {
         'filterColumnLabel': 'Status',
+        'ui': {
+          'labelStacking': 'vertical',
+          'allowTyping': false,
+          'allowMultiple': false
+        }
+      }
+    });
+    
+    var browserBarPicker = new google.visualization.ControlWrapper({
+      'controlType': 'CategoryFilter',
+      'containerId': 'browser1',
+      'options': {
+        'filterColumnLabel': 'Browser',
+        'ui': {
+          'labelStacking': 'vertical',
+          'allowTyping': false,
+          'allowMultiple': false
+        }
+      }
+    });
+    
+    var versionBarPicker = new google.visualization.ControlWrapper({
+      'controlType': 'CategoryFilter',
+      'containerId': 'version1',
+      'options': {
+        'filterColumnLabel': 'Mobilizer Version',
         'ui': {
           'labelStacking': 'vertical',
           'allowTyping': false,
@@ -74,12 +103,10 @@ function drawFeatureBarVisualization(d) {
       bind(statusBarPicker, barChart).
       bind(featureBarPicker, [barChart, statusBarPicker]).
       bind(slider, barChart).
+      bind(browserBarPicker, barChart).
+      bind(versionBarPicker, barChart).
       // Draw the dashboard
-      draw(dataTable,
-      	{title:"Feature Performance",
-         vAxis: {title: "Build"},
-         hAxis: {title: "Duration in Nanoseconds"}}
-      );
+      draw(dataTable);
 }
 
 function drawFeatureLineVisualization(d2) {
@@ -91,9 +118,12 @@ function drawFeatureLineVisualization(d2) {
     dataTable3.addColumn('string', 'Status');
     dataTable3.addColumn('string', 'Feature');
     dataTable3.addColumn({type:'string', role:'tooltip'});
+    dataTable3.addColumn('string', 'Browser');
+    dataTable3.addColumn('string', 'Mobilizer Version');
     
     for(var i=0; i < data3.length; i++) {
-    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration/1000000, data3[i].status, data3[i].name, data3[i].duration_converted]);
+    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration/1000000, data3[i].status, data3[i].name,
+    		data3[i].duration_converted, data3[i].browser, data3[i].mobilizer]);
     }
   	
   	var datePicker = new google.visualization.ControlWrapper({
@@ -142,6 +172,32 @@ function drawFeatureLineVisualization(d2) {
         }
       }
     });
+    
+    var browserLinePicker = new google.visualization.ControlWrapper({
+      'controlType': 'CategoryFilter',
+      'containerId': 'browser2',
+      'options': {
+        'filterColumnLabel': 'Browser',
+        'ui': {
+          'labelStacking': 'vertical',
+          'allowTyping': false,
+          'allowMultiple': false
+        }
+      }
+    });
+    
+    var versionLinePicker = new google.visualization.ControlWrapper({
+      'controlType': 'CategoryFilter',
+      'containerId': 'version2',
+      'options': {
+        'filterColumnLabel': 'Mobilizer Version',
+        'ui': {
+          'labelStacking': 'vertical',
+          'allowTyping': false,
+          'allowMultiple': false
+        }
+      }
+    });
       	
     var lineChart = new google.visualization.ChartWrapper({
       'chartType': 'LineChart',
@@ -169,6 +225,8 @@ function drawFeatureLineVisualization(d2) {
       bind(statusLinePicker, [lineChart, datePicker]).
       bind(featureLinePicker, [lineChart, datePicker, statusLinePicker]).
       bind(datePicker, lineChart).
+      bind(browserLinePicker, lineChart).
+      bind(versionLinePicker, lineChart).
       // Draw the dashboard
       draw(dataTable3);
 }
