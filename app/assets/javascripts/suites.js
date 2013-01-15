@@ -9,7 +9,7 @@ function drawSuiteBarVisualization(d) {
     dataTable.addColumn('string', 'Suite');
     dataTable.addColumn({type:'string', role:'tooltip'});
     dataTable.addColumn('string', 'Browser');
-    dataTable.addColumn('string', 'Mobilizer');
+    dataTable.addColumn('string', 'Mobilizer Version');
     
     for(var i=0; i < data.length; i++) {
       dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration/1000000, data[i].status, data[i].name,
@@ -34,6 +34,19 @@ function drawSuiteBarVisualization(d) {
       'containerId': 'browser1',
       'options': {
         'filterColumnLabel': 'Browser',
+        'ui': {
+          'labelStacking': 'vertical',
+          'allowTyping': false,
+          'allowMultiple': false
+        }
+      }
+    });
+    
+    var versionBarPicker = new google.visualization.ControlWrapper({
+      'controlType': 'CategoryFilter',
+      'containerId': 'version1',
+      'options': {
+        'filterColumnLabel': 'Mobilizer Version',
         'ui': {
           'labelStacking': 'vertical',
           'allowTyping': false,
@@ -77,6 +90,7 @@ function drawSuiteBarVisualization(d) {
       bind(statusBarPicker, barChart).
       bind(slider, barChart).
       bind(browserBarPicker, barChart).
+      bind(versionBarPicker, barChart).
       // Draw the dashboard
       draw(dataTable);
 }
@@ -93,7 +107,7 @@ function drawSuiteLineVisualization(d2) {
     dataTable3.addColumn('string', 'Suite');
     dataTable3.addColumn({type:'string', role:'tooltip'});
     dataTable3.addColumn('string', 'Browser');
-    dataTable3.addColumn('string', 'Mobilizer');
+    dataTable3.addColumn('string', 'Mobilizer Version');
     
     for(var i=0; i < data3.length; i++) {
     	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration/1000000, data3[i].status, data3[i].name,
@@ -145,6 +159,19 @@ function drawSuiteLineVisualization(d2) {
         }
       }
     });
+    
+    var versionLinePicker = new google.visualization.ControlWrapper({
+      'controlType': 'CategoryFilter',
+      'containerId': 'version2',
+      'options': {
+        'filterColumnLabel': 'Mobilizer Version',
+        'ui': {
+          'labelStacking': 'vertical',
+          'allowTyping': false,
+          'allowMultiple': false
+        }
+      }
+    });
       	
     var lineChart = new google.visualization.ChartWrapper({
       'chartType': 'LineChart',
@@ -171,6 +198,7 @@ function drawSuiteLineVisualization(d2) {
       bind(statusLinePicker, [lineChart, datePicker]).
       bind(datePicker, lineChart).
       bind(browserLinePicker, lineChart).
+      bind(versionLinePicker, lineChart).
       // Draw the dashboard
       draw(dataTable3);
 }
@@ -262,7 +290,7 @@ function drawSummaryLineVisualization(d2) {
     dataTable3.addColumn('string', 'Suite');
     dataTable3.addColumn({type:'string', role:'tooltip'});
     dataTable3.addColumn('string', 'Browser');
-    dataTable3.addColumn('string', 'Mobilizer');
+    dataTable3.addColumn('string', 'Mobilizer Version');
     
     for(var i=0; i < data3.length; i++) {
     	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration/1000000, data3[i].status, data3[i].name,
@@ -287,6 +315,19 @@ function drawSummaryLineVisualization(d2) {
       'containerId': 'browserSummaryFilter',
       'options': {
         'filterColumnLabel': 'Browser',
+        'ui': {
+          'labelStacking': 'vertical',
+          'allowTyping': false,
+          'allowMultiple': false
+        }
+      }
+    });
+    
+    var versionSummaryPicker = new google.visualization.ControlWrapper({
+      'controlType': 'CategoryFilter',
+      'containerId': 'versionSummaryFilter',
+      'options': {
+        'filterColumnLabel': 'Mobilizer Version',
         'ui': {
           'labelStacking': 'vertical',
           'allowTyping': false,
@@ -320,6 +361,7 @@ function drawSummaryLineVisualization(d2) {
     new google.visualization.Dashboard(document.getElementById('dashboard3')).
       bind(statusSummaryPicker, lineChart).
       bind(browserSummaryPicker, lineChart).
+      bind(versionSummaryPicker, lineChart).
       // Draw the dashboard
       draw(dataTable3);
 }

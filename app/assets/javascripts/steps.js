@@ -10,7 +10,7 @@ function drawStepBarVisualization(d) {
     dataTable.addColumn('string', 'Step');
     dataTable.addColumn({type:'string', role:'tooltip'});
     dataTable.addColumn('string', 'Browser');
-    dataTable.addColumn('string', 'Mobilizer');
+    dataTable.addColumn('string', 'Mobilizer Version');
     
     for(var i=0; i < data.length; i++) {
     	dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration, data[i].status, data[i].feature_name, data[i].scenario_name, data[i].name,
@@ -35,6 +35,19 @@ function drawStepBarVisualization(d) {
       'containerId': 'browser1',
       'options': {
         'filterColumnLabel': 'Browser',
+        'ui': {
+          'labelStacking': 'vertical',
+          'allowTyping': false,
+          'allowMultiple': false
+        }
+      }
+    });
+    
+    var versionBarPicker = new google.visualization.ControlWrapper({
+      'controlType': 'CategoryFilter',
+      'containerId': 'version1',
+      'options': {
+        'filterColumnLabel': 'Mobilizer Version',
         'ui': {
           'labelStacking': 'vertical',
           'allowTyping': false,
@@ -123,6 +136,7 @@ function drawStepBarVisualization(d) {
       bind(stepBarPicker, [barChart, statusBarPicker]).
       bind(slider, barChart).
       bind(browserBarPicker, barChart).
+      bind(versionBarPicker, barChart).
       // Draw the dashboard
       draw(dataTable);
 }
@@ -139,7 +153,7 @@ function drawStepLineVisualization(d2) {
     dataTable3.addColumn('string', 'Step');
     dataTable3.addColumn({type:'string', role:'tooltip'});
     dataTable3.addColumn('string', 'Browser');
-    dataTable3.addColumn('string', 'Mobilizer');
+    dataTable3.addColumn('string', 'Mobilizer Version');
     
     for(var i=0; i < data3.length; i++) {
     	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration, data3[i].status, data3[i].feature_name, data3[i].scenario_name, data3[i].name,
@@ -233,6 +247,19 @@ function drawStepLineVisualization(d2) {
         }
       }
     });
+    
+    var versionLinePicker = new google.visualization.ControlWrapper({
+      'controlType': 'CategoryFilter',
+      'containerId': 'version2',
+      'options': {
+        'filterColumnLabel': 'Mobilizer Version',
+        'ui': {
+          'labelStacking': 'vertical',
+          'allowTyping': false,
+          'allowMultiple': false
+        }
+      }
+    });
       	
     var lineChart = new google.visualization.ChartWrapper({
       'chartType': 'LineChart',
@@ -263,6 +290,7 @@ function drawStepLineVisualization(d2) {
       bind(featureLinePicker, [lineChart, datePicker, scenarioLinePicker, stepLinePicker, statusLinePicker]).
       bind(datePicker, lineChart).
       bind(browserLinePicker, lineChart).
+      bind(versionLinePicker, lineChart).
       // Draw the dashboard
       draw(dataTable3);
 }
