@@ -74,12 +74,15 @@ class SuitesController < ApplicationController
   # GET /suites
   # GET /suites.json
   def index
-    @suites = Suite.order("runstamp desc").all
-    @bvtSuites = Suite.order("runstamp desc").where(name: "BVT")
+  	  	
+    @suites = {}
+    @suite_list.each do |entry|
+    	@suites[entry.name] = Suite.order("runstamp desc").where(name: entry.name)
+    end
+    @BVTSuites = Suite.order("runstamp desc").where(name: "BVT")
     @psSuites = Suite.order("runstamp desc").where(name: "PortalSmoke")
     @cmhsSuites = Suite.order("runstamp desc").where(name: "CMHSLoadTest")
     @cmhsBVTSuites = Suite.order("runstamp desc").where(name: "CMHSLoadTestBVT")
-    #@cmhsSuites.sort! { |a,b| a.runstamp <=> b.runstamp}
 
     respond_to do |format|
       format.html # index.html.erb

@@ -9,50 +9,51 @@
 	document.write(rick);
 </script> -->
 
-<ul class="nav nav-tabs">
+<!-- <ul class="nav nav-tabs">
   <li class="active"><a href="#allSuites" data-toggle="tab">All Suites</a></li>
   <li><a href="#bvt" data-toggle="tab">BVT Builds</a></li>
   <li><a href="#portalsmoke" data-toggle="tab">Portal Smoke Builds</a></li>
   <li><a href="#cmhsloadtest" data-toggle="tab">CMHS Load Test Builds</a></li>
   <li><a href="#cmhsloadtestbvt" data-toggle="tab">CMHS Load Test Builds</a></li>
-</ul>
-
-<!-- <ul class="nav nav-tabs">
-  <li class="active"><a href="#allSuites" data-toggle="tab">All Suites</a></li>
-  <% @suite_list.each do |suite| %>
-  <li><a href="#<%= suite.name %>" data-toggle="tab"><%= suite.name %> Builds</a></li>
-  <% end %>
 </ul> -->
 
+<ul class="nav nav-tabs">
+  <% @suite_list.each do |suite| %>
+  	<li><a href="#<%= suite.name %>" data-toggle="tab"><%= suite.display_name %> Builds</a></li>
+  <% end %>
+</ul>
+
 <div class="tab-content">
-	<div class="tab-pane active" id="allSuites">
-		<table class="table table-bordered table-condensed">
-		  <tr>
-		    <th>Build Timestamp</th>
-		    <th>Duration</th>
-		    <th>Name</th>
-		    <th>Status</th>
-		    <th></th>
-		    <th></th>
-		  </tr>
-		
-		<% @suites.each do |suite| %>
-		  <tr>
-		    <td><%= suite.runstamp %></td>
-		    <td><%= suite.duration_converted %></td>
-		    <td><%= suite.name %></td>
-		    <% if suite.status == "failed" %>
-		    	<td><span class="badge badge-warning"><%= suite.status %></span></td>
-		    <% else %>
-		    	<td><span class="label label-inverse"><%= suite.status %></span></td>
-		    <% end %>
-		    <td><%= link_to 'Show', suite %></td>
-		    <td><%= link_to 'Destroy', suite, confirm: 'Are you sure?', method: :delete %></td>
-		  </tr>
-		<% end %>
-		</table>
-	</div>
-	<div class="tab-pane" id="BVT">
+	<% @suite_list.each do |entry| %>
+		<div class="tab-pane" id="<%= entry.name %>">
+			<table class="table table-bordered table-condensed">
+			  <tr>
+				<th>Build Timestamp</th>
+			    <th>Duration</th>
+			    <th>Name</th>
+			    <th>Status</th>
+			    <th></th>
+			    <th></th>
+			  </tr>
+			
+			<% @suites[entry.name].each do |suite| %>
+			  <tr>
+			    <td><%= suite.runstamp %></td>
+			    <td><%= suite.duration_converted %></td>
+			    <td><%= suite.name %></td>
+			    <% if suite.status == "failed" %>
+			    	<td><span class="badge badge-warning"><%= suite.status %></span></td>
+			    <% else %>
+			    	<td><span class="label label-inverse"><%= suite.status %></span></td>
+			    <% end %>
+			    <td><%= link_to 'Show', suite %></td>
+			    <td><%= link_to 'Destroy', suite, confirm: 'Are you sure?', method: :delete %></td>
+			  </tr>
+			<% end %>
+			</table>
+		</div>
+	<% end %>
+	<!-- <div class="tab-pane" id="BVT">
 		<table class="table table-bordered table-condensed">
 		  <tr>
 			<th>Build Timestamp</th>
@@ -63,7 +64,7 @@
 		    <th></th>
 		  </tr>
 		
-		<% @bvtSuites.each do |suite| %>
+		<% @BVTSuites.each do |suite| %>
 		  <tr>
 		    <td><%= suite.runstamp %></td>
 		    <td><%= suite.duration_converted %></td>
@@ -159,6 +160,6 @@
 		  </tr>
 		<% end %>
 		</table>
-	</div>
+	</div> -->
 </div>
 <br />
