@@ -7,39 +7,16 @@
     <script type="text/javascript">
       google.load('visualization', '1.1', {packages: ['controls']});
     </script>
-<p>
-	<button class="btn btn-mini btn-primary" onclick="getData('BVT','Summary')" type="button">Get BVT Data</button>
-	<button class="btn btn-mini btn-primary" onclick="getData('PortalSmoke','Summary')" type="button">Get Portal Smoke Data</button>
-	<button class="btn btn-mini btn-primary" onclick="getData('CMHSLoadTest','Summary')" type="button">Get CMHS Load Test Data</button>
-	<button class="btn btn-mini btn-primary" onclick="getData('CMHSLoadTestBVT','Summary')" type="button">Get CMHS Load Test BVT Data</button>
-</p>
+<div class="field">
+	<%= select_tag :summary_suite_name,options_from_collection_for_select(@suite_list,"name","display_name"), :prompt => "Select a Suite to display",
+		:'data-remote' => 'true', :'data-url' => url_for(:controller => 'graph', :action => 'summary', format: 'json') %>
+</div>
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#lineChart" data-toggle="tab">Line Chart</a></li>
+  <li class="active"><a href="#lineChart" data-toggle="tab">Summary</a></li>
 </ul>
 <div class="tab-content">
-	<div class="tab-pane" id="barChart">
-	    <script type="text/javascript">	
-	      // google.setOnLoadCallback(drawSummaryBarVisualization);
-	    </script>
-	  </head>
-	  <body style="font-family: Arial;border: 0 none;">
-	    <div id="dashboard">
-	      <table>
-	        <tr style='vertical-align: top'>
-	          <td style='width: 300px; font-size: 0.9em;'>
-	            <div id="control1"></div>
-	            <div id="control2"></div>
-	          </td>
-	          <td style='width: 600px'>
-	            <div style="float: left;" id="chart1"></div>
-	          </td>
-	        </tr>
-	      </table>
-	    </div>
-	  </body>
-	</div>
 	<div class="tab-pane active" id="lineChart">
-		<script type="text/javascript">	
+		<script type="text/javascript">
 	      google.setOnLoadCallback(drawSummaryLineVisualization);
 	    </script>
 	  </head>

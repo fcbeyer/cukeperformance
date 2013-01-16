@@ -5,15 +5,15 @@ class SuitesController < ApplicationController
 	#runs script to grab build data from json dump
   #then manually create entries in the jobname model each new one
   def auto_create
-  	jobname = params[:jobname]
+  	task = Task.where(name: params[:jobname]).first
   	@haveNewSuiteData = false
-		lastSuite = Suite.where(name: jobname).last
+		lastSuite = Suite.where(name: task.name).last
   	if !lastSuite.nil?
   		build_stamp = lastSuite.build_date + "_" + lastSuite.build_time
   	else
   		build_stamp = "empty"
   	end
-		@build_list = getBuildList(jobname,build_stamp)
+		@build_list = getBuildList(task.name,build_stamp,task.file_path)
 		if @build_list.kind_of?(FalseClass)
 			@haveNewSuiteData = false
 			@directoryDoesNotExist = true
@@ -33,7 +33,7 @@ class SuitesController < ApplicationController
 	  		@newSuite.mobilizer = build.mobilizer
 	  		@newSuite.mobilizer_build_tag = build.mobilizer_build_tag
 	  		@newSuite.url = build.url
-	  		@newSuite.name = jobname
+	  		@newSuite.name = task.name
 	  		@newSuite.status = build.status
 	  		@newSuite.save
 	  		build.features.each do |feature|
@@ -74,12 +74,11 @@ class SuitesController < ApplicationController
   # GET /suites
   # GET /suites.json
   def index
-    @suites = Suite.order("runstamp desc").all
-    @bvtSuites = Suite.order("runstamp desc").where(name: "BVT")
-    @psSuites = Suite.order("runstamp desc").where(name: "PortalSmoke")
-    @cmhsSuites = Suite.order("runstamp desc").where(name: "CMHSLoadTest")
-    @cmhsBVTSuites = Suite.order("runstamp desc").where(name: "CMHSLoadTestBVT")
-    #@cmhsSuites.sort! { |a,b| a.runstamp <=> b.runstamp}
+  	  	
+    @suites = {}
+    @suite_list.each do |entry|
+    	@suites[entry.name] = Suite.order("runstamp desc").where(name: entry.name)
+    end
 
     respond_to do |format|
       format.html # index.html.erb

@@ -29,10 +29,9 @@
           			<b class="caret"></b>  
     			</a>  
     			<ul class="dropdown-menu">
-     				<li><a href="/auto_create/suites/BVT">Generate BVT Data</a></li>
-     				<li><a href="/auto_create/suites/PortalSmoke">Generate Portal Smoke Data</a></li>
-     				<li><a href="/auto_create/suites/CMHSLoadTest">Generate CMHS Load Test Data</a></li> 
-     				<li><a href="/auto_create/suites/CMHSLoadTestBVT">Generate CMHS Load Test BVT Data</a></li> 
+    				<% @suite_list.each do |suite| %>
+     					<li><a href="/auto_create/suites/<%= suite.name %> ">Generate <%= suite.display_name %> Data</a></li>
+     				<% end %> 
     			</ul>  
   			</li> 
   			<li class="divider-vertical"></li> 
@@ -51,6 +50,8 @@
     			</ul>  
   			</li>  
 		</ul>
+		<li class="divider-vertical"></li>
+		<li><a href="/tasks">Tasks</a></li>
 		<li class="divider-vertical"></li> 
 		<li><a href="#help_modal" data-toggle="modal">Help</a></li>
       </ul>
@@ -103,7 +104,6 @@
 		</div>
 	</div>
 	<div class="modal-footer">
-	  <button class="btn btn-small btn-inverse pull-right" data-dismiss="modal" aria-hidden="true">Close</button>
 	</div>
 </div>
 

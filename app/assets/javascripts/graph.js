@@ -2,10 +2,9 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-function getData(suite,view) {
+function getData(view) {
 	var url = document.location.href;
 	var formData = $('#graphParameterData').getFormValues();
-	formData['suite_name'] = suite;
 	if (view == "Summary"){
 		$.getJSON(url, {'suite_name':suite}, drawSummaryGraphs);
 	}
@@ -45,6 +44,12 @@ function drawStepGraphs(json) {
 }
 
 function drawSummaryGraphs(json){
-	//drawSummaryBarVisualization(json);
 	drawSummaryLineVisualization(json);
 }
+
+//used for updating summary graph page select_tag
+$(document).ready(function(){
+	$("#summary_suite_name").live("ajax:success", function(evt, data, status, xhr){
+	      	drawSummaryGraphs(data);
+	});
+});
