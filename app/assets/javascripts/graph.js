@@ -47,3 +47,10 @@ function drawSummaryGraphs(json){
 	//drawSummaryBarVisualization(json);
 	drawSummaryLineVisualization(json);
 }
+
+//used for updating summary graph page select_tag
+$(document).ready(function(){
+	$("#summary_suite_name").live("ajax:success", function(evt, data, status, xhr){
+	      	drawSummaryGraphs(data);
+	});
+});

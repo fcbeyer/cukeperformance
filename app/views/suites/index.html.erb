@@ -9,22 +9,18 @@
 	document.write(rick);
 </script> -->
 
-<!-- <ul class="nav nav-tabs">
-  <li class="active"><a href="#allSuites" data-toggle="tab">All Suites</a></li>
-  <li><a href="#bvt" data-toggle="tab">BVT Builds</a></li>
-  <li><a href="#portalsmoke" data-toggle="tab">Portal Smoke Builds</a></li>
-  <li><a href="#cmhsloadtest" data-toggle="tab">CMHS Load Test Builds</a></li>
-  <li><a href="#cmhsloadtestbvt" data-toggle="tab">CMHS Load Test Builds</a></li>
-</ul> -->
-
 <ul class="nav nav-tabs">
-  <% @suite_list.each do |suite| %>
-  	<li><a href="#<%= suite.name %>" data-toggle="tab"><%= suite.display_name %> Builds</a></li>
+  <% @suite_list.each_with_index do |suite,suite_num| %>
+  	<% if suite_num == 0 %>
+  		<li class="active"><a href="#<%= suite.name %>" data-toggle="tab"><%= suite.display_name %> Builds</a></li>
+  	<% else %>
+  		<li><a href="#<%= suite.name %>" data-toggle="tab"><%= suite.display_name %> Builds</a></li>
+  	<% end %>
   <% end %>
 </ul>
 
 <div class="tab-content">
-	<% @suite_list.each_with_index do |entry, entry_num| %>
+	<% @suite_list.each_with_index do |entry,entry_num| %>
 		<% if entry_num == 0 %>
 			<div class="tab-pane active" id="<%= entry.name %>">
 		<% else %>

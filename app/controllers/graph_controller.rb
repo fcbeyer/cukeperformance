@@ -78,7 +78,7 @@ class GraphController < ApplicationController
   end
   
   def summary
-  	suite_name = params[:suite_name]
+  	suite_name = params[:summary_suite_name]
   	@summary = Suite.order("id desc").where(name: suite_name).limit(10)
   	@summary.sort! { |a,b| a.runstamp <=> b.runstamp}
   	respond_to do |format|
