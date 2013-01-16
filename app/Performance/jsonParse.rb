@@ -200,7 +200,7 @@ end
 #goes through jobs and pulls out performance information from json dumps
 #requires Pickle Job name, last entry for date_time on that model (so we only pull new data)
 #Example   BuildVerificationTest = BVT (so use BVT when calling from the controller)
-def getBuildList(jobName,build_stamp)
+def getBuildList(jobName,build_stamp,file_path)
 	build_list = []
 	#step through file directory and find cucumber.json
 	dirPath = "C:/Program Files (x86)/Jenkins/jobs/" + jobName + "/builds"
