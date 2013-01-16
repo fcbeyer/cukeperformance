@@ -13,7 +13,7 @@ class SuitesController < ApplicationController
   	else
   		build_stamp = "empty"
   	end
-		@build_list = getBuildList(task.name,build_stamp,task.file_path)
+		@build_list = getBuildList(task.file_path,build_stamp)
 		if @build_list.kind_of?(FalseClass)
 			@haveNewSuiteData = false
 			@directoryDoesNotExist = true
