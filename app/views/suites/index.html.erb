@@ -24,8 +24,12 @@
 </ul>
 
 <div class="tab-content">
-	<% @suite_list.each do |entry| %>
-		<div class="tab-pane" id="<%= entry.name %>">
+	<% @suite_list.each_with_index do |entry, entry_num| %>
+		<% if entry_num == 0 %>
+			<div class="tab-pane active" id="<%= entry.name %>">
+		<% else %>
+			<div class="tab-pane" id="<%= entry.name %>">
+		<% end %>
 			<table class="table table-bordered table-condensed">
 			  <tr>
 				<th>Build Timestamp</th>
@@ -53,113 +57,5 @@
 			</table>
 		</div>
 	<% end %>
-	<!-- <div class="tab-pane" id="BVT">
-		<table class="table table-bordered table-condensed">
-		  <tr>
-			<th>Build Timestamp</th>
-		    <th>Duration</th>
-		    <th>Name</th>
-		    <th>Status</th>
-		    <th></th>
-		    <th></th>
-		  </tr>
-		
-		<% @BVTSuites.each do |suite| %>
-		  <tr>
-		    <td><%= suite.runstamp %></td>
-		    <td><%= suite.duration_converted %></td>
-		    <td><%= suite.name %></td>
-		    <% if suite.status == "failed" %>
-		    	<td><span class="badge badge-warning"><%= suite.status %></span></td>
-		    <% else %>
-		    	<td><span class="label label-inverse"><%= suite.status %></span></td>
-		    <% end %>
-		    <td><%= link_to 'Show', suite %></td>
-		    <td><%= link_to 'Destroy', suite, confirm: 'Are you sure?', method: :delete %></td>
-		  </tr>
-		<% end %>
-		</table>
-	</div>
-	<div class="tab-pane" id="portalsmoke">
-		<table class="table table-bordered table-condensed">
-		  <tr>
-		    <th>Build Timestamp</th>
-		    <th>Duration</th>
-		    <th>Name</th>
-		    <th>Status</th>
-		    <th></th>
-		    <th></th>
-		  </tr>
-		
-		<% @psSuites.each do |suite| %>
-		  <tr>
-		    <td><%= suite.runstamp %></td>
-		    <td><%= suite.duration_converted %></td>
-		    <td><%= suite.name %></td>
-		    <% if suite.status == "failed" %>
-		    	<td><span class="badge badge-warning"><%= suite.status %></span></td>
-		    <% else %>
-		    	<td><span class="label label-inverse"><%= suite.status %></span></td>
-		    <% end %>
-		    <td><%= link_to 'Show', suite %></td>
-		    <td><%= link_to 'Destroy', suite, confirm: 'Are you sure?', method: :delete %></td>
-		  </tr>
-		<% end %>
-		</table>
-	</div>
-	<div class="tab-pane" id="cmhsloadtest">
-		<table class="table table-bordered table-condensed">
-		  <tr>
-		    <th>Build Timestamp</th>
-		    <th>Duration</th>
-		    <th>Name</th>
-		    <th>Status</th>
-		    <th></th>
-		    <th></th>
-		  </tr>
-		
-		<% @cmhsSuites.each do |suite| %>
-		  <tr>
-		    <td><%= suite.runstamp %></td>
-		    <td><%= suite.duration_converted %></td>
-		    <td><%= suite.name %></td>
-		    <% if suite.status == "failed" %>
-		    	<td><span class="badge badge-warning"><%= suite.status %></span></td>
-		    <% else %>
-		    	<td><span class="label label-inverse"><%= suite.status %></span></td>
-		    <% end %>
-		    <td><%= link_to 'Show', suite %></td>
-		    <td><%= link_to 'Destroy', suite, confirm: 'Are you sure?', method: :delete %></td>
-		  </tr>
-		<% end %>
-		</table>
-	</div>
-	<div class="tab-pane" id="cmhsloadtestbvt">
-		<table class="table table-bordered table-condensed">
-		  <tr>
-		    <th>Build Timestamp</th>
-		    <th>Duration</th>
-		    <th>Name</th>
-		    <th>Status</th>
-		    <th></th>
-		    <th></th>
-		  </tr>
-		
-		<% @cmhsBVTSuites.each do |suite| %>
-		  <tr>
-		    <td><%= suite.runstamp %></td>
-		    <td><%= suite.duration_converted %></td>
-		    <td><%= suite.name %></td>
-		    <% if suite.status == "failed" %>
-		    	<td><span class="badge badge-warning"><%= suite.status %></span></td>
-		    <% else %>
-		    	<td><span class="label label-inverse"><%= suite.status %></span></td>
-		    <% end %>
-		    <td><%= link_to 'Show', suite %></td>
-		    <td><%= link_to 'Destroy', suite, confirm: 'Are you sure?', method: :delete %></td>
-		  </tr>
-		<% end %>
-		</table>
-	</div> -->
 </div>
 <br />
