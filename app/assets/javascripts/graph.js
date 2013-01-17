@@ -23,6 +23,22 @@ function getData(view) {
 	}
 }
 
+function getStepData(view){
+	$('#loading_steps').show();
+	var url = document.location.href
+	var formData = $('#graphParameterData').getFormValues();
+	$.ajax({
+	 url: url,
+	 data: formData,
+	 success: drawStepGraphs,
+	 complete: ricktest
+    });
+}
+
+function ricktest() {
+	$('#loading_steps').hide();
+}
+
 function drawSuiteGraphs(json) {
 	drawSuiteBarVisualization(json);
 	drawSuiteLineVisualization(json);
