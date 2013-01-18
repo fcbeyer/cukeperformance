@@ -12,19 +12,19 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= label_tag "Jenkins Job Name" %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :display_name %><br />
+    <%= label_tag "Name to be displayed throughout the app" %>
     <%= f.text_field :display_name %>
   </div>
   <div class="field">
-    <%= f.label :file_path %><br />
+    <%= label_tag "File path to where the Jenkins 'builds' directory is located for this job" %>
     <%= f.text_field :file_path %>
   </div>
   <div class="field">
-    <%= f.label :active %><br />
+    <%= label_tag "Enable this task for the app" %>
     <%= f.check_box :active %>
   </div>
   <div class="actions">
