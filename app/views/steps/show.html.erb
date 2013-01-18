@@ -30,6 +30,15 @@
   <%= @step.status %>
 </span></p>
 
+<% if !@step.reason_for_failure.nil?%>
+	<% if !@step.reason_for_failure.empty?%>
+		<p>
+		  <b>Reason for Failure:</b>
+		  <%= @step.reason_for_failure %>
+		</p>
+	<% end %>
+<% end %>
+
 <p>
   <b>Scenario:</b>
   <%= @step.scenario_id %>

@@ -93,7 +93,8 @@ function drawStepBarVisualization(d) {
           'labelStacking': 'vertical',
           'allowNone': false,
           'allowTyping': false,
-          'allowMultiple': false
+          'allowMultiple': false,
+          'sortValues': false
         },
       },
     });

@@ -93,14 +93,15 @@ end
 
 class JsonStep
 	#this will be where we track step information
-	attr_reader :keyword, :name, :duration, :convertedDuration, :status
-	attr_writer :duration, :convertedDuration, :status
-	def initialize(keyword, name, duration, convertedDuration, status)
+	attr_reader :keyword, :name, :duration, :convertedDuration, :status, :reason_for_failure
+	attr_writer :duration, :convertedDuration, :status, :reason_for_failure
+	def initialize(keyword, name, duration, convertedDuration, status, reason_for_failure)
 		@keyword = keyword
 		@name = name
 		@duration = duration
 		@convertedDuration = convertedDuration
 		@status = status
+		@reason_for_failure = reason_for_failure
 	end
 
 	def to_csv
@@ -254,7 +255,11 @@ def getBuildList(file_path,build_stamp)
 								current_feature.status = "failed"
 								current_build.status = "failed"
 							end
-							step_list.push(JsonStep.new(step['keyword'],step['name'],dur,convDur,step['result']['status']))
+							if !step['result']['error_message'].nil?
+								step_list.push(JsonStep.new(step['keyword'],step['name'],dur,convDur,step['result']['status'],step['result']['error_message']))
+							else
+								step_list.push(JsonStep.new(step['keyword'],step['name'],dur,convDur,step['result']['status'],""))
+							end
 						end
 						if current_scenario.status.empty?
 							#all the steps passed

@@ -63,6 +63,7 @@ class SuitesController < ApplicationController
   		    		@newStep.status = step.status
   		    		@newStep.scenario_id = @newScenario.id
   		    		@newStep.status = step.status
+  		    		@newStep.reason_for_failure = step.reason_for_failure
 	  		  		@newStep.save
 	  		  	end #end step
 	  		  end #end scenario
