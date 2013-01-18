@@ -75,12 +75,12 @@
 		<div id="suites_help">
 			<h4 align="center">Suites</h4>
 			<p>
-				Click the Suites link in the Nav Bar to begin your dive into a specific Automation Suite run.  Upon initial loading you are presented with a tabbed page allowing you to view all Suites or
-				narrow down your choice to a specific Suite.  You Once you find the specific run you care to look at click the "Show" link on the right side of the table.  Now you are viewing all the Features
+				Click the Suites link in the Nav Bar to begin your dive into a specific Automation Suite run.  Upon initial loading you are presented with a tabbed page allowing you to view the various
+				Suites that we are currently tracking.  Once you find the specific run you care to look at click the "Show" link on the right side of the table.  Now you are viewing all the Features
 				that were executed during this specific execution of the Suite.  Information specific to that Suite is presented at the top of this page as well as the duration for each Feature.  To continue
 				digging deeper click the name of the Feature you wish to explore.  At this level you are shown some relevant information for the Feature as a whole, as well as the various Scenarios that made up
 				this instance of the Feature.  Again if you would like to dig deeper click the name of the Scenario you wish to view.  At this point you can see a list of all Steps that made up this
-				Scenario.  You can dig deeper into the Step but not much else information is displayed there outside of the duration in <b>nanoseconds</b>.
+				Scenario.  You can dig deeper into the Step to see the duration in <b>nanoseconds</b> as well as the reason for failure.
 			</p>
 		</div>
 		<div id="generate_help">
@@ -100,6 +100,14 @@
 				Filters exist so you can select which feature from the BVT you want to display.  After selecting a Feature you can drill down further and select a specific Scenario and the status (pass or fail).
 				On the Bar Chart you can filter the date range more by typing in the string representation of the build datetime stamp, for the Line Chart there is a date slider.  Hovering over a data 
 				point will you show the duration in Hours:Minutes:Seconds:Milliseconds
+			</p>
+		</div>
+		<div id="task_help">
+			<h4 align="center">Tasks</h4>
+			<p>
+				The Task page lists all Jenkins jobs we are currently tracking with this app.  At the bottom of this page you can add new Tasks.  If you need to change where the json dumps can be found you edit
+				the file path value.  Changing the "active" flag from true to false will remove the task visually from the app but all of the data remains in the database.  This is useful for when you no longer
+				want to track data and would like to clean up the UI.
 			</p>
 		</div>
 	</div>
