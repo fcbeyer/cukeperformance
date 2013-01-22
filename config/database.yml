@@ -13,14 +13,9 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  port: 3306
-  adapter: jdbcmysql
-  encoding: utf8
-  database: perf_reports
+  adapter: sqlite3
+  database: db/test.sqlite3
   pool: 5
-  username: cukeperf
-  password: cuke123
-  host: allservers
   timeout: 5000
 
 production:
