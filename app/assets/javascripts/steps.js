@@ -143,7 +143,7 @@ function drawStepBarVisualization(d) {
 }
 
 function drawStepLineVisualization(d2) {
-  	data3 = d2
+  	var data3 = d2
     // Create and populate the data table.
     var dataTable3 = new google.visualization.DataTable();
     dataTable3.addColumn('date', 'Build Date');
@@ -156,9 +156,13 @@ function drawStepLineVisualization(d2) {
     dataTable3.addColumn('string', 'Browser');
     dataTable3.addColumn('string', 'Mobilizer Version');
     
+    var runstampArr, dateArr, timeArr;
     for(var i=0; i < data3.length; i++) {
-    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration, data3[i].status, data3[i].feature_name, data3[i].scenario_name, data3[i].name,
-    		data3[i].duration_converted + "\n hr:min:sec:ms", data3[i].browser, data3[i].mobilizer]);
+    	runstampArr = data3[i].runstamp.split(' ');
+		dateArr = runstampArr[0].split('-');
+		timeArr = runstampArr[1].split(':');
+    	dataTable3.addRow([new Date(parseInt(dateArr[0], 10), parseInt(dateArr[1], 10) - 1, parseInt(dateArr[2], 10), parseInt(timeArr[0], 10), parseInt(timeArr[1], 10), parseInt(timeArr[2], 10)),
+    		data3[i].duration, data3[i].status, data3[i].feature_name, data3[i].scenario_name, data3[i].name, data3[i].duration_converted + "\n hr:min:sec:ms", data3[i].browser, data3[i].mobilizer]);
     }
   	
   	var datePicker = new google.visualization.ControlWrapper({

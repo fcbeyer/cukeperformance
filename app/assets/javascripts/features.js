@@ -110,7 +110,7 @@ function drawFeatureBarVisualization(d) {
 }
 
 function drawFeatureLineVisualization(d2) {
-  	data3 = d2
+  	var data3 = d2
     // Create and populate the data table.
     var dataTable3 = new google.visualization.DataTable();
     dataTable3.addColumn('date', 'Build Date');
