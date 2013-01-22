@@ -123,8 +123,8 @@ function drawSuiteLineVisualization(d2) {
          'ui': {
            'chartType': 'LineChart',
            'chartOptions': {
-             'chartArea': {'width': '90%'},
-             'hAxis': {'slantedText': true}
+             'chartArea': {'width': '90%', 'height':'50'},
+             'hAxis': {'textPosition': 'out', 'slantedText': true}
            },
            // Display a single series that shows the closing value of the stock.
            // Thus, this view has two columns: the date (axis) and the stock value (line series).
@@ -181,6 +181,10 @@ function drawSuiteLineVisualization(d2) {
         'height': 700,
         'pointSize': 6,
         'tooltip': {'column':4},
+        // 'hAxis': {
+        	// 'slantedText': true,
+        	// 'title': "Run Date"
+        // },
         'hAxis': {
         	'slantedText': true,
         	'title': "Run Date"
