@@ -1,7 +1,12 @@
 class GraphController < ApplicationController
+  
+  before_filter :get_begin_date
+  
+  def get_begin_date
+    @begin_date = Suite.first.runstamp
+  end
 	
   def suites
-  	@begin_date = Suite.first.runstamp
   	suite_name = params[:suite_name]
   	start_date = params[:begin_date]
   	finish_date = params[:end_date]
@@ -19,7 +24,6 @@ class GraphController < ApplicationController
   end
 
   def features		
-		@begin_date = Suite.first.runstamp
   	suite_name = params[:suite_name]
   	start_date = params[:begin_date]
   	finish_date = params[:end_date]
@@ -38,7 +42,6 @@ class GraphController < ApplicationController
   end
 
   def scenarios
-  	@begin_date = Suite.first.runstamp
   	fname = params[:f_name]
   	start_date = params[:begin_date]
   	finish_date = params[:end_date]
@@ -57,7 +60,6 @@ class GraphController < ApplicationController
   end
 
   def steps
-  	@begin_date = Suite.first.runstamp
   	fname = params[:f_name]
   	sname = params[:s_name]
   	start_date = params[:begin_date]
