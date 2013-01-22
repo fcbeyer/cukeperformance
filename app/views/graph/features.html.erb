@@ -5,6 +5,8 @@
     <script type="text/javascript">
       google.load('visualization', '1.1', {packages: ['controls']});
     </script>
+  </head>
+<%= loading_bar %>
 <p>
 	<a href="#featureModal" role="button" class="btn btn-primary" data-toggle="modal">Get Data</a>
 </p>
@@ -24,7 +26,6 @@
 	    <script type="text/javascript">	
 	      google.setOnLoadCallback(drawFeatureBarVisualization);
 	    </script>
-	  </head>
 	  <body style="font-family: Arial;border: 0 none;">
 	    <div id="dashboard">
 	      <table>
@@ -48,7 +49,6 @@
 		<script type="text/javascript">	
 	      google.setOnLoadCallback(drawFeatureLineVisualization);
 	    </script>
-	  </head>
 	  <body style="font-family: Arial;border: 0 none;">
 	    <div id="dashboard3">
 	      <table>

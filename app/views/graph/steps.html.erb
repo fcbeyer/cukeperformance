@@ -1,16 +1,13 @@
 <h1> Step Performance Charts</h1>
-  <div id="loading_steps" style="display: none" class="progress progress-striped active">
-  	<div class="bar" style="width: 100%;">Loading</div>
-  </div>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
-    
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>    
     <script type="text/javascript">
       google.load('visualization', '1.1', {packages: ['controls']});
     </script>
- <!-- Button layout at top of page -->
+  </head>
+<%= loading_bar %>
+<!-- Button layout at top of page -->
 <p>
 	<a href="#stepModal" role="button" class="btn btn-primary" data-toggle="modal">Get Data</a>
 </p>
@@ -30,7 +27,6 @@
 	    <script type="text/javascript">	
 	      google.setOnLoadCallback(drawStepBarVisualization);
 	    </script>
-	  </head>
 	  <body style="font-family: Arial;border: 0 none;">
 	    <div id="dashboard">
 	      <table>
@@ -56,7 +52,6 @@
 		<script type="text/javascript">	
 	      google.setOnLoadCallback(drawStepLineVisualization);
 	    </script>
-	  </head>
 	  <body style="font-family: Arial;border: 0 none;">
 	    <div id="dashboard3">
 	      <table>

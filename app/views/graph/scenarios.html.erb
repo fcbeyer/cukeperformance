@@ -5,6 +5,8 @@
     <script type="text/javascript">
       google.load('visualization', '1.1', {packages: ['controls']});
     </script>
+  </head>
+<%= loading_bar %>
  <!-- Button layout at top of page -->
 <p>
 	<a href="#scenarioModal" role="button" class="btn btn-primary" data-toggle="modal">Get Data</a>
@@ -25,7 +27,6 @@
 	    <script type="text/javascript">	
 	      google.setOnLoadCallback(drawScenarioBarVisualization);
 	    </script>
-	  </head>
 	  <body style="font-family: Arial;border: 0 none;">
 	    <div id="dashboard">
 	      <table>
@@ -50,7 +51,6 @@
 		<script type="text/javascript">	
 	      google.setOnLoadCallback(drawScenarioLineVisualization);
 	    </script>
-	  </head>
 	  <body style="font-family: Arial;border: 0 none;">
 	    <div id="dashboard3">
 	      <table>
