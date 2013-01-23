@@ -33,7 +33,7 @@ class GraphController < ApplicationController
   	finish = (finish_date.nil? ? Time.now : Time.new(finish_date['year'],finish_date['month'],finish_date['day'],23,59,59))
   	
 		@features = Feature.joins(:suite).where(:suites => {:name => suite_name, :runstamp => start..finish}).select("features.*,suites.runstamp,suites.build_time,
-			suites.build_date,suites.mobilizer,suites.browser")
+			suites.build_date,suites.mobilizer,suites.browser,suites.mobilizer_build_tag")
 		@features.sort! { |a,b| a.runstamp <=> b.runstamp}
 		respond_to do |format|
 			format.json {render json: @features}
@@ -51,7 +51,7 @@ class GraphController < ApplicationController
   	finish = (finish_date.nil? ? Time.now : Time.new(finish_date['year'],finish_date['month'],finish_date['day'],23,59,59))
   	
 		@scenarios = Scenario.joins(:feature => :suite).where(:suites => {:name => suite_name, :runstamp => start..finish}).
-			select("scenarios.*,suites.runstamp,suites.build_time,suites.build_date,suites.mobilizer,suites.browser,features.name as feature_name")
+			select("scenarios.*,suites.runstamp,suites.build_time,suites.build_date,suites.mobilizer,suites.browser,suites.mobilizer_build_tag,features.name as feature_name")
 		@scenarios.sort! { |a,b| a.runstamp <=> b.runstamp}
 		respond_to do |format|
 			format.json {render json: @scenarios}
@@ -70,7 +70,7 @@ class GraphController < ApplicationController
   	finish = (finish_date.nil? ? Time.now : Time.new(finish_date['year'],finish_date['month'],finish_date['day'],23,59,59))
   	
 		@steps = Step.joins(:scenario => {:feature => :suite}).where(:suites => {:name => suite_name,:runstamp => start..finish}).
-			select("steps.*,suites.runstamp,suites.build_time,suites.build_date,suites.mobilizer,suites.browser,
+			select("steps.*,suites.runstamp,suites.build_time,suites.build_date,suites.mobilizer,suites.browser,suites.mobilizer_build_tag,
 				features.name as feature_name, scenarios.name as scenario_name")
 		@steps.sort! { |a,b| a.runstamp <=> b.runstamp}
 		respond_to do |format|

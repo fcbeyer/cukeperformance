@@ -14,7 +14,7 @@ function drawStepBarVisualization(d) {
     
     for(var i=0; i < data.length; i++) {
     	dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration, data[i].status, data[i].feature_name, data[i].scenario_name, data[i].name,
-    		data[i].duration_converted + "\n hr:min:sec:ms", data[i].browser, data[i].mobilizer]);
+    		data[i].duration_converted + "\n hr:min:sec:ms \n" + data[i].mobilizer_build_tag, data[i].browser, data[i].mobilizer]);
     }
   
     var statusBarPicker = new google.visualization.ControlWrapper({
@@ -158,7 +158,7 @@ function drawStepLineVisualization(d2) {
     
     for(var i=0; i < data3.length; i++) {
     	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration, data3[i].status, data3[i].feature_name, data3[i].scenario_name, data3[i].name,
-    		data3[i].duration_converted + "\n hr:min:sec:ms", data3[i].browser, data3[i].mobilizer]);
+    		data3[i].duration_converted + "\n hr:min:sec:ms \n" + data3[i].mobilizer_build_tag, data3[i].browser, data3[i].mobilizer]);
     }
   	
   	var datePicker = new google.visualization.ControlWrapper({
