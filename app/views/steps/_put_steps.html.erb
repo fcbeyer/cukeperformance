@@ -1,26 +1,15 @@
 <table id="scenarioSteps" class="table">
   <tr>
-    <th>Name</th>
+    <th>Steps</th>
     <th>Duration</th>
     <th>Status</th>
   </tr>
 
 <% @current_scenario.steps.each do |step| %>
   <tr>
-  	<% if step.name.length == 0
-  		displayName = step.keyword
-  	   else
-  	   	displayName = step.name
-  	   end %>  	
-    <td><%= link_to displayName, [@current_suite,@current_feature,@current_scenario,step] %></td>
+    <td><%= link_to keyword_or_name_link(step), [@current_suite,@current_feature,@current_scenario,step] %></td>
     <td><%= step.duration_converted %></td>
-    <% if step.status == "failed" %>
-    	<td><span class="badge badge-warning"><%= step.status %></span></td>
-    <% elsif step.status == "skipped" %>
-    	<td><span class="label label-info"><%= step.status %></span></td>
-    <% else %>
-    	<td><span class="label label-inverse"><%= step.status %></span></td>
-    <% end %>
+    <%= model_status_display(step) %>
   </tr>
 <% end %>
 </table>

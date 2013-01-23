@@ -12,7 +12,7 @@ function drawFeatureBarVisualization(d) {
     
     for(var i=0; i < data.length; i++) {
     	dataTable.addRow([data[i].build_date+"_"+data[i].build_time, data[i].duration/1000000, data[i].status, data[i].name,
-    		data[i].duration_converted + "\n hr:min:sec:ms", data[i].browser, data[i].mobilizer]);
+    		data[i].duration_converted + "\n hr:min:sec:ms \n" + data[i].mobilizer_build_tag, data[i].browser, data[i].mobilizer]);
     }
   
     var statusBarPicker = new google.visualization.ControlWrapper({
@@ -124,10 +124,10 @@ function drawFeatureLineVisualization(d2) {
     var runstampArr, dateArr, timeArr;
     for(var i=0; i < data3.length; i++) {
     	runstampArr = data3[i].runstamp.split(' ');
-		dateArr = runstampArr[0].split('-');
-		timeArr = runstampArr[1].split(':');
+		  dateArr = runstampArr[0].split('-');
+		  timeArr = runstampArr[1].split(':');
     	dataTable3.addRow([new Date(parseInt(dateArr[0], 10), parseInt(dateArr[1], 10) - 1, parseInt(dateArr[2], 10), parseInt(timeArr[0], 10), parseInt(timeArr[1], 10), parseInt(timeArr[2], 10)),
-    		data3[i].duration/1000000, data3[i].status, data3[i].name, data3[i].duration_converted + "\n hr:min:sec:ms", data3[i].browser, data3[i].mobilizer]);
+    		data3[i].duration/1000000, data3[i].status, data3[i].name, data3[i].duration_converted + "\n hr:min:sec:ms \n" + data3[i].mobilizer_build_tag, data3[i].browser, data3[i].mobilizer]);
     }
   	
   	var datePicker = new google.visualization.ControlWrapper({

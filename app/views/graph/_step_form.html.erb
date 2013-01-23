@@ -13,18 +13,14 @@
 			    <%= label_tag :s_name, "Scenario Name:" %>
 			    <%= text_field_tag :s_name %>
 			</div> -->
-			<div class="field">
-			    <%= label_tag :begin_date, "Begin Date: " %>
-			    <%= select_date(@begin_date, :prefix => "begin_date")%>
-			</div>
-			<div class="field">
-			    <%= label_tag :end_date, "End Date: " %>
-			    <%= select_date(Time.now, :prefix => "end_date")%>
-			</div>
-			<div class="field">
-				<%= label_tag "Select a Suite" %>
-				<%= select_tag :suite_name,options_from_collection_for_select(@suite_list,"name","display_name")  %>
-			</div>				
+			<%= label_tag :begin_date, "Begin Date: " %>
+			<%= begin_date_display %>
+			
+			<%= label_tag :end_date, "End Date: " %>
+			<%= end_date_display %>
+			
+			<%= label_tag "Select a Suite" %>
+			<%= select_suite_display  %>			
 		</fieldset>
 	<% end %>
 </div>
