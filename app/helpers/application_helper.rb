@@ -15,7 +15,7 @@ module ApplicationHelper
 	  			model_name.status
 	  		end
 	  	end
-	  elsif step.status == "skipped"
+	  elsif model_name.status == "skipped"
 	  	content_tag(:td) do
 	  		content_tag(:span, :class => "label label-info") do
 	  			model_name.status
