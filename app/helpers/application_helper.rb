@@ -29,5 +29,25 @@ module ApplicationHelper
 	  	end
 		end    
  	end
+ 	
+ 	def keyword_or_name_display(current_model)
+ 		if current_model.name.length == 0
+ 			content_tag(:td) do
+ 				current_model.keyword
+ 			end
+ 		else
+ 			content_tag(:td) do
+ 				current_model.name
+ 			end
+ 		end
+ 	end
+ 	
+ 	def keyword_or_name_link(current_model)
+ 		if current_model.name.length == 0
+ 			return current_model.keyword
+ 		else
+ 			return current_model.name
+ 		end
+ 	end
 	
 end

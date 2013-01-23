@@ -20,24 +20,12 @@
   <%= @step.duration_converted %>
 </p>
 
-<% if @step.status == "failed" %>
-	<p><b>Status:</b><span class="badge badge-warning">
-<% elsif @step.status == "skipped" %>
-	<p><b>Status:</b><span class="label label-info">
-<% else %>
-	<p><b>Status:</b><span class="label label-inverse">
-<% end %>
-  <%= @step.status %>
-</span></p>
+<p>
+  <b>Status: </b>
+<%= step_status_show_display %>
+</p>
 
-<% if !@step.reason_for_failure.nil?%>
-	<% if !@step.reason_for_failure.empty?%>
-		<p>
-		  <b>Reason for Failure:</b>
-		  <%= @step.reason_for_failure %>
-		</p>
-	<% end %>
-<% end %>
+<%= step_failure_display %>
 
 <p>
   <b>Scenario:</b>

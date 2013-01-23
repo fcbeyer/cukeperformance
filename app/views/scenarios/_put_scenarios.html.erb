@@ -7,12 +7,7 @@
 
 <% @current_feature.scenarios.each do |scenario| %>
   <tr>
-  	<% if scenario.name.length == 0
-  		displayName = scenario.keyword
-  	   else
-  	   	displayName = scenario.name
-  	   end %>
-    <td><%= link_to displayName, [@current_suite,@current_feature,scenario] %></td>
+    <td><%= link_to keyword_or_name_link(scenario), [@current_suite,@current_feature,scenario] %></td>
     <td><%= scenario.duration_converted %></td>
     <%= model_status_display(scenario) %>
   </tr>

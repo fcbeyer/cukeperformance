@@ -7,12 +7,7 @@
     <th></th>
   </tr>
   <tr>
-  	<% if @current_scenario.name.length == 0
-  		displayName = @current_scenario.keyword
-  	   else
-  	   	displayName = @current_scenario.name
-  	   end %>
-    <td><%= displayName %></td>
+  	<%= keyword_or_name_display(@current_scenario) %>
     <td><%= @current_scenario.duration_converted %></td>
     <td><%= link_to 'Destroy', [@current_suite,@current_feature,@current_scenario], confirm: 'Are you sure?', method: :delete %></td>
   </tr>

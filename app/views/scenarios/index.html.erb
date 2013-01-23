@@ -10,12 +10,7 @@
 
 <% @scenarios.each do |scenario| %>
   <tr>
-  	<% if scenario.name.length == 0
-  		displayName = scenario.keyword
-  	   else
-  	   	displayName = scenario.name
-  	   end %>
-    <td><%= displayName %></td>
+  	<%= keyword_or_name_display(scenario) %>
     <td><%= scenario.duration_converted %></td>
     <td><%= link_to 'Show', [@current_suite,@current_feature,scenario] %></td>
     <td><%= link_to 'Destroy', [@current_suite,@current_feature,scenario], confirm: 'Are you sure?', method: :delete %></td>
