@@ -9,11 +9,7 @@
   <tr>
     <td><%= link_to feature.name, [@current_suite,feature] %></td>
     <td><%= feature.duration_converted %></td>
-    <% if feature.status == "failed" %>
-    	<td><span class="badge badge-warning"><%= feature.status %></span></td>
-    <% else %>
-    	<td><span class="label label-inverse"><%= feature.status %></span></td>
-    <% end %>
+    <%= model_status_display(feature) %>
   </tr>
 <% end %>
 </table>

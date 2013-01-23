@@ -41,11 +41,7 @@
 			    <td><%= suite.runstamp %></td>
 			    <td><%= suite.duration_converted %></td>
 			    <td><%= suite.name %></td>
-			    <% if suite.status == "failed" %>
-			    	<td><span class="badge badge-warning"><%= suite.status %></span></td>
-			    <% else %>
-			    	<td><span class="label label-inverse"><%= suite.status %></span></td>
-			    <% end %>
+			    <%= model_status_display(suite) %>
 			    <td><%= link_to 'Show', suite %></td>
 			    <td><%= link_to 'Destroy', suite, confirm: 'Are you sure?', method: :delete %></td>
 			  </tr>

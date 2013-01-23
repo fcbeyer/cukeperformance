@@ -8,4 +8,26 @@ module ApplicationHelper
 		end
 	end
 	
+	def model_status_display(model_name)
+    if model_name.status == "failed"
+	  	content_tag(:td) do
+	  		content_tag(:span, :class => "badge badge-warning") do
+	  			model_name.status
+	  		end
+	  	end
+	  elsif step.status == "skipped"
+	  	content_tag(:td) do
+	  		content_tag(:span, :class => "label label-info") do
+	  			model_name.status
+	  		end
+	  	end
+	  else
+	  	content_tag(:td) do
+	  		content_tag(:span, :class => "label label-inverse") do
+	  			model_name.status
+	  		end
+	  	end
+		end    
+ 	end
+	
 end
