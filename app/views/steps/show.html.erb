@@ -28,9 +28,12 @@
 <%= step_failure_display %>
 
 <p>
-  <b>Scenario:</b>
-  <%= @step.scenario_id %>
+	<a href="#imageButton" role="button" class="btn btn-primary" onclick=showStepFailedImage()>Show Image</a>
 </p>
+
+<div id="imageButton" style="display:none">
+	<img id="imageButton" alt="Embedded Image" src="data:image/png;base64,<%= @step.failure_image %>" />
+</div>
 
 
 <%= link_to 'Back', [@current_suite,@current_feature,@current_scenario] %>

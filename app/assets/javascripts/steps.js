@@ -295,3 +295,7 @@ function drawStepLineVisualization(d2) {
       // Draw the dashboard
       draw(dataTable3);
 }
+
+function showStepFailedImage(){
+	$('#imageButton').toggle();
+}

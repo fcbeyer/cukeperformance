@@ -25,5 +25,17 @@ module StepsHelper
  			end
  		end
  	end
+ 	
+ 	def step_failure_image
+ 		if !@step.reason_for_failure.empty?
+#			<p>
+#				<a href="#imageButton" role="button" class="btn btn-info">Show Image</a>
+#			</p>
+#			
+#			<div id="imageButton" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+#				<%= render 'steps/show_image' %>
+#			</div>
+ 		end
+ 	end
 
 end

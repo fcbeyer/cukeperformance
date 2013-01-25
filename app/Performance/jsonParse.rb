@@ -93,15 +93,16 @@ end
 
 class JsonStep
 	#this will be where we track step information
-	attr_reader :keyword, :name, :duration, :convertedDuration, :status, :reason_for_failure
-	attr_writer :duration, :convertedDuration, :status, :reason_for_failure
-	def initialize(keyword, name, duration, convertedDuration, status, reason_for_failure)
+	attr_reader :keyword, :name, :duration, :convertedDuration, :status, :reason_for_failure, :failure_image
+	attr_writer :duration, :convertedDuration, :status, :reason_for_failure, :failure_image
+	def initialize(keyword, name, duration, convertedDuration, status, reason_for_failure, failure_image)
 		@keyword = keyword
 		@name = name
 		@duration = duration
 		@convertedDuration = convertedDuration
 		@status = status
 		@reason_for_failure = reason_for_failure
+		@failure_image = failure_image
 	end
 
 	def to_csv
@@ -204,8 +205,8 @@ end
 def getBuildList(file_path,build_stamp)
 	build_list = []
 	#step through file directory and find cucumber.json
-	dirPath = file_path + "/builds"
-	#dirPath = "C:/local/projects/Git/CukePerformance/Performance/builds"
+	#dirPath = file_path + "/builds"
+	dirPath = "C:/Users/cbrachmann/workspace/CukePerformance/app/Performance/builds"
 	dir = dirPurge(dirPath,build_stamp)
 	if dir.kind_of?(Array)
 		dir.each do |buildFolder|
@@ -247,6 +248,8 @@ def getBuildList(file_path,build_stamp)
 						stepTotal = 0
 						step_list = []
 						scenario['steps'].each do |step|
+							stepErrorMessage = ''
+							stepFailureImage = ''
 							stepTotal = stepTotal + step['result']['duration']
 							dur = step['result']['duration']
 							convDur = Time.at((dur / 1000000000.00)).gmtime.strftime('%R:%S:%L')
@@ -254,12 +257,18 @@ def getBuildList(file_path,build_stamp)
 								current_scenario.status = "failed"
 								current_feature.status = "failed"
 								current_build.status = "failed"
+								stepErrorMessage = step['result']['error_message']				
+								#failed steps should have an image available:
+								unless step['embeddings'].nil?
+									stepFailureImage = step['embeddings'][0]['data']
+								end					
 							end
-							if !step['result']['error_message'].nil?
-								step_list.push(JsonStep.new(step['keyword'],step['name'],dur,convDur,step['result']['status'],step['result']['error_message']))
-							else
-								step_list.push(JsonStep.new(step['keyword'],step['name'],dur,convDur,step['result']['status'],""))
-							end
+							step_list.push(JsonStep.new(step['keyword'],step['name'],dur,convDur,step['result']['status'],stepErrorMessage,stepFailureImage))
+#							if !step['result']['error_message'].nil?
+#								step_list.push(JsonStep.new(step['keyword'],step['name'],dur,convDur,step['result']['status'],step['result']['error_message']))
+#							else
+#								step_list.push(JsonStep.new(step['keyword'],step['name'],dur,convDur,step['result']['status'],""))
+#							end
 						end
 						if current_scenario.status.empty?
 							#all the steps passed
