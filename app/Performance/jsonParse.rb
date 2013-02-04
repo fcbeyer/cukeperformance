@@ -205,8 +205,8 @@ end
 def getBuildList(file_path,build_stamp)
 	build_list = []
 	#step through file directory and find cucumber.json
-	#dirPath = file_path + "/builds"
-	dirPath = "C:/Users/cbrachmann/workspace/CukePerformance/app/Performance/builds"
+	dirPath = file_path + "/builds"
+	#dirPath = "C:/Users/cbrachmann/workspace/CukePerformance/app/Performance/builds"
 	dir = dirPurge(dirPath,build_stamp)
 	if dir.kind_of?(Array)
 		dir.each do |buildFolder|
@@ -264,11 +264,6 @@ def getBuildList(file_path,build_stamp)
 								end					
 							end
 							step_list.push(JsonStep.new(step['keyword'],step['name'],dur,convDur,step['result']['status'],stepErrorMessage,stepFailureImage))
-#							if !step['result']['error_message'].nil?
-#								step_list.push(JsonStep.new(step['keyword'],step['name'],dur,convDur,step['result']['status'],step['result']['error_message']))
-#							else
-#								step_list.push(JsonStep.new(step['keyword'],step['name'],dur,convDur,step['result']['status'],""))
-#							end
 						end
 						if current_scenario.status.empty?
 							#all the steps passed
