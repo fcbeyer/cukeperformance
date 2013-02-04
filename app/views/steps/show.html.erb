@@ -22,10 +22,15 @@
 
 <p>
   <b>Status: </b>
-<%= step_status_show_display %>
+  <%= step_status_show_display %>
 </p>
 
 <%= step_failure_display %>
+
+<p>
+  <b>Scenario:</b>
+  <%= @step.scenario_id %>
+</p>
 
 <%= step_display_failure_image %>
 
