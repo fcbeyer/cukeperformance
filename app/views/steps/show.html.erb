@@ -22,7 +22,7 @@
 
 <p>
   <b>Status: </b>
-<%= step_status_show_display %>
+  <%= step_status_show_display %>
 </p>
 
 <%= step_failure_display %>
@@ -32,5 +32,6 @@
   <%= @step.scenario_id %>
 </p>
 
+<%= step_display_failure_image %>
 
 <%= link_to 'Back', [@current_suite,@current_feature,@current_scenario] %>
