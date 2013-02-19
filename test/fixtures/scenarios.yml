@@ -13,3 +13,21 @@ two:
   duration: 1
   duration_converted: MyString
   feature_id: 1
+
+three:
+  id: 3
+  keyword: Scenario
+  name: Add Department
+  duration: 5189000000
+  duration_converted: "00:00:05:189"
+  feature_id: 3
+  status: passed
+
+four:
+  id: 4
+  keyword: Scenario
+  name: Loading of the System Management subtab
+  duration: 920412000
+  duration_converted: "00:00:00:920"
+  feature_id: 4
+  status: passed
