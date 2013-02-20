@@ -86,7 +86,7 @@ class StepsController < ApplicationController
     @step.destroy
 
     respond_to do |format|
-      format.html { redirect_to steps_url }
+      format.html { redirect_to suite_feature_scenario_steps_url }
       format.json { head :no_content }
     end
   end
