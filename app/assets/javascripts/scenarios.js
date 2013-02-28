@@ -117,7 +117,7 @@ function drawScenarioBarVisualization(d) {
     new google.visualization.Dashboard(document.getElementById('dashboard')).
       bind(statusBarPicker, barChart).
       bind(featureBarPicker, [barChart, scenarioBarPicker, statusBarPicker]).
-      bind(scenarioBarPicker, [barChart, statusBarPicker]).
+      bind(scenarioBarPicker, [barChart, slider, statusBarPicker]).
       bind(slider, barChart).
       bind(browserBarPicker, barChart).
       bind(versionBarPicker, barChart).

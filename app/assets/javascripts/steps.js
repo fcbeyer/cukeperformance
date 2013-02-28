@@ -218,7 +218,8 @@ function drawStepLineVisualization(d2) {
           'labelStacking': 'vertical',
           'allowNone': false,
           'allowTyping': false,
-          'allowMultiple': false
+          'allowMultiple': false,
+          'sortValues': false
         }
       },
     })
