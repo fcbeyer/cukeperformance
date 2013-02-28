@@ -134,7 +134,7 @@ function drawStepBarVisualization(d) {
       bind(statusBarPicker, barChart).
       bind(featureBarPicker, [barChart, scenarioBarPicker, stepBarPicker, statusBarPicker]).
       bind(scenarioBarPicker, [barChart, stepBarPicker, statusBarPicker]).
-      bind(stepBarPicker, [barChart, statusBarPicker]).
+      bind(stepBarPicker, [barChart, slider, statusBarPicker]).
       bind(slider, barChart).
       bind(browserBarPicker, barChart).
       bind(versionBarPicker, barChart).
@@ -222,7 +222,8 @@ function drawStepLineVisualization(d2) {
           'labelStacking': 'vertical',
           'allowNone': false,
           'allowTyping': false,
-          'allowMultiple': false
+          'allowMultiple': false,
+          'sortValues': false
         }
       },
     })
