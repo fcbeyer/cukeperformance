@@ -71,6 +71,7 @@ class SuitesController < ApplicationController
 	  		end #end feature
   		end #end build
   	end #end else
+  	check_average(task)
   end #end auto_create
   
   # GET /suites
