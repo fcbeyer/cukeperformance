@@ -2,7 +2,7 @@ require_relative '../performance/jsonParse.rb'
 
 class SuitesController < ApplicationController
 	
-	include SuitesHelper
+	include TaskAlertsHelper
 	
 	#runs script to grab build data from json dump
   #then manually create entries in the jobname model each new one
