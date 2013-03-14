@@ -16,17 +16,15 @@ module TaskAlertsHelper
 			# end
 			# average /= 10
 			# if average > current_alert.time_limit
-				# send_alert(task)
+				# send_alert(task,current_alert,average)
 			# end
 		# end
-		send_alert(task)
+		send_alert(task,task.task_alerts.active.first,2100000000000)
 	end
 	
-	def send_alert(task)
+	def send_alert(task,current_alert,average)
 		#oh my god its taking forever!
-		if task.name.eql?("BVT")
-			RunTimeNotifier.bvt.deliver
-		end
+		RunTimeNotifier.suite_alert(task,current_alert,average).deliver
 	end
 	
 end

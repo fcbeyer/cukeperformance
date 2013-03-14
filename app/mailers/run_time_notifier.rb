@@ -22,4 +22,14 @@ class RunTimeNotifier < ActionMailer::Base
 
     mail to: "teamverve@patientkeeper.com"
   end
+  
+  
+  def suite_alert(task,current_alert,average)
+  	alert_subject = "Cuke Performance " + task.display_name + " Alert"
+  	@email_alert_task = current_alert
+  	@email_task = task
+  	@average
+  	
+  	mail to: "rbeyer@patientkeeper.com", subject: alert_subject
+  end
 end
