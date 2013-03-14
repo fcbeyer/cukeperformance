@@ -48,7 +48,7 @@ class TaskAlertsController < ApplicationController
   # POST /task_alerts.json
   def create
     @task_alert = TaskAlert.new(params[:task_alert])
-    @task_alert.id = params[:task_id]
+    @task_alert.task_id = params[:task_id]
 
     respond_to do |format|
       if @task_alert.save

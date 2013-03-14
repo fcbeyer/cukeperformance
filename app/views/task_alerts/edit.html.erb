@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @task_alert %> |
-<%= link_to 'Back', task_alerts_path %>
+<%= link_to 'Show', [@current_task,@task_alert] %> |
+<%= link_to 'Back', task_task_alerts_path(@current_task) %>
