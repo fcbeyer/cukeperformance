@@ -10,6 +10,10 @@
   <%= @task_alert.time_limit %>
 </p>
 
+<p>
+  <b>Active:</b>
+  <%= @task_alert.active %>
+</p>
 
 <%= link_to 'Edit', edit_task_task_alert_path([@current_task,@task_alert]) %> |
 <%= link_to 'Back', task_task_alerts_path %>

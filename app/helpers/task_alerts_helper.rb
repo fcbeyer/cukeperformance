@@ -7,7 +7,7 @@ module TaskAlertsHelper
 	
 	def check_average(task)
 		#loop through each alert we have for this task and send accordingly
-		# alert_list = task.task_alerts
+		# alert_list = task.task_alerts.active
 		# alert_list.each do |current_alert|
 			# suite_list = Suite.order("id desc").where({:name => task.name, :browser => current_alert.browser}).limit(10)
 			# average = 0
