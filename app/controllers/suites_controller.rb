@@ -15,59 +15,59 @@ class SuitesController < ApplicationController
   	else
   		build_stamp = "empty"
   	end
-		@build_list = getBuildList(task.file_path,build_stamp)
-		if @build_list.kind_of?(FalseClass)
+		build_list = getBuildList(task.file_path,build_stamp)
+		if build_list.kind_of?(FalseClass)
 			@haveNewSuiteData = false
 			@directoryDoesNotExist = true
-  	elsif @build_list.empty?
+  	elsif build_list.empty?
   		@haveNewSuiteData = false
   	else
   		@haveNewSuiteData = true
-  		@build_list.each do |build|
-	  		@newSuite = Suite.new
-	  		@newSuite.build_date = build.date
-	  		@newSuite.build_time = build.time
-	  		@newSuite.runstamp = build.runstamp
-	  		@newSuite.duration = build.duration
-	  		@newSuite.duration_converted = build.convertedDuration
-	  		@newSuite.browser = build.browser
-	  		@newSuite.os = build.os
-	  		@newSuite.mobilizer = build.mobilizer
-	  		@newSuite.mobilizer_build_tag = build.mobilizer_build_tag
-	  		@newSuite.url = build.url
-	  		@newSuite.name = task.name
-	  		@newSuite.status = build.status
-	  		@newSuite.save
+  		build_list.each do |build|
+	  		newSuite = Suite.new
+	  		newSuite.build_date = build.date
+	  		newSuite.build_time = build.time
+	  		newSuite.runstamp = build.runstamp
+	  		newSuite.duration = build.duration
+	  		newSuite.duration_converted = build.convertedDuration
+	  		newSuite.browser = build.browser
+	  		newSuite.os = build.os
+	  		newSuite.mobilizer = build.mobilizer
+	  		newSuite.mobilizer_build_tag = build.mobilizer_build_tag
+	  		newSuite.url = build.url
+	  		newSuite.name = task.name
+	  		newSuite.status = build.status
+	  		newSuite.save
 	  		build.features.each do |feature|
-	  		  @newFeat = Feature.new
-  		    @newFeat.keyword = feature.keyword
-  		    @newFeat.name = feature.name
-  		    @newFeat.duration = feature.duration
-  		    @newFeat.duration_converted = feature.convertedDuration
-  		    @newFeat.suite_id = @newSuite.id
-  		    @newFeat.status = feature.status
-	  		  @newFeat.save
+	  		  newFeat = Feature.new
+  		    newFeat.keyword = feature.keyword
+  		    newFeat.name = feature.name
+  		    newFeat.duration = feature.duration
+  		    newFeat.duration_converted = feature.convertedDuration
+  		    newFeat.suite_id = newSuite.id
+  		    newFeat.status = feature.status
+	  		  newFeat.save
 	  		  feature.scenarios.each do |scenario|
-	  		  	@newScenario = Scenario.new
-	  		  	@newScenario.keyword = scenario.keyword
-  		    	@newScenario.name = scenario.name
-  		    	@newScenario.duration = scenario.duration
-  		    	@newScenario.duration_converted = scenario.convertedDuration
-  		    	@newScenario.feature_id = @newFeat.id
-  		    	@newScenario.status = scenario.status
-	  		  	@newScenario.save
+	  		  	newScenario = Scenario.new
+	  		  	newScenario.keyword = scenario.keyword
+  		    	newScenario.name = scenario.name
+  		    	newScenario.duration = scenario.duration
+  		    	newScenario.duration_converted = scenario.convertedDuration
+  		    	newScenario.feature_id = newFeat.id
+  		    	newScenario.status = scenario.status
+	  		  	newScenario.save
 	  		  	scenario.steps.each do |step|
-	  		  		@newStep = Step.new
-	  		  		@newStep.keyword = step.keyword
-  		    		@newStep.name = step.name
-  		    		@newStep.duration = step.duration
-  		    		@newStep.duration_converted = step.convertedDuration
-  		    		@newStep.status = step.status
-  		    		@newStep.scenario_id = @newScenario.id
-  		    		@newStep.status = step.status
-  		    		@newStep.reason_for_failure = step.reason_for_failure
-							@newStep.failure_image = step.failure_image
-	  		  		@newStep.save
+	  		  		newStep = Step.new
+	  		  		newStep.keyword = step.keyword
+  		    		newStep.name = step.name
+  		    		newStep.duration = step.duration
+  		    		newStep.duration_converted = step.convertedDuration
+  		    		newStep.status = step.status
+  		    		newStep.scenario_id = newScenario.id
+  		    		newStep.status = step.status
+  		    		newStep.reason_for_failure = step.reason_for_failure
+							newStep.failure_image = step.failure_image
+	  		  		newStep.save
 	  		  	end #end step
 	  		  end #end scenario
 	  		end #end feature

@@ -7,9 +7,9 @@ class RunTimeNotifier < ActionMailer::Base
   #   en.run_time_notifier.bvt.subject
   #
   def bvt
-  	attachments.inline['zoidberg_attention'] = File.read("app/assets/images/zoidberg_attention.jpg")
   	
-    mail to: "rbeyer@patientkeeper.com", subject: "Cuke Performance Alert"
+  	
+    mail to: "rbeyer@patientkeeper.com", subject: "Cuke Performance BVT Alert"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml

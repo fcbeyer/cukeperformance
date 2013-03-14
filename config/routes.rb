@@ -1,6 +1,8 @@
 CukePerformance::Application.routes.draw do  
 
-  resources :tasks
+  resources :tasks do
+  	resources :task_alerts
+  end
 
   get "graph/suites"
 

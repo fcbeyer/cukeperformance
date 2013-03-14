@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  browser: MyString
+  time_limit: 1
+  task_id: 1
+
+two:
+  browser: MyString
+  time_limit: 1
+  task_id: 1

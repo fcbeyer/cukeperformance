@@ -1,0 +1,27 @@
+<h1>Listing task_alerts</h1>
+
+<table>
+  <tr>
+    <th>Browser</th>
+    <th>Time limit</th>
+    <th>Task</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @task_alerts.each do |task_alert| %>
+  <tr>
+    <td><%= task_alert.browser %></td>
+    <td><%= task_alert.time_limit %></td>
+    <td><%= task_alert.task_id %></td>
+    <td><%= link_to 'Show', task_alert %></td>
+    <td><%= link_to 'Edit', edit_task_alert_path(task_alert) %></td>
+    <td><%= link_to 'Destroy', task_alert, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Task alert', new_task_alert_path %>

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Browser:</b>
+  <%= @task_alert.browser %>
+</p>
+
+<p>
+  <b>Time limit:</b>
+  <%= @task_alert.time_limit %>
+</p>
+
+<p>
+  <b>Task:</b>
+  <%= @task_alert.task_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_task_alert_path(@task_alert) %> |
+<%= link_to 'Back', task_alerts_path %>
