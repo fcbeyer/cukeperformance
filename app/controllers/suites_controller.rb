@@ -2,6 +2,8 @@ require_relative '../performance/jsonParse.rb'
 
 class SuitesController < ApplicationController
 	
+	include SuitesHelper
+	
 	#runs script to grab build data from json dump
   #then manually create entries in the jobname model each new one
   def auto_create
