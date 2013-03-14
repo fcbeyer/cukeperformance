@@ -1,12 +1,12 @@
 <h1>
-	<%= @email_task.display_name %> has reached critical mass
+	The last 10 <%= @email_task.display_name %> Suites have reached critical mass
 </h1>
 
 <ul>
-	<li>Browser: <%= @email_alert_task.browser %></li>
-	<li>Current Average: </li>
-	<li>Current Average Converted: </li>
-	<li>Time Limit: <%= @email_alert_task.time_limit %></li>
-	<li>Time Limit Converted: </li>
+	<li>Browser: <%= @email_alert_task.browser %> </li>
+	<li>Current Average: <%= @average %> </li>
+	<li>Current Average Converted: <%= convert_time(@average)%> </li>
+	<li>Time Limit: <%= @email_alert_task.time_limit %> </li>
+	<li>Time Limit Converted: <%= convert_time(@email_alert_task.time_limit)%> </li>
 </ul>
 

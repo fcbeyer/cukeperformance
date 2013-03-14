@@ -27,4 +27,9 @@ module TaskAlertsHelper
 		RunTimeNotifier.suite_alert(task,current_alert,average).deliver
 	end
 	
+	
+	def convert_time(time)
+		Time.at(time / 1000000000.00).gmtime.strftime('%R:%S:%L')
+	end
+	
 end

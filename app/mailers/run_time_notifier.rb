@@ -1,5 +1,6 @@
 class RunTimeNotifier < ActionMailer::Base
   default from: "cukes@patientkeeper.com"
+  add_template_helper(TaskAlertsHelper)
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -28,7 +29,7 @@ class RunTimeNotifier < ActionMailer::Base
   	alert_subject = "Cuke Performance " + task.display_name + " Alert"
   	@email_alert_task = current_alert
   	@email_task = task
-  	@average
+  	@average = average
   	
   	mail to: "rbeyer@patientkeeper.com", subject: alert_subject
   end
