@@ -20,5 +20,10 @@
   <%= @task_alert.active %>
 </p>
 
+<p>
+  <b>Email List (comma separated list):</b>
+  <%= @task_alert.email_list %>
+</p>
+
 <%= link_to 'Edit', edit_task_task_alert_path([@current_task,@task_alert]) %> |
 <%= link_to 'Back', task_task_alerts_path %>

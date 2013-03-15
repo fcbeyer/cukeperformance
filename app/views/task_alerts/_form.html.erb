@@ -23,6 +23,11 @@
     <%= label_tag "Enable this alert" %>
     <%= f.check_box :active %>
   </div>
+  <div class="field">
+    <%= f.label :email_list , 'Email List (comma separated)'%><br />
+    <%= f.text_field :email_list %>
+  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>
