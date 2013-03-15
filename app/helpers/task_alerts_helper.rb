@@ -9,27 +9,34 @@ module TaskAlertsHelper
 		#loop through each alert we have for this task and send accordingly
 		# alert_list = task.task_alerts.active
 		# alert_list.each do |current_alert|
-			# suite_list = Suite.order("id desc").where({:name => task.name, :browser => current_alert.browser}).limit(10)
+			# suite_list = Suite.order("runstamp desc").where({:name => task.name, :browser => current_alert.browser}).limit(10)
 			# average = 0
 			# suite_list.each do |suite|
 				# average += suite.duration
 			# end
 			# average /= 10
 			# if average > current_alert.time_limit
-				# send_alert(task,current_alert,average)
+				# send_alert(task,current_alert,average,suite_list)
 			# end
 		# end
-		send_alert(task,task.task_alerts.active.first,2100000000000)
+		suite_list = Suite.order("runstamp desc").where({:name => task.name, :browser => task.task_alerts.active.first.browser}).limit(10)		
+		send_alert(task,task.task_alerts.active.first,2100000000000,suite_list)
 	end
 	
-	def send_alert(task,current_alert,average)
+	def send_alert(task,current_alert,average,suite_list)
 		#oh my god its taking forever!
-		RunTimeNotifier.suite_alert(task,current_alert,average).deliver
+		RunTimeNotifier.suite_alert(task,current_alert,average,suite_list).deliver
 	end
 	
 	
 	def convert_time(time)
 		Time.at(time / 1000000000.00).gmtime.strftime('%R:%S:%L')
+	end
+	
+	def dump_suite_list(suite)
+		content_tag(:li) do
+			link_to suite.name + ' from ' + Time.at(suite.runstamp).utc.in_time_zone("Eastern Time (US & Canada)").to_s, root_url + suite_path(suite.id)
+		end
 	end
 	
 end
