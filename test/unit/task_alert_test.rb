@@ -1,7 +1,7 @@
 require 'test_helper'
 
-class SuiteTest < ActiveSupport::TestCase
+class TaskAlertTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
-  # end  
+  # end
 end

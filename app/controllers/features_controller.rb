@@ -84,7 +84,7 @@ class FeaturesController < ApplicationController
     @feature.destroy
 
     respond_to do |format|
-      format.html { redirect_to features_url }
+      format.html { redirect_to suite_features_url }
       format.json { head :no_content }
     end
   end

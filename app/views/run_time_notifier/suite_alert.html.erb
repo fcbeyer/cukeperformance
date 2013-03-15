@@ -1,0 +1,21 @@
+<h1>
+	The last 10 <%= @email_task.display_name %> Suites have reached critical mass
+</h1>
+
+<ul>
+	<li>Browser: <%= @email_alert_task.browser %> </li>
+	<li>Current Average: <%= @average %> </li>
+	<li>Current Average Converted: <%= convert_time(@average)%> </li>
+	<li>Time Limit: <%= @email_alert_task.time_limit %> </li>
+	<li>Time Limit Converted: <%= convert_time(@email_alert_task.time_limit)%> </li>
+</ul>
+
+<p>
+	Links to the last 10 Suites
+</p>
+<ul>
+	<%  @email_suite_list.each do |suite| %>
+		<%= dump_suite_list(suite) %>
+	<% end %>
+</ul>
+

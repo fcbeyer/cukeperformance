@@ -37,18 +37,13 @@ CukePerformance::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
-  
+
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.perform_deliveries = true
   ActionMailer::Base.raise_delivery_errors = true
   ActionMailer::Base.smtp_settings = {
-    :enable_starttls_auto => true,
     :address            => 'exchange.ne.virtmed.com',
-    :port               => 587,
-    :enable_starttls_auto => true,
-    :domain             => 'virtmed',
-    :authentication     => :plain,
-    :user_name          => 'cukes',
-    :password           => 'Tw0tbgrar'
+    :port               => 25,
+    :domain             => 'virtmed'
   }
 end

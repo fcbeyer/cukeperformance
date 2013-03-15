@@ -13,3 +13,33 @@ two:
   duration: 1
   duration_converted: MyString
   name: MyString
+
+bvt:
+  id: 3
+  build_date: "2012-10-30"
+  build_time: "11-28-05"
+  duration: 524291845983
+  duration_converted: "00:08:44:291"
+  name: BVT
+  browser: firefox
+  os: Windows_NT
+  mobilizer: "7.6.2.1"
+  mobilizer_build_tag: "MOBILIZER_7_6_2_20121031_1125-STB"
+  url: "http://qa-vm-aut-app01:82/index.jsp"
+  status: failed
+  runstamp: "2012-10-30 15:28:05"
+
+portalsmoke:
+  id: 4
+  build_date: "2012-10-30"
+  build_time: "03-01-18"
+  duration: 791602952998
+  duration_converted: "00:13:11:602"
+  name: PortalSmoke
+  browser: firefox
+  os: Windows_NT
+  mobilizer: "7.6.2.1"
+  mobilizer_build_tag: "MOBILIZER_7_6_2_20121031_1125-STB"
+  url: "http://qa-vm-aut-app01:82/index.jsp"
+  status: failed
+  runstamp: "2012-10-30 07:01:18"

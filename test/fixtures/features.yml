@@ -13,3 +13,21 @@ two:
   duration: 1
   duration_converted: MyString
   suite_id: 1
+  
+three:
+  id: 3
+  keyword: Feature
+  name: Department Preferences
+  duration: 9402000000
+  duration_converted: "00:00:09:401"
+  suite_id: 3
+  status: passed
+
+four:
+  id: 4
+  keyword: Feature
+  name: System Management
+  duration: 5038864999
+  duration_converted: "00:00:05:038"
+  suite_id: 4
+  status: passed
