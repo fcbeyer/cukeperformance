@@ -6,6 +6,7 @@
     <th>Time limit (nanoseconds)</th>
     <th>Time limit (converted)</th>
     <th>Active</th>
+    <th>Email List</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,6 +18,7 @@
     <td><%= task_alert.time_limit %></td>
     <td><%= convert_time(task_alert.time_limit)%></td>
     <td><%= task_alert.active %></td>
+    <td><%= task_alert.email_list %></td>
     <td><%= link_to 'Show', [@current_task,task_alert] %></td>
     <td><%= link_to 'Edit', edit_task_task_alert_path(@current_task,task_alert) %></td>
     <td><%= link_to 'Destroy', [@current_task,task_alert], confirm: 'Are you sure?', method: :delete %></td>

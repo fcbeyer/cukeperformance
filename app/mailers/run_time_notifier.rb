@@ -31,7 +31,18 @@ class RunTimeNotifier < ActionMailer::Base
   	@email_task = task
   	@average = average
   	@email_suite_list = suite_list
+  	emails = process_email_list(current_alert)
   	
-  	mail to: "rbeyer@patientkeeper.com", subject: alert_subject
+  	mail to: emails, subject: alert_subject
   end
+  
+  def process_email_list(current_alert)
+		list = current_alert.email_list.split(",")
+		list.each_with_index do |entry,entry_num|
+			#stuff
+			list[entry_num] = entry + "@patientkeeper.com"
+		end
+		return list
+	end
+	
 end
