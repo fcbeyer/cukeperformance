@@ -64,11 +64,12 @@
      				<% @suite_list.each do |suite| %>
      					<li><%= link_to suite.display_name, task_task_alerts_path(suite.id) %></li>
      				<% end %>
-     				<li><button class="btn btn-danger" onclick="askPermission()" type="button">Permissions</button></td></li> 
     			</ul>
   			</li>
 		<li class="divider-vertical"></li> 
 		<li><a href="#help_modal" data-toggle="modal">Help</a></li>
+		<li class="divider-vertical"></li>
+		<%= display_notifications_button %>
 		<li class="divider-vertical"></li>
       </ul>
     </div>

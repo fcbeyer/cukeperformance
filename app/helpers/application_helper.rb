@@ -4,11 +4,21 @@ module ApplicationHelper
 		if browser.ie?
   		return "Alerts notifications do NOT work in IE.  Please switch over to Chrome or Firefox for a better experience"
     elsif browser.firefox?
-    	return raw("<a href="'https://addons.mozilla.org/en-us/firefox/addon/html-notifications/'" target="'_blank'">Please make sure this add-on is enabled to receive notifications</a>")
+    	return raw("<a href=\"https://addons.mozilla.org/en-us/firefox/addon/html-notifications/\" target=\"_blank\">Please make sure this add-on is enabled to receive notifications</a>")
     else
-    	return "Alert notifications are supported, make sure they are enabled"
+    	return "Alert notifications are supported, make sure they are enabled!"
 		end
 	end
+	
+  def display_notifications_button
+ 		enabled_button = raw("<li><button class=\"btn btn-small btn-info\" onclick=\"askPermission()\" type=\"button\">Enable Notifications</button></td></li>")
+ 		disabled_button = raw("<li><button class=\"btn btn-small btn-info disabled\" onclick=\"askPermission()\" type=\"button\">Enable Notifications</button></td></li>")
+ 		if browser.ie?
+ 			return disabled_button
+ 		else
+ 			return enabled_button
+ 		end
+ 	end
 	
 	
 	def loading_bar

@@ -10,11 +10,14 @@ function testAlert(alert,url){
 function alertComplete(data){
 	//send html5 notifications
 	if (window.webkitNotifications.checkPermission() == 0) {
-		var myNotification = "for browser ";
-		var myAlertSubject = data[0] + " PERFORMANCE ALERT";
-		var myOkSubject = data[0] + " is Okay";
+		var myNotification;
+		var myAlertSubject;
+		var myOkSubject;
 		var alertGenerated;
 		for(var i=1; i < data.length; i++) {
+			myNotification = "for browser ";
+			myAlertSubject = data[0] + " PERFORMANCE ALERT";
+			myOkSubject = data[0] + " is Okay";
 			alertGenerated = data[i][1] 
 			myNotification = myNotification + data[i][0].browser
 			if (alertGenerated) {
