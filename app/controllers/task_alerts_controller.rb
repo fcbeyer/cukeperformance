@@ -8,11 +8,17 @@ class TaskAlertsController < ApplicationController
   
   def test_alert
   	#do something awesome
+  	alerts_triggered = []
   	if params[:alert].empty?
-  		check_all_alerts(@current_task)
+  		check_all_alerts(@current_task,false)
   	else
   		alert = TaskAlert.find(params[:alert])
-  		check_alert(alert)
+  		alerts_triggered.push(check_alert(alert,false))
+  	end
+  	alerts_triggered.insert(0,@current_task.name)
+  	respond_to do |format|
+			format.json {render json: alerts_triggered}
+			format.html {render html: alerts_triggered}
   	end
   end
   

@@ -1,5 +1,16 @@
 module ApplicationHelper
 	
+	def alert_information
+		if browser.ie?
+  		return "Alerts notifications do NOT work in IE.  Please switch over to Chrome or Firefox for a better experience"
+    elsif browser.firefox?
+    	return raw("<a href="'https://addons.mozilla.org/en-us/firefox/addon/html-notifications/'" target="'_blank'">Please make sure this add-on is enabled to receive notifications</a>")
+    else
+    	return "Alert notifications are supported, make sure they are enabled"
+		end
+	end
+	
+	
 	def loading_bar
 		content_tag(:div, :id => "loading_screen", :style => "display: none", :class => "progress progress-striped active") do
 			content_tag(:div, :style => "width: 100%;", :class => "bar") do

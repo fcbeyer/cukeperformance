@@ -73,7 +73,7 @@ class SuitesController < ApplicationController
 	  		end #end feature
   		end #end build
   	end #end else
-  	check_all_alerts(task)
+  	check_all_alerts(task,true)
   end #end auto_create
   
   # GET /suites

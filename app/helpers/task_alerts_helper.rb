@@ -5,7 +5,7 @@ module TaskAlertsHelper
 	end
 	
 	
-	def check_all_alerts(task)
+	def check_all_alerts(task,send_email)
 		#loop through each alert we have for this task and send accordingly
 		alert_list = task.task_alerts.active
 		alert_list.each do |current_alert|
@@ -21,7 +21,7 @@ module TaskAlertsHelper
 		end
 	end
 	
-	def check_alert(alert)
+	def check_alert(alert,send_email)
 		suite_list = Suite.order("runstamp desc").where({:name => @current_task.name, :browser => alert.browser}).limit(10)
 		average = 0
 		suite_list.each do |suite|
@@ -29,8 +29,12 @@ module TaskAlertsHelper
 		end
 		average /= 10
 		if average > alert.time_limit
-			send_alert(@current_task,alert,average,suite_list)
+			if send_email.to_s.eql?("true")
+				send_alert(@current_task,alert,average,suite_list)
+			end
+			return [alert,true]
 		end
+		return [alert,false]
 	end
 	
 	def send_alert(task,current_alert,average,suite_list)
