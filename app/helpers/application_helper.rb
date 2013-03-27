@@ -10,13 +10,21 @@ module ApplicationHelper
 		end
 	end
 	
-  def display_notifications_button
- 		enabled_button = raw("<li><button class=\"btn btn-small btn-info\" onclick=\"askPermission()\" type=\"button\">Enable Notifications</button></td></li>")
- 		disabled_button = raw("<li><button class=\"btn btn-small btn-info disabled\" onclick=\"askPermission()\" type=\"button\">Enable Notifications</button></td></li>")
+  def display_notifications_button(size, color)
  		if browser.ie?
- 			return disabled_button
+ 			return enabled_or_disabled_button(size,color,false)
  		else
- 			return enabled_button
+ 			return enabled_or_disabled_button(size,color,true)
+ 		end
+ 	end
+ 	
+ 	def enabled_or_disabled_button(size, color, enable)
+ 		if enable.kind_of?(FalseClass)
+ 			#disable the button
+ 			return raw("class=\"btn btn-#{size} btn-#{color}\" disabled")
+ 		else
+ 			#enable the button
+ 			return raw("class=\"btn btn-#{size} btn-#{color}\"")
  		end
  	end
 	
