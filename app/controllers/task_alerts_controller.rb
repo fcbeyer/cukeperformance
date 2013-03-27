@@ -7,7 +7,6 @@ class TaskAlertsController < ApplicationController
   before_filter :get_task
   
   def test_alert
-  	#do something awesome
   	alerts_triggered = []
   	if params[:alert].empty?
   		check_all_alerts(@current_task,false)
