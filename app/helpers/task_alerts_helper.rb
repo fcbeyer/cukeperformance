@@ -4,6 +4,30 @@ module TaskAlertsHelper
 		@current_task.display_name
 	end
 	
+	def hours_display
+    content_tag(:div, :class => "field") do
+      number_field_tag('hours', @task_alert_time_converted[0], :in => 0...13)
+    end
+  end
+  
+  def minutes_display
+    content_tag(:div, :class => "field") do
+      number_field_tag('minutes', @task_alert_time_converted[1], :in => 0...60)
+    end
+  end
+  
+  def seconds_display
+    content_tag(:div, :class => "field") do
+      number_field_tag('seconds', @task_alert_time_converted[2], :in => 0...60)
+    end
+  end
+  
+  def milliseconds_display
+    content_tag(:div, :class => "field") do
+      number_field_tag('milliseconds', @task_alert_time_converted[3], :in => 0...1000)
+    end
+  end
+	
 	
 	def check_task_alerts(task,send_email)
 		#loop through each alert we have for this task and send accordingly
@@ -58,6 +82,15 @@ module TaskAlertsHelper
 	
 	def get_alert_url
 		root_url + test_task_alert_path(@current_task.id)
+	end
+	
+	def build_duration_value(hours, minutes, seconds, milliseconds)
+		hours = hours.to_i * 3600000000000
+		minutes = minutes.to_i * 60000000000
+		seconds = seconds.to_i * 1000000000
+		milliseconds = milliseconds.to_i * 1000000
+		return hours + minutes + seconds + milliseconds
+		
 	end
 	
 end
