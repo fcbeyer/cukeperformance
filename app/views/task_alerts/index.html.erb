@@ -1,4 +1,4 @@
-<h1>Automated Alerts for <%= display_task_name %></h1>
+<h1>Automated Alerts for <%= display_task_name %> </h1>
 
 <table class="table table-bordered table-hover">
   <tr>
@@ -7,6 +7,7 @@
     <th>Time limit (converted)</th>
     <th>Active</th>
     <th>Email List</th>
+    <th><button <%= display_notifications_button("small","danger") %> onclick="testAlert('','<%= get_alert_url %>')" type="button">Test All <%= display_task_name %> Alerts</button></th>
     <th></th>
     <th></th>
     <th></th>
@@ -19,6 +20,7 @@
     <td><%= convert_time(task_alert.time_limit)%></td>
     <td><%= task_alert.active %></td>
     <td><%= task_alert.email_list %></td>
+    <td><button <%= display_notifications_button("small","warning") %> onclick="testAlert(<%= task_alert.id %>,'<%= get_alert_url %>')" type="button">Test Now</button></td>
     <td><%= link_to 'Show', [@current_task,task_alert] %></td>
     <td><%= link_to 'Edit', edit_task_task_alert_path(@current_task,task_alert) %></td>
     <td><%= link_to 'Destroy', [@current_task,task_alert], confirm: 'Are you sure?', method: :delete %></td>

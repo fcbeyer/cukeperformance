@@ -211,7 +211,9 @@ def getBuildList(file_path,build_stamp)
 	if dir.kind_of?(Array)
 		dir.each do |buildFolder|
 			curPath = dirPath + "/" + buildFolder
-			if Dir.exists?(curPath)#get the date time stamp from the name of this directory
+			systemDatafilePath = dirPath + "/" + buildFolder + "/archive/systemData.json"
+			filePath = dirPath + "/" + buildFolder + "/archive/cucumber.json"
+			if Dir.exists?(curPath) and File.exists?(systemDatafilePath) and File.exists?(filePath)#get the date time stamp from the name of this directory
 				build = buildFolder.split("_")
 				date = build[0]
 				time = build[1]
@@ -225,14 +227,12 @@ def getBuildList(file_path,build_stamp)
 					dt.push(t.to_i)
 				end
 				runstamp = Time.new(dt[0],dt[1],dt[2],dt[3],dt[4],dt[5])
-				systemDatafilePath = dirPath + "/" + buildFolder + "/archive/systemData.json"
 				systemDataFile = File.read(systemDatafilePath)
 				systemData = JSON.parse(systemDataFile)
 				#mobilizer_build_tag, mobilizer, os, url, browser
 				current_build = Build.new(date,time,runstamp,systemData['mobilizer_build_tag'],systemData['mobilizer'],systemData['os'],systemData['url'],systemData['browser'])
 	
 				#now we have the cucumber.json file location, lets process it
-				filePath = dirPath + "/" + buildFolder + "/archive/cucumber.json"
 				file = File.read(filePath)
 				document = JSON.parse(file)
 	

@@ -2,7 +2,25 @@ class TaskAlertsController < ApplicationController
   # GET /task_alerts
   # GET /task_alerts.json
   
+  include TaskAlertsHelper
+  
   before_filter :get_task
+  
+  def test_alert
+  	alerts_triggered = []
+  	if params[:alert].empty?
+  		alerts_triggered = check_task_alerts(@current_task,false)
+  	else
+  		alert = TaskAlert.find(params[:alert])
+  		alerts_triggered.push(check_alert(alert,false))
+  	end
+  	alerts_triggered.insert(0,@current_task.name)
+  	puts alerts_triggered.to_s
+  	respond_to do |format|
+			format.json {render json: alerts_triggered}
+			format.html {render html: alerts_triggered}
+  	end
+  end
   
   def get_task
   	@current_task = Task.find(params[:task_id])

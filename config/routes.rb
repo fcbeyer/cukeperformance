@@ -25,6 +25,7 @@ CukePerformance::Application.routes.draw do
   #custom route for auto generating data
   # => 				url you want								model#action						  				 path
   match 'auto_create/suites/:jobname' => 'suites#auto_create', :as => :auto_create_suites
+  match 'test_task_alert/tasks/:task_id/' => 'task_alerts#test_alert', :as => :test_task_alert
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
