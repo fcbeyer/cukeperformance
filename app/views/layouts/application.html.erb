@@ -30,7 +30,7 @@
     			</a>  
     			<ul class="dropdown-menu">
     				<% @suite_list.each do |suite| %>
-     					<li><a href="/auto_create/suites/<%= suite.name %> ">Generate <%= suite.display_name %> Data</a></li>
+    				    <li><button <%= display_button("small","primary") %> onclick="captureData('<%= get_generate_data_url(suite) %>')" type="button"><%= suite.display_name %></button></li>
      				<% end %> 
     			</ul>  
   			</li> 
@@ -69,7 +69,7 @@
 		<li class="divider-vertical"></li> 
 		<li><a href="#help_modal" data-toggle="modal">Help</a></li>
 		<li class="divider-vertical"></li>
-		<li><button <%= display_notifications_button("small","info") %> onclick="askPermission()" type="button">Enable Notifications</button></td></li>
+		<li><button <%= display_button("small","info") %> onclick="askPermission()" type="button">Enable Notifications</button></td></li>
 		<li class="divider-vertical"></li>
       </ul>
     </div>
