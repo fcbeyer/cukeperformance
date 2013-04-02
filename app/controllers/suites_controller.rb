@@ -8,6 +8,8 @@ class SuitesController < ApplicationController
   #then manually create entries in the jobname model each new one
   def auto_create
   	task = Task.where(name: params[:jobname]).first
+  	capture_results = []
+  	send_email = params[:send_email].nil? ? true : false
   	@haveNewSuiteData = false
 		lastSuite = Suite.where(name: task.name).last
   	if !lastSuite.nil?
@@ -73,7 +75,15 @@ class SuitesController < ApplicationController
 	  		end #end feature
   		end #end build
   	end #end else
-  	check_task_alerts(task,true)
+  	check_task_alerts(task,send_email)
+  	capture_results.push(@haveNewSuiteData)
+  	capture_results.push(@directoryDoesNotExist)
+  	capture_results.push(task.display_name)
+  	
+  	respond_to do |format|
+			format.json {render json: capture_results}
+			format.html {render html: capture_results}
+  	end
   end #end auto_create
   
   # GET /suites

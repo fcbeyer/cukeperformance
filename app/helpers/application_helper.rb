@@ -10,7 +10,7 @@ module ApplicationHelper
 		end
 	end
 	
-  def display_notifications_button(size, color)
+  def display_button(size, color)
  		if browser.ie?
  			return enabled_or_disabled_button(size,color,false)
  		else
@@ -77,6 +77,10 @@ module ApplicationHelper
  		else
  			return current_model.name
  		end
+ 	end
+ 	
+ 	def get_generate_data_url(suite)
+ 		root_url + auto_create_suites_path(suite.name)
  	end
 	
 end

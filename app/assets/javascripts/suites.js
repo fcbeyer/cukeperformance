@@ -1,3 +1,36 @@
+function captureData(url){
+	var generateData = {'send_email': false}
+	$.ajax({
+	 url: url,
+	 data: generateData,
+	 success: captureDataComplete
+    });
+}
+
+function captureDataComplete(data){
+	//send html5 notifications
+	//haveNewSuiteData, directoryDoesNotExist, display_name
+	if (window.webkitNotifications.checkPermission() == 0) {
+		var myNotification;
+		var mySubject;
+		if (data[1]){
+			//directory or JSON files were missing
+			mySubject = data[2] + " DATA ALERT";
+			myNotification ="The directory or JSON files do NOT exist"
+		}
+		else {
+			mySubject = data[2]
+			if (data[0]){
+				myNotification = "New data was found"
+			}
+			else {
+				myNotification = "No new data was found"
+			}
+		} 
+		window.webkitNotifications.createNotification('http://images4.wikia.nocookie.net/__cb20110309055904/memoryalpha/en/images/7/7a/Data,_2379.jpg',mySubject,myNotification).show();
+	}
+}
+
 function drawSuiteBarVisualization(d) {
           
     var data = d
