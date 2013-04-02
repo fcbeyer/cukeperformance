@@ -43,7 +43,7 @@ function drawSummaryGraphs(json){
 
 //used for updating summary graph page select_tag
 $(document).ready(function(){
-	$("#summary_suite_name").live("ajax:success", function(evt, data, status, xhr){
+	$("#summary_suite_name").on("ajax:success", function(evt, data, status, xhr){
 	      	drawSummaryGraphs(data);
 	});
 });

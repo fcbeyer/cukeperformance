@@ -15,10 +15,7 @@
     <%= f.label :browser %><br />
     <%= f.text_field :browser %>
   </div>
-  <div class="field">
-    <%= f.label :time_limit %><br />
-    <%= f.number_field :time_limit %>
-  </div>
+  
   <div class="field">
     <%= label_tag "Enable this alert" %>
     <%= f.check_box :active %>
@@ -27,6 +24,8 @@
     <%= f.label :email_list , 'Email List (comma separated)'%><br />
     <%= f.text_field :email_list %>
   </div>
+  
+  <%= render 'layouts/calculate_nanoseconds'%>
   
   <div class="actions">
     <%= f.submit %>
