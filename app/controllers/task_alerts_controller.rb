@@ -85,10 +85,12 @@ class TaskAlertsController < ApplicationController
   # PUT /task_alerts/1.json
   def update
     @task_alert = TaskAlert.find(params[:id])
+    task_alert_hash = params[:task_alert]
+    task_alert_hash["time_limit"] = build_duration_value(params[:hours],params[:minutes],params[:seconds],params[:milliseconds])
+    puts "HEY I AM HERE!!!!!: " + task_alert_hash.to_s
 
     respond_to do |format|
-      if @task_alert.update_attributes(params[:task_alert])
-      	@task_alert.update_attribute(:time_limit,build_duration_value(params[:hours],params[:minutes],params[:seconds],params[:milliseconds]))
+      if @task_alert.update_attributes(task_alert_hash)
         format.html { redirect_to [@current_task,@task_alert], notice: 'Task alert was successfully updated.' }
         format.json { head :no_content }
       else
