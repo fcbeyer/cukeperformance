@@ -50,6 +50,7 @@ class TaskAlertsController < ApplicationController
   # GET /task_alerts/new.json
   def new
     @task_alert = TaskAlert.new
+    @task_alert_time_converted = [0,0,0,0]
 
     respond_to do |format|
       format.html # new.html.erb
