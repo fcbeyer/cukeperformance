@@ -15,11 +15,11 @@ function alertComplete(data){
 		var myOkSubject;
 		var alertGenerated;
 		for(var i=1; i < data.length; i++) {
-			myNotification = "for browser ";
+			myNotification = "the current average for ";
 			myAlertSubject = data[0] + " PERFORMANCE ALERT";
 			myOkSubject = data[0] + " is Okay";
 			alertGenerated = data[i][1] 
-			myNotification = myNotification + data[i][0].browser + " the current average is " + data[i][2]
+			myNotification = myNotification + data[i][0].browser + " is " + data[i][2]
 			if (alertGenerated) {
 				window.webkitNotifications.createNotification('http://media.tumblr.com/tumblr_m63vd5EW2I1qly8of.jpg',myAlertSubject,myNotification).show();	
 			} else {
