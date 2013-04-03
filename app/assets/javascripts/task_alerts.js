@@ -19,7 +19,7 @@ function alertComplete(data){
 			myAlertSubject = data[0] + " PERFORMANCE ALERT";
 			myOkSubject = data[0] + " is Okay";
 			alertGenerated = data[i][1] 
-			myNotification = myNotification + data[i][0].browser
+			myNotification = myNotification + data[i][0].browser + " the current average is " + data[i][2]
 			if (alertGenerated) {
 				window.webkitNotifications.createNotification('http://media.tumblr.com/tumblr_m63vd5EW2I1qly8of.jpg',myAlertSubject,myNotification).show();	
 			} else {

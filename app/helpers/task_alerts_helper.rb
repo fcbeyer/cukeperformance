@@ -42,9 +42,9 @@ module TaskAlertsHelper
 			average /= 10
 			if average > current_alert.time_limit
 				send_alert(task,current_alert,average,suite_list) unless send_email.to_s.eql?("false")
-				alerts_triggered.push([current_alert,true])
+				alerts_triggered.push([current_alert,true,convert_time(average)])
 			else
-				alerts_triggered.push([current_alert,false])
+				alerts_triggered.push([current_alert,false,convert_time(average)])
 			end
 		end
 		return alerts_triggered
@@ -59,9 +59,9 @@ module TaskAlertsHelper
 		average /= 10
 		if average > alert.time_limit
 			send_alert(@current_task,alert,average,suite_list) unless send_email.to_s.eql?("false")
-			return [alert,true]
+			return [alert,true,convert_time(average)]
 		end
-		return [alert,false]
+		return [alert,false,convert_time(average)]
 	end
 	
 	def send_alert(task,current_alert,average,suite_list)
