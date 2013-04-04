@@ -186,9 +186,8 @@ def dirPurge(dirPath, build_stamp)
 		dir = Dir.entries(dirPath)
 		if build_stamp != "empty"
 			dir.each do |buildFolder|
-				if buildFolder > build_stamp
-					dropNum = dir.index(buildFolder)
-					break
+				if buildFolder <= build_stamp
+					dropNum = dir.index(buildFolder) + 1
 				end
 			end
 		end
