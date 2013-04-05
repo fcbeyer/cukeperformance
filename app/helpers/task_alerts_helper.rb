@@ -34,7 +34,7 @@ module TaskAlertsHelper
 		alert_list = task.task_alerts.active
 		alerts_triggered = []
 		alert_list.each do |current_alert|
-			suite_list = Suite.order("runstamp desc").where({:name => task.name, :browser => current_alert.browser}).limit(10)
+			suite_list = Suite.order("runstamp desc").where({:name => task.name, :browser => current_alert.browser, :status => "passed"}).limit(10)
 			average = 0
 			suite_list.each do |suite|
 				average += suite.duration
