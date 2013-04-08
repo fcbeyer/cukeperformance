@@ -22,6 +22,29 @@ function getAverage(data) {
 	return average
 }
 
+function convertAverage(data){
+	var seconds = data / 1000;
+	var numhours = padNumber(Math.floor(((seconds % 31536000) % 86400) / 3600),"hours");
+	var numminutes = padNumber(Math.floor((((seconds % 31536000) % 86400) % 3600) / 60),"minutes");
+	var numseconds = padNumber(Math.floor((((seconds % 31536000) % 86400) % 3600) % 60),"seconds");
+	var nummilliseconds = padNumber((data % 1000),"milliseconds");
+	converted =  numhours + ":" + numminutes + ":" + numseconds + ":" + nummilliseconds
+	return converted
+
+}
+
+function padNumber(number,unitOfTime){
+	if (unitOfTime == "milliseconds" && number < 100){
+		return ("0" + parseInt(number))
+	}
+	else if (number < 10){
+		return ("0" + number)
+	}
+	else {
+		return parseInt(number)
+	}
+}
+
 function hideLoading() {
 	$('#loading_screen').hide();
 }
