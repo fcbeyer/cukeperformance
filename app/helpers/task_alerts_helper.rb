@@ -28,6 +28,14 @@ module TaskAlertsHelper
     end
   end
 	
+	def get_average(suite_list)
+ 		average = 0
+ 		suite_list.each do |suite|
+			average += suite.duration
+		end
+		average /= suite_list.length
+ 		return average
+ 	end
 	
 	def check_task_alerts(task,send_email)
 		#loop through each alert we have for this task and send accordingly
@@ -35,11 +43,7 @@ module TaskAlertsHelper
 		alerts_triggered = []
 		alert_list.each do |current_alert|
 			suite_list = Suite.order("runstamp desc").where({:name => task.name, :browser => current_alert.browser, :status => "passed"}).limit(10)
-			average = 0
-			suite_list.each do |suite|
-				average += suite.duration
-			end
-			average /= 10
+			average = get_average(suite_list)
 			if average > current_alert.time_limit
 				send_alert(task,current_alert,average,suite_list) unless send_email.to_s.eql?("false")
 				alerts_triggered.push([current_alert,true,convert_time(average)])
@@ -52,11 +56,7 @@ module TaskAlertsHelper
 	
 	def check_alert(alert,send_email)
 		suite_list = Suite.order("runstamp desc").where({:name => @current_task.name, :browser => alert.browser}).limit(10)
-		average = 0
-		suite_list.each do |suite|
-			average += suite.duration
-		end
-		average /= 10
+		average = get_average(suite_list)
 		if average > alert.time_limit
 			send_alert(@current_task,alert,average,suite_list) unless send_email.to_s.eql?("false")
 			return [alert,true,convert_time(average)]
@@ -90,7 +90,6 @@ module TaskAlertsHelper
 		seconds = seconds.to_i * 1000000000
 		milliseconds = milliseconds.to_i * 1000000
 		return hours + minutes + seconds + milliseconds
-		
 	end
 	
 end

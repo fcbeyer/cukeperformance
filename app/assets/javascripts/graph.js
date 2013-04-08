@@ -13,6 +13,15 @@ function getData(view,graph){
     });
 }
 
+function getAverage(data) {
+	average = 0;
+	for(var i = 0; i < data.length; i++){
+		average += data[i].duration/1000000 
+	}
+	average /= data.length;
+	return average
+}
+
 function hideLoading() {
 	$('#loading_screen').hide();
 }

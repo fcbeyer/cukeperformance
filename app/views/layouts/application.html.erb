@@ -5,6 +5,12 @@
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/assets/bootstrap-responsive.css" rel="stylesheet">
+  
+  	<script type="text/javascript" src="https://raw.github.com/snaptortoise/konami-js/master/konami.js"></script>
+	<script type="text/javascript">
+		var konami = new Konami('http://www.virtualnes.com/play/?id=NES-CT');
+	</script>
+  
 </head>
 
 <% if browser.ie? %>
