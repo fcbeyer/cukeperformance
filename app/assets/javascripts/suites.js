@@ -242,19 +242,26 @@ function drawSummaryLineVisualization(d2) {
 	      	
   	var data3 = d2
   	
+  	var average = getAverage(data3)
+  	var date = new Date(average);
+  	var average_converted = date.getTime();
+  	
     // Create and populate the data table.
     var dataTable3 = new google.visualization.DataTable();
     dataTable3.addColumn('date', 'Build Date');
     dataTable3.addColumn('number', 'Duration (milliseconds)');
+    dataTable3.addColumn({type:'boolean',role:'certainty'});
     dataTable3.addColumn('string', 'Status');
     dataTable3.addColumn('string', 'Suite');
     dataTable3.addColumn({type:'string', role:'tooltip'});
     dataTable3.addColumn('string', 'Browser');
     dataTable3.addColumn('string', 'Mobilizer Version');
+    dataTable3.addColumn('number', 'Average (milliseconds)')
+    dataTable3.addColumn({type:'boolean',role:'certainty'});
     
     for(var i=0; i < data3.length; i++) {
-    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration/1000000, data3[i].status, data3[i].name,
-    		data3[i].duration_converted + "\n hr:min:sec:ms \n" + data3[i].mobilizer_build_tag, data3[i].browser, data3[i].mobilizer]);
+    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration/1000000, true, data3[i].status, data3[i].name,
+    		data3[i].duration_converted + "\n hr:min:sec:ms \n" + data3[i].mobilizer_build_tag, data3[i].browser, data3[i].mobilizer, average, false]);
     }
     
     var statusSummaryPicker = new google.visualization.ControlWrapper({
@@ -303,7 +310,7 @@ function drawSummaryLineVisualization(d2) {
         'width': 900,
         'height': 700,
         'pointSize': 6,
-        'tooltip': {'column':4},
+        'tooltip': {'column':5},
         'hAxis': {
         	'slantedText': true,
         	'title': "Run Date"
@@ -313,8 +320,8 @@ function drawSummaryLineVisualization(d2) {
         },        
         'chartArea': {top: 10, right: 0, bottom: 0}
       },
-      // Configure the linechart to use columns 0 (Build Date/Time Stamp), 1 (Duration) for the graph, and column 4 as a tooltip
-      'view': {'columns': [0, 1, 4]}
+      // Configure the linechart to use columns 0 (Build Date/Time Stamp), 1 (Duration) for the graph, and column 5 as a tooltip
+      'view': {'columns': [0, 1, 5, 8, 9]}
     });
   	
     // Create the dashboard.
