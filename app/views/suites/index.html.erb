@@ -26,11 +26,10 @@
 		<% else %>
 			<div class="tab-pane" id="<%= entry.name %>">
 		<% end %>
-			<table class="table table-bordered table-condensed">
+			<table class="table table-bordered table-condensed table-hover">
 			  <tr>
 				<th>Build Timestamp</th>
 			    <th>Duration</th>
-			    <th>Name</th>
 			    <th>Status</th>
 			    <th></th>
 			    <th></th>
@@ -40,7 +39,6 @@
 			  <tr>
 			    <td><%= suite.runstamp %></td>
 			    <td><%= suite.duration_converted %></td>
-			    <td><%= suite.name %></td>
 			    <%= model_status_display(suite) %>
 			    <td><%= link_to 'Show', suite %></td>
 			    <td><%= link_to 'Destroy', suite, confirm: 'Are you sure?', method: :delete %></td>

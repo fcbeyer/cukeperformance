@@ -3,5 +3,6 @@ class Suite < ActiveRecord::Base
 	
 	validates_uniqueness_of :runstamp
 	
+	scope :exclude, where(:exclude => false)
 	
 end
