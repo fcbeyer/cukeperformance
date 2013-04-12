@@ -55,7 +55,7 @@ module TaskAlertsHelper
 	end
 	
 	def check_alert(alert,send_email)
-		suite_list = Suite.exclude.order("runstamp desc").where({:name => @current_task.name, :browser => alert.browser}).limit(10)
+		suite_list = Suite.exclude.order("runstamp desc").where({:name => @current_task.name, :browser => alert.browser, :status => "passed"}).limit(10)
 		average = get_average(suite_list)
 		if average > alert.time_limit
 			send_alert(@current_task,alert,average,suite_list) unless send_email.to_s.eql?("false")
