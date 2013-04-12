@@ -9,3 +9,19 @@ two:
   browser: MyString
   time_limit: 1
   task_id: 1
+
+three:
+  id: 3
+  browser: firefox
+  time_limit: 450000000000
+  task_id: 3
+  active: true
+  email_list: teamverve
+
+four:
+  id: 4
+  browser: ie
+  time_limit: 2100000000000
+  task_id: 4
+  active: false
+  email_list: jpiro

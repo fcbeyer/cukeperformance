@@ -10,6 +10,7 @@
     <th>Mobilizer</th>
     <th>Mobilizer Build Tag</th>
     <th>URL</th>
+    <th>Exclude</th>
     <th></th>
     <th></th>
   </tr>
@@ -22,6 +23,8 @@
     <td><%= @current_suite.mobilizer %></td>
     <td><%= @current_suite.mobilizer_build_tag %></td>
     <td><%= @current_suite.url %></td>
+    <td><%= @current_suite.exclude %></td>
+    <td><%= link_to 'Edit', edit_suite_path(@current_suite) %></td>
     <td><%= link_to 'Destroy', @current_suite, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 </table>

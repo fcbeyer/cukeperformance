@@ -39,6 +39,7 @@ class SuitesController < ApplicationController
 	  		newSuite.url = build.url
 	  		newSuite.name = task.name
 	  		newSuite.status = build.status
+	  		newSuite.exclude = false
 	  		newSuite.save
 	  		build.features.each do |feature|
 	  		  newFeat = Feature.new

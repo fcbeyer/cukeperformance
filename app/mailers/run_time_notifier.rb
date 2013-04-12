@@ -8,7 +8,7 @@ class RunTimeNotifier < ActionMailer::Base
   #   en.run_time_notifier.bvt.subject
   #
   def bvt
-  	
+  	@greeting = "Hi"
   	
     mail to: "rbeyer@patientkeeper.com", subject: "Cuke Performance BVT Alert"
   end
@@ -21,8 +21,8 @@ class RunTimeNotifier < ActionMailer::Base
   def portalsmoke
     @greeting = "Hi"
 
-    mail to: "teamverve@patientkeeper.com"
-  end  
+    mail to: "teamverve@patientkeeper.com", subject: "Cuke Performance Portal Smoke Alert"
+  end
   
   def suite_alert(task,current_alert,average,suite_list)
   	alert_subject = "Cuke Performance " + task.display_name + " Alert"
