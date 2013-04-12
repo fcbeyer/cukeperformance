@@ -26,14 +26,16 @@
 		<% else %>
 			<div class="tab-pane" id="<%= entry.name %>">
 		<% end %>
-			<table class="table table-bordered table-condensed table-hover">
-			  <tr>
-				<th>Build Timestamp</th>
-			    <th>Duration</th>
-			    <th>Status</th>
-			    <th></th>
-			    <th></th>
-			  </tr>
+			<table class="tablesorter table table-bordered table-condensed table-hover" id="suiteTable">
+				<thead>
+				  <tr>
+					<th>Build Timestamp</th>
+				    <th>Duration</th>
+				    <th>Status</th>
+				    <th></th>
+				    <th></th>
+				  </tr>
+				</thead>
 			
 			<% @suites[entry.name].each do |suite| %>
 			  <tr>

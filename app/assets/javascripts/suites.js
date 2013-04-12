@@ -7,6 +7,10 @@ function captureData(url){
     });
 }
 
+$(document).ready(function(){
+		$("#suiteTable").tablesorter( {headers: { 3: {sorter: false}, 4: {sorter: false}}});
+});
+
 function captureDataComplete(data){
 	//send html5 notifications
 	//haveNewSuiteData, directoryDoesNotExist, display_name
