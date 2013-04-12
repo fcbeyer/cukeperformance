@@ -9,6 +9,10 @@ group :development do
 	gem 'mysql2'
 end
 
+group :test do
+	gem 'sqlite3'
+end
+
 group :production do
 	gem 'mysql2'
 end

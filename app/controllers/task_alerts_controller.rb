@@ -88,7 +88,6 @@ class TaskAlertsController < ApplicationController
     @task_alert = TaskAlert.find(params[:id])
     task_alert_hash = params[:task_alert]
     task_alert_hash["time_limit"] = build_duration_value(params[:hours],params[:minutes],params[:seconds],params[:milliseconds])
-    puts "HEY I AM HERE!!!!!: " + task_alert_hash.to_s
 
     respond_to do |format|
       if @task_alert.update_attributes(task_alert_hash)
