@@ -59,6 +59,16 @@ module ApplicationHelper
 		end    
  	end
  	
+ 	def active_flag_display(flag)
+ 		if flag.kind_of?(FalseClass)
+ 			#de-activated
+ 			tag(:i, :class => "icon-remove")
+ 		else
+ 			#active
+ 			tag(:i, :class => "icon-ok")
+ 		end
+ 	end
+ 	
  	def keyword_or_name_display(current_model)
  		if current_model.name.length == 0
  			content_tag(:td) do

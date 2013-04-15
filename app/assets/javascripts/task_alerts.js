@@ -17,7 +17,7 @@ function alertComplete(data){
 		for(var i=1; i < data.length; i++) {
 			myNotification = "the current average for ";
 			myAlertSubject = data[0] + " PERFORMANCE ALERT";
-			myOkSubject = data[0] + " is Okay";
+			myOkSubject = data[0] + " is okay";
 			alertGenerated = data[i][1] 
 			myNotification = myNotification + data[i][0].browser + " is " + data[i][2]
 			if (alertGenerated) {
