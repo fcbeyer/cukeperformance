@@ -26,7 +26,7 @@
 		<% else %>
 			<div class="tab-pane" id="<%= entry.name %>">
 		<% end %>
-			<table class="table table-bordered table-condensed table-hover" id="suiteTable<%= entry_num %>" >
+			<table class="table table-bordered table-condensed table-hover" id="suiteTable<%= entry_num %>">
 				<thead>
 				  <tr>
 					<th>Build Timestamp <%= text_field_tag 'build_filter'+entry_num.to_s, nil, :onkeyup => "filterSuitesTable('#build_filter#{entry_num}','tr td.buildRunstamp#{entry_num}')" %> </th>

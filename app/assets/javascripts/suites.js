@@ -6,7 +6,6 @@ function captureData(url){
 	 success: captureDataComplete
     });
 }
-
 /*
  * filterElementID is the id of the object you want to grab the value from for filtering
  * elementLocation is the path to the element to filter upon
@@ -16,7 +15,15 @@ function filterSuitesTable(filterElementID,elementLocation){
 	var filterVal = $(filterElementID).val()
 	filterVal = filterVal.toLowerCase()
 	$('tr').show();
-	//$('div.tab-pane').closest('tr').show();
+	$(elementLocation).filter(function(index){
+		return $(this).text().toLowerCase().search(filterVal) != 0
+	}).closest('tr').hide();
+}
+
+function superFilter(filterElementID,elementLocation){
+	var filterVal = $(filterElementID).val()
+	filterVal = filterVal.toLowerCase()
+	$('tr').show();
 	$(elementLocation).filter(function(index){
 		return $(this).text().toLowerCase().search(filterVal) != 0
 	}).closest('tr').hide();
