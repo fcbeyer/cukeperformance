@@ -26,15 +26,13 @@
 		<% else %>
 			<div class="tab-pane" id="<%= entry.name %>">
 		<% end %>
-			<table class="table table-bordered table-condensed table-hover" id="suiteTable<%= entry_num %>">
+			<table class="table table-bordered table-condensed table-hover" id="suiteTable<%= entry_num %>" >
 				<thead>
 				  <tr>
-				  	<%= text_field_tag 'build_filter'+entry_num.to_s, nil, :onkeyup => "filterSuitesTable('#build_filter#{entry_num}','tr td.buildRunstamp#{entry_num}')" %>
-					<%= text_field_tag 'duration_filter'+entry_num.to_s, nil, :onkeyup => "filterSuitesTable('#duration_filter#{entry_num}','tr td.buildDuration#{entry_num}')" %>
-					<%= select_tag 'status_filter'+entry_num.to_s, "<option>failed</option><option>passed</option>".html_safe, :prompt => "Choose a value...",:onchange => "filterSuitesTable('#status_filter#{entry_num}','tr td span.buildStatus#{entry_num}')" %>
-					<th>Build Timestamp</th>
-				    <th>Duration</th>
-				    <th>Status</th>
+					<th>Build Timestamp <%= text_field_tag 'build_filter'+entry_num.to_s, nil, :onkeyup => "filterSuitesTable('#build_filter#{entry_num}','tr td.buildRunstamp#{entry_num}')" %> </th>
+				    <th>Duration <%= text_field_tag 'duration_filter'+entry_num.to_s, nil, :onkeyup => "filterSuitesTable('#duration_filter#{entry_num}','tr td.buildDuration#{entry_num}')" %> </th>
+				    <th>Build Tag <%= text_field_tag 'tag_filter'+entry_num.to_s, nil, :onkeyup => "filterSuitesTable('#tag_filter#{entry_num}','tr td.buildTag#{entry_num}')" %> </th></th>
+				    <th>Status <%= select_tag 'status_filter'+entry_num.to_s, "<option>failed</option><option>passed</option>".html_safe, :prompt => "Choose a value...",:onchange => "filterSuitesTable('#status_filter#{entry_num}','tr td span.buildStatus#{entry_num}')" %> </th>
 				    <th></th>
 				    <th></th>
 				  </tr>
@@ -44,6 +42,7 @@
 			  <tr>
 			    <td class="buildRunstamp<%= entry_num %>"><%= suite.runstamp %></td>
 			    <td class="buildDuration<%= entry_num %>"><%= suite.duration_converted %></td>
+			    <td class="buildTag<%= entry_num %>"><%= suite.mobilizer_build_tag %></td>
 			    <%= model_status_display(suite,entry_num) %>
 			    <td><%= link_to 'Show', suite %></td>
 			    <td><%= link_to 'Destroy', suite, confirm: 'Are you sure?', method: :delete %></td>

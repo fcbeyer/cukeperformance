@@ -7,23 +7,18 @@ function captureData(url){
     });
 }
 
-$(document).ready(function(){
-		$("#suiteTable0").tablesorter( {headers: { 3: {sorter: false}, 4: {sorter: false}}});
-		$("#suiteTable1").tablesorter( {headers: { 3: {sorter: false}, 4: {sorter: false}}});
-});
-
 /*
  * filterElementID is the id of the object you want to grab the value from for filtering
  * elementLocation is the path to the element to filter upon
  * example: '#buildButton','tr td.buildRunstamp'
  */
-
 function filterSuitesTable(filterElementID,elementLocation){
 	var filterVal = $(filterElementID).val()
+	filterVal = filterVal.toLowerCase()
 	$('tr').show();
 	//$('div.tab-pane').closest('tr').show();
 	$(elementLocation).filter(function(index){
-		return $(this).text().search(filterVal) != 0
+		return $(this).text().toLowerCase().search(filterVal) != 0
 	}).closest('tr').hide();
 }
 
