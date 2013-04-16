@@ -37,22 +37,22 @@ module ApplicationHelper
 		end
 	end
 	
-	def model_status_display(model_name)
+	def model_status_display(model_name,entry_num)
     if model_name.status == "failed"
 	  	content_tag(:td) do
-	  		content_tag(:span, :class => "badge badge-warning") do
+	  		content_tag(:span, :class => "buildStatus#{entry_num} badge badge-warning") do
 	  			model_name.status
 	  		end
 	  	end
 	  elsif model_name.status == "skipped"
 	  	content_tag(:td) do
-	  		content_tag(:span, :class => "label label-info") do
+	  		content_tag(:span, :class => "buildStatus#{entry_num} label label-info") do
 	  			model_name.status
 	  		end
 	  	end
 	  else
 	  	content_tag(:td) do
-	  		content_tag(:span, :class => "label label-inverse") do
+	  		content_tag(:span, :class => "buildStatus#{entry_num} label label-inverse") do
 	  			model_name.status
 	  		end
 	  	end
