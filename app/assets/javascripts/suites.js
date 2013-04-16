@@ -20,7 +20,8 @@ $(document).ready(function(){
 
 function filterSuitesTable(filterElementID,elementLocation){
 	var filterVal = $(filterElementID).val()
-	$('div.tab-pane').closest('tr').show();
+	$('tr').show();
+	//$('div.tab-pane').closest('tr').show();
 	$(elementLocation).filter(function(index){
 		return $(this).text().search(filterVal) != 0
 	}).closest('tr').hide();

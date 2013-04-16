@@ -30,11 +30,8 @@
 				<thead>
 				  <tr>
 				  	<%= text_field_tag 'build_filter'+entry_num.to_s, nil, :onkeyup => "filterSuitesTable('#build_filter#{entry_num}','tr td.buildRunstamp#{entry_num}')" %>
-					<button id="buildButton" class="btn btn-mini btn-inverse" type="button" onclick="filterSuitesTable('#build_filter<%= entry_num %>','tr td.buildRunstamp<%= entry_num %>')">Filter!</button>
-					<%= text_field_tag 'duration_filter'+entry_num.to_s %>
-					<button id="durationButton" class="btn btn-mini btn-inverse" type="button" onclick="filterSuitesTable('#duration_filter<%= entry_num %>','tr td.buildDuration<%= entry_num %>')">Filter!</button>
-					<%= select_tag 'status_filter'+entry_num.to_s, "<option>failed</option><option>passed</option>".html_safe, :prompt => "Choose a value..." %>
-					<button id="statusButton" class="btn btn-mini btn-inverse" type="button" onclick="filterSuitesTable('#status_filter<%= entry_num %>','tr td span.buildStatus<%= entry_num %>')">Filter!</button>
+					<%= text_field_tag 'duration_filter'+entry_num.to_s, nil, :onkeyup => "filterSuitesTable('#duration_filter#{entry_num}','tr td.buildDuration#{entry_num}')" %>
+					<%= select_tag 'status_filter'+entry_num.to_s, "<option>failed</option><option>passed</option>".html_safe, :prompt => "Choose a value...",:onchange => "filterSuitesTable('#status_filter#{entry_num}','tr td span.buildStatus#{entry_num}')" %>
 					<th>Build Timestamp</th>
 				    <th>Duration</th>
 				    <th>Status</th>
