@@ -36,7 +36,8 @@
 				    	<%= text_field_tag 'duration_filter'+entry_num.to_s, nil, :placeholder => "Text input", :onkeyup => "filterSuitesTable('#{entry_num}')" %>
 				    </th>
 				    <th>Build Tag
-				    	<%= text_field_tag 'tag_filter'+entry_num.to_s, nil, :placeholder => "Text input", :onkeyup => "filterSuitesTable('#{entry_num}')" %>
+				    	<input type="text" id="tag_filter<%=entry_num%>" data-provide="typeahead" placeholder="Text input" autocomplete="off" onkeyup="filterSuitesTable(<%=entry_num%>)" ></input>
+				    	<%= javascript_tag "$('#tag_filter0').typeahead({source: #{get_build_tags(entry.name)}})"%>
 				    </th>
 				    <th>Status
 				    	<%= select_tag 'status_filter'+entry_num.to_s, "<option>failed</option><option>passed</option>".html_safe, :prompt => "Choose a value...",:onchange => "filterSuitesTable('#{entry_num}')" %>
