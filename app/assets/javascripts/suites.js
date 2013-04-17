@@ -11,22 +11,23 @@ function captureData(url){
  * elementLocation is the path to the element to filter upon
  * example: '#buildButton','tr td.buildRunstamp'
  */
-function filterSuitesTable(filterElementID,elementLocation){
-	var filterVal = $(filterElementID).val()
-	filterVal = filterVal.toLowerCase()
+function filterSuitesTable(filterNum){
+	//grab values from filters
+	var filterArray = getFilterValues(filterNum);
 	$('tr').show();
-	$(elementLocation).filter(function(index){
-		return $(this).text().toLowerCase().search(filterVal) != 0
-	}).closest('tr').hide();
+	for(var i = 0; i < filterArray.length; i++){
+		$(filterArray[i][0]).filter(function(index){
+			return $(this).text().toLowerCase().search(filterArray[i][1]) != 0
+		}).closest('tr').hide();	
+	}
 }
 
-function superFilter(filterElementID,elementLocation){
-	var filterVal = $(filterElementID).val()
-	filterVal = filterVal.toLowerCase()
-	$('tr').show();
-	$(elementLocation).filter(function(index){
-		return $(this).text().toLowerCase().search(filterVal) != 0
-	}).closest('tr').hide();
+function getFilterValues(filterNum){
+	var build = ['tr td.buildRunstamp' + filterNum,$('#build_filter' + filterNum).val().toLowerCase()];
+	var duration = ['tr td.buildDuration' + filterNum,$('#duration_filter' + filterNum).val().toLowerCase()];
+	var tag = ['tr td.buildTag' + filterNum,$('#tag_filter' + filterNum).val().toLowerCase()];
+	var status = ['tr td span.buildStatus' + filterNum,$('#status_filter' + filterNum).val().toLowerCase()];
+	return [build,duration,tag,status];
 }
 
 

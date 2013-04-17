@@ -29,10 +29,18 @@
 			<table class="table table-bordered table-condensed table-hover" id="suiteTable<%= entry_num %>">
 				<thead>
 				  <tr>
-					<th>Build Timestamp <%= text_field_tag 'build_filter'+entry_num.to_s, nil, :onkeyup => "filterSuitesTable('#build_filter#{entry_num}','tr td.buildRunstamp#{entry_num}')" %> </th>
-				    <th>Duration <%= text_field_tag 'duration_filter'+entry_num.to_s, nil, :onkeyup => "filterSuitesTable('#duration_filter#{entry_num}','tr td.buildDuration#{entry_num}')" %> </th>
-				    <th>Build Tag <%= text_field_tag 'tag_filter'+entry_num.to_s, nil, :onkeyup => "filterSuitesTable('#tag_filter#{entry_num}','tr td.buildTag#{entry_num}')" %> </th></th>
-				    <th>Status <%= select_tag 'status_filter'+entry_num.to_s, "<option>failed</option><option>passed</option>".html_safe, :prompt => "Choose a value...",:onchange => "filterSuitesTable('#status_filter#{entry_num}','tr td span.buildStatus#{entry_num}')" %> </th>
+					<th>Build Timestamp
+						<%= text_field_tag 'build_filter'+entry_num.to_s, nil, :placeholder => "Text input", :onkeyup => "filterSuitesTable('#{entry_num}')" %> 
+					</th>
+				    <th>Duration
+				    	<%= text_field_tag 'duration_filter'+entry_num.to_s, nil, :placeholder => "Text input", :onkeyup => "filterSuitesTable('#{entry_num}')" %>
+				    </th>
+				    <th>Build Tag
+				    	<%= text_field_tag 'tag_filter'+entry_num.to_s, nil, :placeholder => "Text input", :onkeyup => "filterSuitesTable('#{entry_num}')" %>
+				    </th>
+				    <th>Status
+				    	<%= select_tag 'status_filter'+entry_num.to_s, "<option>failed</option><option>passed</option>".html_safe, :prompt => "Choose a value...",:onchange => "filterSuitesTable('#{entry_num}')" %>
+				    </th>
 				    <th></th>
 				    <th></th>
 				  </tr>
