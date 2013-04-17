@@ -26,20 +26,32 @@
 		<% else %>
 			<div class="tab-pane" id="<%= entry.name %>">
 		<% end %>
-			<table class="table table-bordered table-condensed table-hover">
-			  <tr>
-				<th>Build Timestamp</th>
-			    <th>Duration</th>
-			    <th>Status</th>
-			    <th></th>
-			    <th></th>
-			  </tr>
+			<table class="table table-bordered table-condensed table-hover" id="suiteTable<%= entry_num %>">
+				<thead>
+				  <tr>
+					<th>Build Timestamp
+						<%= text_field_tag 'build_filter'+entry_num.to_s, nil, :placeholder => "Text input", :onkeyup => "filterSuitesTable('#{entry_num}')" %> 
+					</th>
+				    <th>Duration
+				    	<%= text_field_tag 'duration_filter'+entry_num.to_s, nil, :placeholder => "Text input", :onkeyup => "filterSuitesTable('#{entry_num}')" %>
+				    </th>
+				    <th>Build Tag
+				    	<%= text_field_tag 'tag_filter'+entry_num.to_s, nil, :placeholder => "Text input", :onkeyup => "filterSuitesTable('#{entry_num}')" %>
+				    </th>
+				    <th>Status
+				    	<%= select_tag 'status_filter'+entry_num.to_s, "<option>failed</option><option>passed</option>".html_safe, :prompt => "Choose a value...",:onchange => "filterSuitesTable('#{entry_num}')" %>
+				    </th>
+				    <th></th>
+				    <th></th>
+				  </tr>
+				</thead>
 			
 			<% @suites[entry.name].each do |suite| %>
 			  <tr>
-			    <td><%= suite.runstamp %></td>
-			    <td><%= suite.duration_converted %></td>
-			    <%= model_status_display(suite) %>
+			    <td class="buildRunstamp<%= entry_num %>"><%= suite.runstamp %></td>
+			    <td class="buildDuration<%= entry_num %>"><%= suite.duration_converted %></td>
+			    <td class="buildTag<%= entry_num %>"><%= suite.mobilizer_build_tag %></td>
+			    <%= model_status_display(suite,entry_num) %>
 			    <td><%= link_to 'Show', suite %></td>
 			    <td><%= link_to 'Destroy', suite, confirm: 'Are you sure?', method: :delete %></td>
 			  </tr>

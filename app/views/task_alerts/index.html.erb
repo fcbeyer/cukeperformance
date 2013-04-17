@@ -16,7 +16,7 @@
   <tr>
     <td><%= task_alert.browser %></td>
     <td><%= convert_time(task_alert.time_limit)%></td>
-    <td><%= task_alert.active %></td>
+    <td><%= active_flag_display(task_alert.active) %></td>
     <td><%= task_alert.email_list %></td>
     <td><button <%= display_button("small","warning") %> onclick="testAlert(<%= task_alert.id %>,'<%= get_alert_url %>')" type="button">Test Now</button></td>
     <td><%= link_to 'Show', [@current_task,task_alert] %></td>
