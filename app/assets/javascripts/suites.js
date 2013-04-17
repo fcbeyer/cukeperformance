@@ -7,16 +7,19 @@ function captureData(url){
     });
 }
 /*
- * filterElementID is the id of the object you want to grab the value from for filtering
- * elementLocation is the path to the element to filter upon
- * example: '#buildButton','tr td.buildRunstamp'
+ * filterNum: the index number associated with the tab
+ * this could be changed to the task name if the index view was changed to support it. 
  */
 function filterSuitesTable(filterNum){
 	//grab values from filters
 	var filterArray = getFilterValues(filterNum);
 	$('tr').show();
+	//loop through
 	for(var i = 0; i < filterArray.length; i++){
 		$(filterArray[i][0]).filter(function(index){
+			if(i==2){
+				return $(this).text().toLowerCase().search(filterArray[i][1]) < 0
+			}
 			return $(this).text().toLowerCase().search(filterArray[i][1]) != 0
 		}).closest('tr').hide();	
 	}
@@ -29,7 +32,6 @@ function getFilterValues(filterNum){
 	var status = ['tr td span.buildStatus' + filterNum,$('#status_filter' + filterNum).val().toLowerCase()];
 	return [build,duration,tag,status];
 }
-
 
 function captureDataComplete(data){
 	//send html5 notifications
