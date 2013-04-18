@@ -13,14 +13,13 @@ function captureData(url){
 function filterSuitesTable(filterNum){
 	//grab values from filters
 	var filterArray = getFilterValues(filterNum);
+	var elementVal;
 	$('tr').show();
 	//loop through
 	for(var i = 0; i < filterArray.length; i++){
 		$(filterArray[i][0]).filter(function(index){
-			if(i==2){
-				return $(this).text().toLowerCase().search(filterArray[i][1]) < 0
-			}
-			return $(this).text().toLowerCase().search(filterArray[i][1]) != 0
+			elementVal = $(this).text().toLowerCase().replace(/_/g,"");
+			return elementVal.search(filterArray[i][1]) < 0
 		}).closest('tr').hide();	
 	}
 }
@@ -28,7 +27,7 @@ function filterSuitesTable(filterNum){
 function getFilterValues(filterNum){
 	var build = ['tr td.buildRunstamp' + filterNum,$('#build_filter' + filterNum).val().toLowerCase()];
 	var duration = ['tr td.buildDuration' + filterNum,$('#duration_filter' + filterNum).val().toLowerCase()];
-	var tag = ['tr td.buildTag' + filterNum,$('#tag_filter' + filterNum).val().toLowerCase()];
+	var tag = ['tr td.buildTag' + filterNum,$('#tag_filter' + filterNum).val().toLowerCase().replace(/_/g,"")];
 	var status = ['tr td span.buildStatus' + filterNum,$('#status_filter' + filterNum).val().toLowerCase()];
 	return [build,duration,tag,status];
 }
