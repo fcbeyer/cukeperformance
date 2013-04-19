@@ -11,7 +11,7 @@ development:
   pool: 5
   username: cukeperf
   password: cuke123
-  host: allservers
+  host: allservers-t
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -36,4 +36,4 @@ production:
   pool: 5
   username: cukeperf
   password: cuke123
-  host: allservers
+  host: allservers-t
