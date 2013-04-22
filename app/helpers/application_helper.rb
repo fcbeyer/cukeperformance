@@ -37,7 +37,8 @@ module ApplicationHelper
 		end
 	end
 	
-	def model_status_display(model_name,entry_num)
+	def model_status_display(model_name,entry_num = nil)
+		entry_num = (entry_num.nil? ? 0 : entry_num)
     if model_name.status == "failed"
 	  	content_tag(:td) do
 	  		content_tag(:span, :class => "buildStatus#{entry_num} badge badge-warning") do
