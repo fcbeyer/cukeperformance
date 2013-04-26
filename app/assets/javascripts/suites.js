@@ -1,3 +1,61 @@
+function captureData(url){
+	var generateData = {'send_email': false}
+	$.ajax({
+	 url: url,
+	 data: generateData,
+	 success: captureDataComplete
+    });
+}
+/*
+ * filterNum: the index number associated with the tab
+ * this could be changed to the task name if the index view was changed to support it. 
+ */
+function filterSuitesTable(filterNum){
+	//grab values from filters
+	var filterArray = getFilterValues(filterNum);
+	var elementVal;
+	$('tr').show();
+	//loop through
+	for(var i = 0; i < filterArray.length; i++){
+		$(filterArray[i][0]).filter(function(index){
+			elementVal = $(this).text().toLowerCase().replace(/_/g,"");
+			return elementVal.search(filterArray[i][1]) < 0
+		}).closest('tr').hide();	
+	}
+}
+
+function getFilterValues(filterNum){
+	var build = ['tr td.buildRunstamp' + filterNum,$('#build_filter' + filterNum).val().toLowerCase()];
+	var duration = ['tr td.buildDuration' + filterNum,$('#duration_filter' + filterNum).val().toLowerCase()];
+	var tag = ['tr td.buildTag' + filterNum,$('#tag_filter' + filterNum).val().toLowerCase().replace(/_/g,"")];
+	var status = ['tr td span.buildStatus' + filterNum,$('#status_filter' + filterNum).val().toLowerCase()];
+	return [build,duration,tag,status];
+}
+
+function captureDataComplete(data){
+	//send html5 notifications
+	//haveNewSuiteData, directoryDoesNotExist, display_name
+	if (window.webkitNotifications.checkPermission() == 0) {
+		var myNotification;
+		var mySubject;
+		if (data[1]){
+			//directory or JSON files were missing
+			mySubject = data[2] + " DATA ALERT";
+			myNotification ="The directory or JSON files do NOT exist"
+		}
+		else {
+			mySubject = data[2]
+			if (data[0]){
+				myNotification = "New data was found"
+			}
+			else {
+				myNotification = "No new data was found"
+			}
+		} 
+		window.webkitNotifications.createNotification('http://images4.wikia.nocookie.net/__cb20110309055904/memoryalpha/en/images/7/7a/Data,_2379.jpg',mySubject,myNotification).show();
+	}
+}
+
 function drawSuiteBarVisualization(d) {
           
     var data = d
@@ -213,19 +271,26 @@ function drawSummaryLineVisualization(d2) {
 	      	
   	var data3 = d2
   	
+  	var average = getAverage(data3)
+  	var converted_average = convertAverage(average)
+  	
     // Create and populate the data table.
     var dataTable3 = new google.visualization.DataTable();
     dataTable3.addColumn('date', 'Build Date');
     dataTable3.addColumn('number', 'Duration (milliseconds)');
+    dataTable3.addColumn({type:'boolean',role:'certainty'});
     dataTable3.addColumn('string', 'Status');
     dataTable3.addColumn('string', 'Suite');
     dataTable3.addColumn({type:'string', role:'tooltip'});
     dataTable3.addColumn('string', 'Browser');
     dataTable3.addColumn('string', 'Mobilizer Version');
+    dataTable3.addColumn('number', 'Average (milliseconds)')
+    dataTable3.addColumn({type:'boolean',role:'certainty'});
+    dataTable3.addColumn({type:'string', role:'tooltip'});
     
     for(var i=0; i < data3.length; i++) {
-    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration/1000000, data3[i].status, data3[i].name,
-    		data3[i].duration_converted + "\n hr:min:sec:ms \n" + data3[i].mobilizer_build_tag, data3[i].browser, data3[i].mobilizer]);
+    	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration/1000000, true, data3[i].status, data3[i].name,
+    		data3[i].duration_converted + "\n hr:min:sec:ms \n" + data3[i].mobilizer_build_tag, data3[i].browser, data3[i].mobilizer, parseInt(average), false, converted_average]);
     }
     
     var statusSummaryPicker = new google.visualization.ControlWrapper({
@@ -274,7 +339,7 @@ function drawSummaryLineVisualization(d2) {
         'width': 900,
         'height': 700,
         'pointSize': 6,
-        'tooltip': {'column':4},
+        'tooltip': {'column':5},
         'hAxis': {
         	'slantedText': true,
         	'title': "Run Date"
@@ -284,8 +349,8 @@ function drawSummaryLineVisualization(d2) {
         },        
         'chartArea': {top: 10, right: 0, bottom: 0}
       },
-      // Configure the linechart to use columns 0 (Build Date/Time Stamp), 1 (Duration) for the graph, and column 4 as a tooltip
-      'view': {'columns': [0, 1, 4]}
+      // Configure the linechart to use columns 0 (Build Date/Time Stamp), 1 (Duration) for the graph, and column 5 as a tooltip
+      'view': {'columns': [0, 1, 5, 8, 9, 10]}
     });
   	
     // Create the dashboard.

@@ -5,6 +5,12 @@
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/assets/bootstrap-responsive.css" rel="stylesheet">
+  
+  	<script type="text/javascript" src="https://raw.github.com/snaptortoise/konami-js/master/konami.js"></script>
+	<script type="text/javascript">
+		var konami = new Konami('http://www.virtualnes.com/play/?id=NES-CT');
+	</script>
+  
 </head>
 
 <% if browser.ie? %>
@@ -15,7 +21,7 @@
 <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="/">Cuke Performance</a>
+      <a class="brand" href="/"><i class="icon-home"></i></a>
       <ul class="nav">
       	<li class="divider-vertical"></li>
         <li><a href="/suites">Suites</a></li>
@@ -30,7 +36,7 @@
     			</a>  
     			<ul class="dropdown-menu">
     				<% @suite_list.each do |suite| %>
-     					<li><a href="/auto_create/suites/<%= suite.name %> ">Generate <%= suite.display_name %> Data</a></li>
+    				    <li><button <%= display_button("small","primary") %> onclick="captureData('<%= get_generate_data_url(suite) %>')" type="button"><%= suite.display_name %></button></li>
      				<% end %> 
     			</ul>  
   			</li> 
@@ -51,9 +57,26 @@
   			</li>  
 		</ul>
 		<li class="divider-vertical"></li>
-		<li><a href="/tasks">Tasks</a></li>
+		<li><a href="/tasks">Tasks <i class="icon-tasks"></i></a></li>
 		<li class="divider-vertical"></li> 
-		<li><a href="#help_modal" data-toggle="modal">Help</a></li>
+  			<li class="dropdown">  
+    			<a href="#"  
+          			class="dropdown-toggle"  
+          			data-toggle="dropdown">  
+          			Alerts 
+          			<b class="caret"></b>  
+    			</a>  
+    			<ul class="dropdown-menu">  
+     				<% @suite_list.each do |suite| %>
+     					<li><%= link_to suite.display_name, task_task_alerts_path(suite.id) %></li>
+     				<% end %>
+    			</ul>
+  			</li>
+		<li class="divider-vertical"></li> 
+		<li><a href="#help_modal" data-toggle="modal">Help <i class="icon-question-sign"></i></a></li>
+		<li class="divider-vertical"></li>
+		<li><button <%= display_button("small","info") %> onclick="askPermission()" type="button">Enable Notifications</button></td></li>
+		<li class="divider-vertical"></li>
       </ul>
     </div>
   </div>
@@ -65,51 +88,96 @@
     	<h2 id="myModalLabel" align="center">How Do I Use This?</h2>
 	</div>
 	<div class="modal-body">
-		<div id="executive_help">
-			<h4 align="center">Executive Summary/Home Page</h4>
-			<p>
-				Click the blue Get Data buttons to retrieve the last 10 entries for that Automation Suite.  The purpose of this screen is to show how the suite has been trending over the last 10 runs.
-				The scale on the left side of the graph is in <b>milliseconds</b>.  Hovering over a data point will you show the duration in Hours:Minutes:Seconds:Milliseconds
-			</p>
-		</div>
-		<div id="suites_help">
-			<h4 align="center">Suites</h4>
-			<p>
-				Click the Suites link in the Nav Bar to begin your dive into a specific Automation Suite run.  Upon initial loading you are presented with a tabbed page allowing you to view the various
-				Suites that we are currently tracking.  Once you find the specific run you care to look at click the "Show" link on the right side of the table.  Now you are viewing all the Features
-				that were executed during this specific execution of the Suite.  Information specific to that Suite is presented at the top of this page as well as the duration for each Feature.  To continue
-				digging deeper click the name of the Feature you wish to explore.  At this level you are shown some relevant information for the Feature as a whole, as well as the various Scenarios that made up
-				this instance of the Feature.  Again if you would like to dig deeper click the name of the Scenario you wish to view.  At this point you can see a list of all Steps that made up this
-				Scenario.  You can dig deeper into the Step to see the duration in <b>nanoseconds</b> as well as the reason for failure.
-			</p>
-		</div>
-		<div id="generate_help">
-			<h4 align="center">Generate Data</h4>
-			<p>
-				Each of these links will find new Automation Suite information created by Cukes (our Jenkins service for Automation).  If you click the BVT entry, a script launches that will find the 
-				datetime stamp of the last run recorded in the database for BVTs and use that stamp to look for new data in the corresponding Jenkins job directory.  It will return a failure notice if
-				cucumber.json or systemData.json are missing from the archive folder for a specific run it is trying to gather data for.
-			</p>
-		</div>
-		<div id="graph_help">
-			<h4 align="center">View Graphs</h4>
-			<p>
-				Each of these pages allow you to graph the performance of individual components of our Automation suites.  For instance, if you select Scenario Graphs you are presented with a blank Chart.
-				Click the blue Get Data button and a form will appear to allow you to select what data you would like to display.  After you enter values for the fields, click one of the green
-				Buttons on the bottom left of the page to graph data for that specific Automation suite.  Now that data is displayed, you have the option of choosing a Bar Chart or Line Chart tab.
-				Filters exist so you can select which feature from the BVT you want to display.  After selecting a Feature you can drill down further and select a specific Scenario and the status (pass or fail).
-				On the Bar Chart you can filter the date range more by typing in the string representation of the build datetime stamp, for the Line Chart there is a date slider.  Hovering over a data 
-				point will you show the duration in Hours:Minutes:Seconds:Milliseconds
-			</p>
-		</div>
-		<div id="task_help">
-			<h4 align="center">Tasks</h4>
-			<p>
-				The Task page lists all Jenkins jobs we are currently tracking with this app.  At the bottom of this page you can add new Tasks.  If you need to change where the json dumps can be found you edit
-				the file path value.  Changing the "active" flag from true to false will remove the task visually from the app but all of the data remains in the database.  This is useful for when you no longer
-				want to track data and would like to clean up the UI.
-			</p>
-		</div>
+		<div class="accordion" id="accordion2">
+			<div class ="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="accordion2" href="#collapseOne" align="center">Executive Summary/Home Page</a>
+				</div>
+				<div id="collapseOne" class="accordion-body collapse">
+					<div class="accordion-inner" id="executive_help">
+						<p>
+							Click the blue Get Data buttons to retrieve the last 10 entries for that Automation Suite.  The purpose of this screen is to show how the suite has been trending over the last 10 runs.
+							The scale on the left side of the graph is in <b>milliseconds</b>.  Hovering over a data point will you show the duration in Hours:Minutes:Seconds:Milliseconds
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class ="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="accordion2" href="#collapseTwo" align="center">Suites</a>
+				</div>
+				<div id="collapseTwo" class="accordion-body collapse">
+					<div class="accordion-inner" id="suites_help">
+						<h4 align="center"></h4>
+						<p>
+							Click the Suites link in the Nav Bar to begin your dive into a specific Automation Suite run.  Upon initial loading you are presented with a tabbed page allowing you to view the various
+							Suites that we are currently tracking.  Once you find the specific run you care to look at click the "Show" link on the right side of the table.  Now you are viewing all the Features
+							that were executed during this specific execution of the Suite.  Information specific to that Suite is presented at the top of this page as well as the duration for each Feature.  To continue
+							digging deeper click the name of the Feature you wish to explore.  At this level you are shown some relevant information for the Feature as a whole, as well as the various Scenarios that made up
+							this instance of the Feature.  Again if you would like to dig deeper click the name of the Scenario you wish to view.  At this point you can see a list of all Steps that made up this
+							Scenario.  You can dig deeper into the Step to see the duration in <b>nanoseconds</b> as well as the reason for failure.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class ="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="accordion2" href="#collapseThree" align="center">Generate Data</a>
+				</div>
+				<div id="collapseThree" class="accordion-body collapse">
+					<div class="accordion-inner" id="generate_help">
+						<p>
+							Each of these links will find new Automation Suite information created by Cukes (our Jenkins service for Automation).  If you click the BVT entry, a script launches that will find the 
+							datetime stamp of the last run recorded in the database for BVTs and use that stamp to look for new data in the corresponding Jenkins job directory.  It will return a failure notice if
+							cucumber.json or systemData.json are missing from the archive folder for a specific run it is trying to gather data for.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class ="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="accordion2" href="#collapseFour" align="center">View Graphs</a>
+				</div>
+				<div id="collapseFour" class="accordion-body collapse">
+					<div class="accordion-inner" id="graph_help">
+						<p>
+							Each of these pages allow you to graph the performance of individual components of our Automation suites.  For instance, if you select Scenario Graphs you are presented with a blank Chart.
+							Click the blue Get Data button and a form will appear to allow you to select what data you would like to display.  After you enter values for the fields, click one of the green
+							Buttons on the bottom left of the page to graph data for that specific Automation suite.  Now that data is displayed, you have the option of choosing a Bar Chart or Line Chart tab.
+							Filters exist so you can select which feature from the BVT you want to display.  After selecting a Feature you can drill down further and select a specific Scenario and the status (pass or fail).
+							On the Bar Chart you can filter the date range more by typing in the string representation of the build datetime stamp, for the Line Chart there is a date slider.  Hovering over a data 
+							point will you show the duration in Hours:Minutes:Seconds:Milliseconds
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class ="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="accordion2" href="#collapseFive" align="center">Tasks</a>
+				</div>
+				<div id="collapseFive" class="accordion-body collapse">
+					<div class="accordion-inner" id="task_help">
+						<p>
+							The Task page lists all Jenkins jobs we are currently tracking with this app.  At the bottom of this page you can add new Tasks.  If you need to change where the json dumps can be found you edit
+							the file path value.  Changing the "active" flag from true to false will remove the task visually from the app but all of the data remains in the database.  This is useful for when you no longer
+							want to track data and would like to clean up the UI.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class ="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="accordion2" href="#collapseSix" align="center">Alerts</a>
+				</div>
+				<div id="collapseSix" class="accordion-body collapse">
+					<div class="accordion-inner" id="alert_help">
+						<p>
+							<%= alert_information %>
+						</p>
+					</div> 
+				</div>
+			</div>
+		</div> <!-- accordion class -->
 	</div>
 	<div class="modal-footer">
 	</div>

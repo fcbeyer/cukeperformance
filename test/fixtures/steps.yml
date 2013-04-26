@@ -15,3 +15,25 @@ two:
   duration_converted: MyString
   status: MyString
   scenario_id: 1
+
+three:
+  id: 3
+  keyword: When
+  name: I click the New Department button
+  duration: 1503000000
+  duration_converted: "00:00:01:502"
+  status: passed
+  scenario_id: 3
+  reason_for_failure: ""
+  failure_image: ""
+
+four:
+  id: 4
+  keyword: And
+  name: I am on the Admin tab
+  duration: 0
+  duration_converted: "00:00:00:000"
+  status: passed
+  scenario_id: 4
+  reason_for_failure: ""
+  failure_image: ""

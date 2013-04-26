@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SuitesControllerTest < ActionController::TestCase
   setup do
-    @suite = suites(:one)
+    @suite = suites(:bvt)
   end
 
   test "should get index" do

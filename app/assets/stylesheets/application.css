@@ -20,3 +20,10 @@ table.index{
 table.showHeader{
 	width: 900px;
 }
+
+select,
+textarea,
+input[type="number"],
+.uneditable-input {
+  height: 25px;
+}

@@ -26,3 +26,7 @@ jQuery.fn.getFormValues = function(){
     });    
     return formvals;
 }
+
+function askPermission(){
+    window.webkitNotifications.requestPermission();
+}

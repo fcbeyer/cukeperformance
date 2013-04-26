@@ -85,7 +85,7 @@ class ScenariosController < ApplicationController
     @scenario.destroy
 
     respond_to do |format|
-      format.html { redirect_to scenarios_url }
+      format.html { redirect_to suite_feature_scenarios_url }
       format.json { head :no_content }
     end
   end

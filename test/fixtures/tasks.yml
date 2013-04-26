@@ -11,3 +11,17 @@ two:
   display_name: MyString
   file_path: MyString
   active: false
+
+three:
+  id: 3
+  name: BVT
+  display_name: BVT
+  file_path: C:/Program Files (x86)/Jenkins/jobs/BVT
+  active: true
+
+four:
+  id: 4
+  name: PortalSmoke
+  display_name: Portal Smoke
+  file_path: C:/Program Files (x86)/Jenkins/jobs/PortalSmoke
+  active: false

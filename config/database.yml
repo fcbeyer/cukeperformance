@@ -8,15 +8,6 @@ development:
   database: db/development.sqlite3
   pool: 5
   timeout: 5000
-# development:
-  # adapter: mysql2
-  # encoding: utf8
-  # reconnect: false
-  # database: perf_reports
-  # pool: 5
-  # username: cukeperf
-  # password: cuke123
-  # host: allservers
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -27,18 +18,8 @@ test:
   pool: 5
   timeout: 5000
 
-# production:
-  # adapter: sqlite3
-  # database: db/production.sqlite3
-  # pool: 5
-  # timeout: 5000
-  
 production:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
-  database: perf_reports
+  adapter: sqlite3
+  database: db/production.sqlite3
   pool: 5
-  username: cukeperf
-  password: cuke123
-  host: allservers
+  timeout: 5000
