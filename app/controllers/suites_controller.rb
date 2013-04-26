@@ -12,12 +12,19 @@ class SuitesController < ApplicationController
   	send_email = params[:send_email].nil? ? true : false
   	@haveNewSuiteData = false
 		lastSuite = Suite.where(name: task.name).last
+		problem = false
   	if !lastSuite.nil?
   		build_stamp = lastSuite.build_date + "_" + lastSuite.build_time
   	else
   		build_stamp = "empty"
   	end
-		build_list = getBuildList(task.file_path,build_stamp)
+  	begin
+			build_list = CukeParser.json_jenkins_list(task.file_path,build_stamp)
+		rescue Exception
+			STDERR.puts "AHHH THIS IS AWFUL! #{$!}"
+			problem = true
+			build_list = false
+		end
 		if build_list.kind_of?(FalseClass)
 			@haveNewSuiteData = false
 			@directoryDoesNotExist = true
@@ -31,11 +38,11 @@ class SuitesController < ApplicationController
 	  		newSuite.build_time = build.time
 	  		newSuite.runstamp = build.runstamp
 	  		newSuite.duration = build.duration
-	  		newSuite.duration_converted = build.convertedDuration
+	  		newSuite.duration_converted = build.converted_duration
 	  		newSuite.browser = build.browser
 	  		newSuite.os = build.os
-	  		newSuite.mobilizer = build.mobilizer
-	  		newSuite.mobilizer_build_tag = build.mobilizer_build_tag
+	  		newSuite.mobilizer = build.branch_number
+	  		newSuite.mobilizer_build_tag = build.branch_build_tag
 	  		newSuite.url = build.url
 	  		newSuite.name = task.name
 	  		newSuite.status = build.status
@@ -46,7 +53,7 @@ class SuitesController < ApplicationController
   		    newFeat.keyword = feature.keyword
   		    newFeat.name = feature.name
   		    newFeat.duration = feature.duration
-  		    newFeat.duration_converted = feature.convertedDuration
+  		    newFeat.duration_converted = feature.converted_duration
   		    newFeat.suite_id = newSuite.id
   		    newFeat.status = feature.status
 	  		  newFeat.save
@@ -55,7 +62,7 @@ class SuitesController < ApplicationController
 	  		  	newScenario.keyword = scenario.keyword
   		    	newScenario.name = scenario.name
   		    	newScenario.duration = scenario.duration
-  		    	newScenario.duration_converted = scenario.convertedDuration
+  		    	newScenario.duration_converted = scenario.converted_duration
   		    	newScenario.feature_id = newFeat.id
   		    	newScenario.status = scenario.status
 	  		  	newScenario.save
@@ -64,7 +71,7 @@ class SuitesController < ApplicationController
 	  		  		newStep.keyword = step.keyword
   		    		newStep.name = step.name
   		    		newStep.duration = step.duration
-  		    		newStep.duration_converted = step.convertedDuration
+  		    		newStep.duration_converted = step.converted_duration
   		    		newStep.status = step.status
   		    		newStep.scenario_id = newScenario.id
   		    		newStep.status = step.status
@@ -80,6 +87,7 @@ class SuitesController < ApplicationController
   	capture_results.push(@haveNewSuiteData)
   	capture_results.push(@directoryDoesNotExist)
   	capture_results.push(task.display_name)
+  	capture_results.push(problem)
   	
   	respond_to do |format|
 			format.json {render json: capture_results}
