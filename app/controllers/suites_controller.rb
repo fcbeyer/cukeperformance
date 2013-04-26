@@ -1,5 +1,3 @@
-require_relative '../performance/jsonParse.rb'
-
 class SuitesController < ApplicationController
 	
 	include TaskAlertsHelper
