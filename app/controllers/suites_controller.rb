@@ -12,12 +12,19 @@ class SuitesController < ApplicationController
   	send_email = params[:send_email].nil? ? true : false
   	@haveNewSuiteData = false
 		lastSuite = Suite.where(name: task.name).last
+		problem = false
   	if !lastSuite.nil?
   		build_stamp = lastSuite.build_date + "_" + lastSuite.build_time
   	else
   		build_stamp = "empty"
   	end
-		build_list = getBuildList(task.file_path,build_stamp)
+  	begin
+			build_list = CukeParser.json_jenkins_list(task.file_path,build_stamp)
+		rescue Exception
+			#do something awesome
+			problem = true
+			build_list = false
+		end
 		if build_list.kind_of?(FalseClass)
 			@haveNewSuiteData = false
 			@directoryDoesNotExist = true
@@ -80,6 +87,7 @@ class SuitesController < ApplicationController
   	capture_results.push(@haveNewSuiteData)
   	capture_results.push(@directoryDoesNotExist)
   	capture_results.push(task.display_name)
+  	capture_results.push(problem)
   	
   	respond_to do |format|
 			format.json {render json: capture_results}
