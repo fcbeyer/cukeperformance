@@ -53,7 +53,7 @@ class SuitesController < ApplicationController
   		    newFeat.keyword = feature.keyword
   		    newFeat.name = feature.name
   		    newFeat.duration = feature.duration
-  		    newFeat.duration_converted = feature.convertedDuration
+  		    newFeat.duration_converted = feature.converted_duration
   		    newFeat.suite_id = newSuite.id
   		    newFeat.status = feature.status
 	  		  newFeat.save
@@ -62,7 +62,7 @@ class SuitesController < ApplicationController
 	  		  	newScenario.keyword = scenario.keyword
   		    	newScenario.name = scenario.name
   		    	newScenario.duration = scenario.duration
-  		    	newScenario.duration_converted = scenario.convertedDuration
+  		    	newScenario.duration_converted = scenario.converted_duration
   		    	newScenario.feature_id = newFeat.id
   		    	newScenario.status = scenario.status
 	  		  	newScenario.save
@@ -71,7 +71,7 @@ class SuitesController < ApplicationController
 	  		  		newStep.keyword = step.keyword
   		    		newStep.name = step.name
   		    		newStep.duration = step.duration
-  		    		newStep.duration_converted = step.convertedDuration
+  		    		newStep.duration_converted = step.converted_duration
   		    		newStep.status = step.status
   		    		newStep.scenario_id = newScenario.id
   		    		newStep.status = step.status
