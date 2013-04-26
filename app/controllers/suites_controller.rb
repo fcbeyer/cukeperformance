@@ -21,7 +21,6 @@ class SuitesController < ApplicationController
   	begin
 			build_list = CukeParser.json_jenkins_list(task.file_path,build_stamp)
 		rescue Exception
-			#do something awesome
 			problem = true
 			build_list = false
 		end
@@ -38,11 +37,11 @@ class SuitesController < ApplicationController
 	  		newSuite.build_time = build.time
 	  		newSuite.runstamp = build.runstamp
 	  		newSuite.duration = build.duration
-	  		newSuite.duration_converted = build.convertedDuration
+	  		newSuite.duration_converted = build.converted_duration
 	  		newSuite.browser = build.browser
 	  		newSuite.os = build.os
-	  		newSuite.mobilizer = build.mobilizer
-	  		newSuite.mobilizer_build_tag = build.mobilizer_build_tag
+	  		newSuite.mobilizer = build.branch_number
+	  		newSuite.mobilizer_build_tag = build.branch_build_tag
 	  		newSuite.url = build.url
 	  		newSuite.name = task.name
 	  		newSuite.status = build.status
