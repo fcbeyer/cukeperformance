@@ -41,7 +41,12 @@ function captureDataComplete(data){
 		if (data[1]){
 			//directory or JSON files were missing
 			mySubject = data[2] + " DATA ALERT";
-			myNotification ="The directory or JSON files do NOT exist"
+			if (data[3]){
+				myNotification ="Something horrible happened, like an exception!"
+			}
+			else {
+				myNotification ="The directory or JSON files do NOT exist"	
+			}
 		}
 		else {
 			mySubject = data[2]
