@@ -21,6 +21,7 @@ class SuitesController < ApplicationController
   	begin
 			build_list = CukeParser.json_jenkins_list(task.file_path,build_stamp)
 		rescue Exception
+			STDERR.puts "AHHH THIS IS AWFUL! #{$!}"
 			problem = true
 			build_list = false
 		end
