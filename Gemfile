@@ -40,7 +40,7 @@ gem 'yaml_db'
 
 gem 'bootstrap-sass'
 
-gem 'cuke_parser', '0.0.0', :path => "C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/cuke_parser-0.0.0"
+gem 'cuke_parser'
 
 gem 'browser'
 
