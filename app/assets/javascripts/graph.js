@@ -15,11 +15,16 @@ function getData(view,graph){
 
 function getAverage(data) {
 	average = 0;
+	var durations = []
+	var stuff = {}
 	for(var i = 0; i < data.length; i++){
+		durations[i] = data[i].duration/1000000
 		average += data[i].duration/1000000 
 	}
 	average /= data.length;
-	return average
+	stuff['average'] = average
+	stuff['duration'] = durations
+	return stuff
 }
 
 function convertAverage(data){
@@ -43,6 +48,36 @@ function padNumber(number,unitOfTime){
 	else {
 		return parseInt(number)
 	}
+}
+
+function calculateTrend(durations){
+	var xcoords = [];
+	var n = durations.length;
+	var sum_x=0;
+	var sum_y=0;
+	var sum_xx=0; //sum of x squared values
+	var sum_xy=0; //sum of x times y values
+	var trends = [];
+	for(var i=0; i < n; i++) {
+	  var y = durations[i];
+	  // create x coordinates
+	  xcoords[i] = i+1;
+	  var x = xcoords[i];
+	  //calc sum of y coords (durations)
+	  sum_y = sum_y+y;
+	  //calc sum of x coords
+	  sum_x = sum_x+x;
+	  //calc sum of x times y
+	  sum_xy = sum_xy+(x*y);
+	  //calc sum of x squared
+	  sum_xx = sum_xx+(x*x);
+	}
+	var m = ((n*sum_xy)-(sum_y*sum_x))/((n*sum_xx)-(sum_x*sum_x));
+	var b = (sum_y-(m*sum_x))/n;
+	for(var i=0; i < n; i++) {
+	  trends[i]=(m*xcoords[i])+b;
+	}
+	return trends;
 }
 
 function hideLoading() {
