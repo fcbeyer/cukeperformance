@@ -273,6 +273,8 @@ function drawSummaryLineVisualization(d2) {
   	var data3 = d2
   	
   	var average = getAverage(data3)
+  	var trendData = calculateTrend(average['duration'])
+  	average = average['average']
   	var converted_average = convertAverage(average)
   	
     // Create and populate the data table.
@@ -288,10 +290,13 @@ function drawSummaryLineVisualization(d2) {
     dataTable3.addColumn('number', 'Average (milliseconds)')
     dataTable3.addColumn({type:'boolean',role:'certainty'});
     dataTable3.addColumn({type:'string', role:'tooltip'});
+    dataTable3.addColumn('number', 'Trend Line (milliseconds)')
+    dataTable3.addColumn({type:'boolean',role:'certainty'});
     
     for(var i=0; i < data3.length; i++) {
     	dataTable3.addRow([new Date(data3[i].runstamp), data3[i].duration/1000000, true, data3[i].status, data3[i].name,
-    		data3[i].duration_converted + "\n hr:min:sec:ms \n" + data3[i].mobilizer_build_tag, data3[i].browser, data3[i].mobilizer, parseInt(average), false, converted_average]);
+    		data3[i].duration_converted + "\n hr:min:sec:ms \n" + data3[i].mobilizer_build_tag, data3[i].browser, data3[i].mobilizer, parseInt(average), false, converted_average,
+    		trendData[i], true]);
     }
     
     var statusSummaryPicker = new google.visualization.ControlWrapper({
@@ -351,7 +356,7 @@ function drawSummaryLineVisualization(d2) {
         'chartArea': {top: 10, right: 0, bottom: 0}
       },
       // Configure the linechart to use columns 0 (Build Date/Time Stamp), 1 (Duration) for the graph, and column 5 as a tooltip
-      'view': {'columns': [0, 1, 5, 8, 9, 10]}
+      'view': {'columns': [0, 1, 5, 8, 9, 10, 11]}
     });
   	
     // Create the dashboard.

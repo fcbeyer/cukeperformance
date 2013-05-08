@@ -34,6 +34,8 @@ gem 'bootstrap-sass'
 
 gem 'cuke_parser'
 
+gem 'nokogiri'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
