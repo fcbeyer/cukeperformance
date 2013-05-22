@@ -276,9 +276,9 @@ function drawSummaryLineVisualization(d2) {
 	      	
   	var data3 = d2
   	
-  	var average = getAverage(data3)
-  	var trendData = calculateTrend(average['duration'])
-  	average = average['average']
+  	var metrics = getMetrics(data3);
+  	var trendData = calculateTrend(metrics['duration'], metrics['runstamps']);
+  	var average = metrics['average'];
   	var converted_average = convertAverage(average)
   	
     // Create and populate the data table.
