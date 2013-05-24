@@ -27,6 +27,23 @@ function getAverage(data) {
 	return stuff
 }
 
+function getMetrics(data) {
+	average = 0;
+	var durations = [];
+	var runstamps = [];
+	var metrics = {};
+	for(var i = 0; i < data.length; i++){
+		durations[i] = data[i].duration/1000000;
+		runstamps[i] = new Date(data[i].runstamp);
+		average += data[i].duration/1000000;
+	}
+	average /= data.length;
+	metrics['average'] = average;
+	metrics['duration'] = durations;
+	metrics['runstamps'] = runstamps;
+	return metrics;
+}
+
 function convertAverage(data){
 	var seconds = data / 1000;
 	var numhours = padNumber(Math.floor(((seconds % 31536000) % 86400) / 3600),"hours");
@@ -50,18 +67,18 @@ function padNumber(number,unitOfTime){
 	}
 }
 
-function calculateTrend(durations){
-	var xcoords = [];
+function calculateTrend(durations, runstamps){
 	var n = durations.length;
 	var sum_x=0;
 	var sum_y=0;
 	var sum_xx=0; //sum of x squared values
 	var sum_xy=0; //sum of x times y values
+	var xcoords = [];
 	var trends = [];
 	for(var i=0; i < n; i++) {
 	  var y = durations[i];
 	  // create x coordinates
-	  xcoords[i] = i+1;
+	  xcoords[i] = Date.parse(runstamps[i]);
 	  var x = xcoords[i];
 	  //calc sum of y coords (durations)
 	  sum_y = sum_y+y;
