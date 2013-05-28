@@ -43,7 +43,7 @@ module ApplicationHelper
 	  	content_tag(:td) do
 	  		content_tag(:span, :class => "buildStatus#{entry_num} badge badge-warning") do
 	  			model_name.status
-	  		end
+	  		end + model_exclude_display(model_name)
 	  	end
 	  elsif model_name.status == "skipped"
 	  	content_tag(:td) do
@@ -55,9 +55,17 @@ module ApplicationHelper
 	  	content_tag(:td) do
 	  		content_tag(:span, :class => "buildStatus#{entry_num} label label-inverse") do
 	  			model_name.status
-	  		end
+	  		end + model_exclude_display(model_name)
 	  	end
 		end    
+ 	end
+ 	
+ 	def model_exclude_display(model_name)
+ 		if model_name.kind_of?(Suite) and model_name.exclude
+ 			return tag(:i, :class => "icon-ban-circle")
+ 		else
+ 			return nil
+ 		end
  	end
  	
  	def active_flag_display(flag)
