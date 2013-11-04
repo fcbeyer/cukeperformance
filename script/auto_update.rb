@@ -4,7 +4,6 @@ require 'getoptlong'
 def auto_create(cuke_name)
 	send_email = true
 	cuke_results = CukeParser.json(cuke_name+"/")
-	puts cuke_results.mobilizer_build_tag
 end
 
 def auto_create_dub(cuke_name)
