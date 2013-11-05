@@ -58,5 +58,5 @@ end
 
 ENV['RAILS_ENV'] = "development" # Set to your desired Rails environment name
 require_relative '..\config\environment.rb'
-setup_data
+options = setup_data
 auto_create(options[:cuke_path],options[:cuke_name],options[:cuke_file])
