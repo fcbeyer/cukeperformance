@@ -30,56 +30,30 @@ class SuitesController < ApplicationController
   		@haveNewSuiteData = false
   	else
   		@haveNewSuiteData = true
-  		build_list.each do |build|
-	  		newSuite = Suite.new
-	  		newSuite.build_date = build.date
-	  		newSuite.build_time = build.time
-	  		newSuite.runstamp = build.runstamp
-	  		newSuite.duration = build.duration
-	  		newSuite.duration_converted = build.converted_duration
-	  		newSuite.browser = build.browser
-	  		newSuite.os = build.os
-	  		newSuite.mobilizer = build.branch_number
-	  		newSuite.mobilizer_build_tag = build.branch_build_tag
-	  		newSuite.url = build.url
-	  		newSuite.name = task.name
-	  		newSuite.status = build.status
-	  		newSuite.exclude = false
-	  		newSuite.save
-	  		build.features.each do |feature|
-	  		  newFeat = Feature.new
-  		    newFeat.keyword = feature.keyword
-  		    newFeat.name = feature.name
-  		    newFeat.duration = feature.duration
-  		    newFeat.duration_converted = feature.converted_duration
-  		    newFeat.suite_id = newSuite.id
-  		    newFeat.status = feature.status
-	  		  newFeat.save
-	  		  feature.scenarios.each do |scenario|
-	  		  	newScenario = Scenario.new
-	  		  	newScenario.keyword = scenario.keyword
-  		    	newScenario.name = scenario.name
-  		    	newScenario.duration = scenario.duration
-  		    	newScenario.duration_converted = scenario.converted_duration
-  		    	newScenario.feature_id = newFeat.id
-  		    	newScenario.status = scenario.status
-	  		  	newScenario.save
-	  		  	scenario.steps.each do |step|
-	  		  		newStep = Step.new
-	  		  		newStep.keyword = step.keyword
-  		    		newStep.name = step.name
-  		    		newStep.duration = step.duration
-  		    		newStep.duration_converted = step.converted_duration
-  		    		newStep.status = step.status
-  		    		newStep.scenario_id = newScenario.id
-  		    		newStep.status = step.status
-  		    		newStep.reason_for_failure = step.reason_for_failure
-							newStep.failure_image = step.failure_image
-	  		  		newStep.save
-	  		  	end #end step
-	  		  end #end scenario
-	  		end #end feature
-  		end #end build
+  		build_list.each do |cuke_results|
+  			suite = Suite.new({:build_date => cuke_results.date,:build_time => cuke_results.time,:runstamp => cuke_results.runstamp,:duration => cuke_results.duration,
+						:duration_converted => cuke_results.converted_duration,:browser => cuke_results.browser,:os => cuke_results.os,:mobilizer => cuke_results.branch_number,
+						:mobilizer_build_tag => cuke_results.branch_build_tag,:url => cuke_results.url,:name => task.name,:status => cuke_results.status,:exclude => false})
+				suite.save
+				cuke_results.features.each do |cur_feature|
+					#save each feature
+					feature = Feature.new({:keyword => cur_feature.keyword,:name => cur_feature.name,:duration => cur_feature.duration,
+											:duration_converted => cur_feature.converted_duration,:suite_id => suite.id,:status => cur_feature.status})
+					feature.save
+					cur_feature.scenarios.each do |cur_scenario|
+						#save each scenario
+						scenario = Scenario.new({:keyword => cur_scenario.keyword,:name => cur_scenario.name,:duration => cur_scenario.duration,
+												:duration_converted => cur_scenario.converted_duration,:feature_id => feature.id,:status => cur_scenario.status})
+						scenario.save
+						cur_scenario.steps.each do |cur_step|
+							#save each step
+							step = Step.new({:keyword => cur_step.keyword,:name => cur_step.name,:duration => cur_step.duration,:duration_converted => cur_step.converted_duration,
+											:status => cur_step.status,:scenario_id => scenario.id,:reason_for_failure => cur_step.reason_for_failure,:failure_image => cur_step.failure_image})
+							step.save
+						end #end steps
+					end #end scenarios
+				end #end features
+			end #end build_list
   	end #end else
   	check_task_alerts(task,send_email)
   	capture_results.push(@haveNewSuiteData)

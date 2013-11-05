@@ -1,7 +1,7 @@
 module ApplicationHelper
 	
 	def alert_information
-		if browser.ie?
+		if acceptable_browser?
   		return "Alerts notifications do NOT work in IE.  Please switch over to Chrome or Firefox for a better experience"
     elsif browser.firefox?
     	return raw("<a href=\"https://addons.mozilla.org/en-us/firefox/addon/html-notifications/\" target=\"_blank\">Please make sure this add-on is enabled to receive notifications</a>")
@@ -101,5 +101,9 @@ module ApplicationHelper
  	def get_generate_data_url(suite)
  		root_url + auto_create_suites_path(suite.name)
  	end
+ 	
+ 	def acceptable_browser?
+		browser.ie? and (browser.version.to_i < 10)
+	end
 	
 end

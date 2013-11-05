@@ -6,7 +6,7 @@ gem 'rails', '3.2.1'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development do
-	gem 'mysql2'
+	gem 'mysql2', '<= 0.3.11'
 end
 
 group :test do
@@ -14,7 +14,7 @@ group :test do
 end
 
 group :production do
-	gem 'mysql2'
+	gem 'mysql2', '<= 0.3.11'
 end
 
 
