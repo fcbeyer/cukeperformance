@@ -25,5 +25,19 @@ select,
 textarea,
 input[type="number"],
 .uneditable-input {
-  height: 25px;
+  height: 30px;
+}
+
+.fancy-header{
+	text-align: center;
+	color: orangered
+}
+
+.pagination{
+	margin: 20px;
+	text-align: center;
+}
+
+a.cuke_results {
+  text-decoration: underline;
 }

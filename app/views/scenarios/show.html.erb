@@ -1,20 +1,25 @@
 <p id="notice"><%= notice %></p>
-
-<table class="table table-bordered table-hover">
-  <tr>
-    <th>Scenario</th>
-    <th>Duration</th>
-    <th></th>
-  </tr>
-  <tr>
-  	<%= keyword_or_name_display(@current_scenario) %>
-    <td><%= @current_scenario.duration_converted %></td>
-    <td><%= link_to 'Destroy', [@current_suite,@current_feature,@current_scenario], confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-</table>
-
-<%= render 'steps/put_steps' %>
-
-<br />
-
-<%= link_to 'Back', [@current_suite,@current_feature] %>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<table class="table table-bordered table-hover">
+			  <tr>
+			    <th>Scenario</th>
+			    <th>Duration</th>
+			    <th></th>
+			  </tr>
+			  <tr>
+			  	<td><%= link_to keyword_or_name_link(@current_scenario), [@current_suite,@current_feature], :class => "cuke_results" %></td>
+			    <td><%= @current_scenario.duration_converted %></td>
+			    <td><%= link_to 'Destroy', [@current_suite,@current_feature,@current_scenario], confirm: 'Are you sure?', method: :delete, :class => "btn btn-small" %></td>
+			  </tr>
+			</table>
+			
+			<%= render 'steps/put_steps' %>
+			
+			<br />
+			
+			<%= link_to 'Back', [@current_suite,@current_feature], :class => "btn btn-small" %>
+		</div>
+	</div>
+</div>

@@ -1,4 +1,4 @@
-<h1>Listing suites</h1>
+<h1 class="fancy-header">Listing suites</h1>
 
 <!-- <script>
 	var date = "2012-10-30"
@@ -8,57 +8,62 @@
 	var rick = moment("2012-10-30").hours(myArray[0]).seconds(myArray[1]).milliseconds(myArray[2]).toDate();
 	document.write(rick);
 </script> -->
-
-<ul class="nav nav-tabs">
-  <% @suite_list.each_with_index do |suite,suite_num| %>
-  	<% if suite_num == 0 %>
-  		<li class="active"><a href="#<%= suite.name %>" data-toggle="tab"><%= suite.display_name %> Builds</a></li>
-  	<% else %>
-  		<li><a href="#<%= suite.name %>" data-toggle="tab"><%= suite.display_name %> Builds</a></li>
-  	<% end %>
-  <% end %>
-</ul>
-
-<div class="tab-content">
-	<% @suite_list.each_with_index do |entry,entry_num| %>
-		<% if entry_num == 0 %>
-			<div class="tab-pane active" id="<%= entry.name %>">
-		<% else %>
-			<div class="tab-pane" id="<%= entry.name %>">
-		<% end %>
-			<table class="table table-bordered table-condensed table-hover" id="suiteTable<%= entry_num %>">
-				<thead>
-				  <tr>
-					<th>Build Timestamp
-						<%= text_field_tag 'build_filter'+entry_num.to_s, nil, :placeholder => "Text input", :onkeyup => "filterSuitesTable('#{entry_num}')" %> 
-					</th>
-				    <th>Duration
-				    	<%= text_field_tag 'duration_filter'+entry_num.to_s, nil, :placeholder => "Text input", :onkeyup => "filterSuitesTable('#{entry_num}')" %>
-				    </th>
-				    <th>Build Tag
-				    	<input type="text" id="tag_filter<%=entry_num%>" data-provide="typeahead" placeholder="Text input" autocomplete="off" onkeyup="filterSuitesTable(<%=entry_num%>)" ></input>
-				    	<%= javascript_tag "$('#tag_filter0').typeahead({source: #{get_build_tags(entry.name)}})"%>
-				    </th>
-				    <th>Status
-				    	<%= select_tag 'status_filter'+entry_num.to_s, "<option>failed</option><option>passed</option>".html_safe, :prompt => "Choose a value...",:onchange => "filterSuitesTable('#{entry_num}')" %>
-				    </th>
-				    <th></th>
-				    <th></th>
-				  </tr>
-				</thead>
-			
-			<% @suites[entry.name].each do |suite| %>
-			  <tr>
-			    <td class="buildRunstamp<%= entry_num %>"><%= suite.runstamp %></td>
-			    <td class="buildDuration<%= entry_num %>"><%= suite.duration_converted %></td>
-			    <td class="buildTag<%= entry_num %>"><%= suite.mobilizer_build_tag %></td>
-			    <%= model_status_display(suite,entry_num) %>
-			    <td><%= link_to 'Show', suite %></td>
-			    <td><%= link_to 'Destroy', suite, confirm: 'Are you sure?', method: :delete %></td>
-			  </tr>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<ul class="nav nav-tabs">
+		  <% @suite_list.each_with_index do |suite,suite_num| %>
+		  	<% if suite_num == 0 %>
+		  		<li class="active"><a href="#<%= suite.name %>" data-toggle="tab"><%= suite.display_name %> Builds</a></li>
+		  	<% else %>
+		  		<li><a href="#<%= suite.name %>" data-toggle="tab"><%= suite.display_name %> Builds</a></li>
+		  	<% end %>
+		  <% end %>
+		</ul>
+		
+		<div class="tab-content">
+			<% @suite_list.each_with_index do |entry,entry_num| %>
+				<% if entry_num == 0 %>
+					<div class="tab-pane active" id="<%= entry.name %>">
+				<% else %>
+					<div class="tab-pane" id="<%= entry.name %>">
+				<% end %>
+					<div class="span12">
+						<table class="table table-bordered table-condensed table-hover" id="suiteTable<%= entry_num %>">
+							<thead>
+							  <tr>
+								<th>Build Timestamp
+									<%= text_field_tag 'build_filter'+entry_num.to_s, nil, :placeholder => "Text input", :onkeyup => "filterSuitesTable('#{entry_num}')" %> 
+								</th>
+							    <th>Duration
+							    	<%= text_field_tag 'duration_filter'+entry_num.to_s, nil, :placeholder => "Text input", :onkeyup => "filterSuitesTable('#{entry_num}')" %>
+							    </th>
+							    <th>Build Tag
+							    	<input type="text" id="tag_filter<%=entry_num%>" data-provide="typeahead" placeholder="Text input" autocomplete="off" onkeyup="filterSuitesTable(<%=entry_num%>)" ></input>
+							    	<%= javascript_tag "$('#tag_filter0').typeahead({source: #{get_build_tags(entry.name)}})"%>
+							    </th>
+							    <th>Status
+							    	<%= select_tag 'status_filter'+entry_num.to_s, "<option>failed</option><option>passed</option>".html_safe, :prompt => "Choose a value...",:onchange => "filterSuitesTable('#{entry_num}')" %>
+							    </th>
+							    <th></th>
+							    <th></th>
+							  </tr>
+							</thead>
+						
+						<% @suites[entry.name].each do |suite| %>
+						  <tr>
+						    <td class="buildRunstamp<%= entry_num %>"><%= time_tag(suite.runstamp,:format=>'%B %d, %Y %l:%M %p') %></td>
+						    <td class="buildDuration<%= entry_num %>"><%= suite.duration_converted %></td>
+						    <td class="buildTag<%= entry_num %>"><%= suite.mobilizer_build_tag %></td>
+						    <%= model_status_display(suite,entry_num) %>
+						    <td><%= link_to 'Show', suite, :class => "btn btn-small"  %></td>
+						    <td><%= link_to 'Destroy', suite, confirm: 'Are you sure?', method: :delete, :class => "btn btn-small"  %></td>
+						  </tr>
+						<% end %>
+						</table>
+					</div>
+				</div>
 			<% end %>
-			</table>
 		</div>
-	<% end %>
+	</div>
 </div>
 <br />
