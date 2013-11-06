@@ -2,6 +2,10 @@
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
+			<ul class="breadcrumb">
+			  <li><%= link_to @current_suite.name, get_tab_path(suites_path,@current_suite.name) %><span class="divider">/</span></li>
+			  <li class="active"><%= time_tag(@current_suite.runstamp,:format=>'%B %d, %Y %l:%M %p') %></li>
+			</ul>
 			<table class="table table-bordered table-hover">
 			  <tr>
 			    <th>Build Timestamp</th>
@@ -17,7 +21,7 @@
 			    <th></th>
 			  </tr>
 			  <tr>
-			    <td><%= @current_suite.runstamp %></td>
+			    <td><%= time_tag(@current_suite.runstamp,:format=>'%B %d, %Y %l:%M %p') %></td>
 			    <td><%= @current_suite.duration_converted %></td>
 			    <td><%= @current_suite.name %></td>
 			    <td><%= @current_suite.browser %></td>
@@ -30,13 +34,14 @@
 			    <td><%= link_to 'Destroy', @current_suite, confirm: 'Are you sure?', method: :delete, :class => "btn btn-small"  %></td>
 			  </tr>
 			</table>
-			
-			
-			<%= render 'features/put_features' %>
-			
-			<br />
-			
-			<%= link_to 'Back', suites_path, :class => "btn btn-small"  %>
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span12">
+						<%= render 'features/put_features' %>
+					</div>
+				</div>
+			</div>
+			<!-- <%= link_to 'Back', suites_path, :class => "btn btn-small"  %> -->
 		</div>
 	</div>
 </div>

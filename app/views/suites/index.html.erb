@@ -1,16 +1,15 @@
 <h1 class="fancy-header">Listing suites</h1>
-
-<!-- <script>
-	var date = "2012-10-30"
-	var time = "11-28-05"
-	var myArray = time.split("-")
-	for(var i=0; i<myArray.length; i++) { myArray[i] = parseInt(myArray[i], 10); }
-	var rick = moment("2012-10-30").hours(myArray[0]).seconds(myArray[1]).milliseconds(myArray[2]).toDate();
-	document.write(rick);
-</script> -->
+<script>
+  $(function () {
+  	var hash = window.location.hash;
+  	if(hash){
+    	$('#myTab a[href="'+hash+'"]').tab('show');
+   	}
+  })
+</script>
 <div class="container-fluid">
 	<div class="row-fluid">
-		<ul class="nav nav-tabs">
+		<ul class="nav nav-tabs" id="myTab">
 		  <% @suite_list.each_with_index do |suite,suite_num| %>
 		  	<% if suite_num == 0 %>
 		  		<li class="active"><a href="#<%= suite.name %>" data-toggle="tab"><%= suite.display_name %> Builds</a></li>

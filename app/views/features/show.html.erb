@@ -2,6 +2,11 @@
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
+			<ul class="breadcrumb">
+			  <li><%= link_to @current_suite.name, get_tab_path(suites_path,@current_suite.name) %><span class="divider">/</span></li>
+			  <li><%= link_to time_tag(@current_suite.runstamp,:format=>'%B %d, %Y %l:%M %p'), [@current_suite] %><span class="divider">/</span></li>
+			  <li class="active"><%= @current_feature.name %><span class="divider">/</span></li>
+			</ul>
 			<table class="table table-bordered table-hover">
 			  <tr>
 			    <th>Feature</th>
@@ -14,12 +19,14 @@
 			    <td><%= link_to 'Destroy', [@current_suite,@current_feature], confirm: 'Are you sure?', method: :delete, :class => "btn btn-small" %></td>
 			  </tr>
 			</table>
-			
-			<%= render 'scenarios/put_scenarios' %>
-			
-			<br />
-			
-			<%= link_to 'Back', [@current_suite], :class => "btn btn-small" %>
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span12">
+						<%= render 'scenarios/put_scenarios' %>
+					</div>
+				</div>
+			</div>
+			<!-- <%= link_to 'Back', [@current_suite], :class => "btn btn-small" %> -->
 		</div>
 	</div>
 </div>

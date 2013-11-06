@@ -106,4 +106,8 @@ module ApplicationHelper
 		browser.ie? and (browser.version.to_i < 10)
 	end
 	
+	def get_tab_path(path,suite_name)
+		return path + "#" + suite_name
+	end
+	
 end
