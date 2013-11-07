@@ -1,29 +1,34 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Browser:</b>
-  <%= @task_alert.browser %>
-</p>
-
-<p>
-  <b>Time limit:</b>
-  <%= @task_alert.time_limit %>
-</p>
-
-<p>
-  <b>Time limit converted:</b>
-  <%= convert_time(@task_alert.time_limit) %>
-</p>
-
-<p>
-  <b>Active:</b>
-  <%= @task_alert.active %>
-</p>
-
-<p>
-  <b>Email List (comma separated list):</b>
-  <%= @task_alert.email_list %>
-</p>
-
-<%= link_to 'Edit', edit_task_task_alert_path([@current_task,@task_alert]) %> |
-<%= link_to 'Back', task_task_alerts_path %>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<p>
+			  <b>Browser:</b>
+			  <%= @task_alert.browser %>
+			</p>
+			
+			<p>
+			  <b>Time limit:</b>
+			  <%= @task_alert.time_limit %>
+			</p>
+			
+			<p>
+			  <b>Time limit converted:</b>
+			  <%= convert_time(@task_alert.time_limit) %>
+			</p>
+			
+			<p>
+			  <b>Active:</b>
+			  <%= @task_alert.active %>
+			</p>
+			
+			<p>
+			  <b>Email List (comma separated list):</b>
+			  <%= @task_alert.email_list %>
+			</p>
+			
+			<%= link_to 'Edit', edit_task_task_alert_path([@current_task,@task_alert]), :class => "btn btn-small" %> |
+			<%= link_to 'Back', task_task_alerts_path, :class => "btn btn-small" %>
+		</div>
+	</div>
+</div>
