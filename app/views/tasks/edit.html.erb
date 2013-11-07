@@ -1,6 +1,12 @@
-<h1>Editing task</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @task %> |
-<%= link_to 'Back', tasks_path %>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<h1 style="color: orangered">Editing task</h1>
+			
+			<%= render 'form' %>
+			
+			<%= link_to 'Show', @task, :class => "btn btn-small" %> |
+			<%= link_to 'Back', tasks_path, :class => "btn btn-small" %>
+		</div>
+	</div>
+</div>
