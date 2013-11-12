@@ -65,7 +65,7 @@ def setup_data
 	return options
 end
 
-ENV['RAILS_ENV'] = "development" # Set to your desired Rails environment name
+ENV['RAILS_ENV'] = "production" # Set to your desired Rails environment name
 require_relative '..\config\environment.rb'
 options = setup_data
 auto_create(options[:cuke_path],options[:cuke_name],options[:cuke_file],options[:cuke_time])
