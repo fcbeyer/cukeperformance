@@ -7,7 +7,7 @@
 
 <% @current_feature.scenarios.each do |scenario| %>
   <tr>
-    <td><%= link_to keyword_or_name_link(scenario), [@current_suite,@current_feature,scenario] %></td>
+    <td><%= link_to keyword_or_name_link(scenario), [@current_suite,@current_feature,scenario], :class => "cuke_results" %></td>
     <td><%= scenario.duration_converted %></td>
     <%= model_status_display(scenario) %>
   </tr>

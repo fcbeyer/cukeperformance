@@ -1,40 +1,44 @@
-<h1> Executive Summary </h1>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>    
-    <script type="text/javascript">
-      google.load('visualization', '1.1', {packages: ['controls']});
-    </script>
-<div class="field">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>    
+<script type="text/javascript">
+  google.load('visualization', '1.1', {packages: ['controls']});
+</script>
+</head>
+<h1 class="fancy-header"> Executive Summary </h1>
+<div class="field" align="center">
 	<%= select_tag :summary_suite_name,options_from_collection_for_select(@suite_list,"name","display_name"), :prompt => "Select a Suite to display",
 		:'data-remote' => 'true', :'data-url' => url_for(:controller => 'graph', :action => 'summary', format: 'json') %>
 </div>
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#lineChart" data-toggle="tab">Summary</a></li>
-</ul>
-<div class="tab-content">
-	<div class="tab-pane active" id="lineChart">
-		<script type="text/javascript">
-	      google.setOnLoadCallback(drawSummaryLineVisualization);
-	    </script>
-	  </head>
-	  <body style="font-family: Arial;border: 0 none;">
-	    <div id="dashboard3">
-	      <table>
-	        <tr style='vertical-align: top'>
-	          <td style='width: 300px; font-size: 0.9em;'>
-	            <div id="statusSummaryFilter"></div>
-	            <div id="browserSummaryFilter"></div>
-	            <div id="versionSummaryFilter"></div>
-	          </td>
-	          <td style='width: 600px'>
-	            <div id="linechart"></div>
-	          </td>
-	        </tr>
-	      </table>
-	    </div>
-	  </body>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<ul class="nav nav-tabs">
+			  <li class="active"><a href="#lineChart" data-toggle="tab">Summary</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="lineChart">
+					<script type="text/javascript">
+				      google.setOnLoadCallback(drawSummaryLineVisualization);
+				    </script>
+				  <body style="font-family: Arial;border: 0 none;">
+				    <div id="dashboard3">
+				      <table>
+				        <tr style='vertical-align: top'>
+				          <td style='width: 300px; font-size: 0.9em;'>
+				            <div id="statusSummaryFilter"></div>
+				            <div id="browserSummaryFilter"></div>
+				            <div id="versionSummaryFilter"></div>
+				          </td>
+				          <td style='width: 600px'>
+				            <div id="linechart"></div>
+				          </td>
+				        </tr>
+				      </table>
+				    </div>
+				  </body>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
-
-<br />

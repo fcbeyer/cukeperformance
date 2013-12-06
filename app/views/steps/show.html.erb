@@ -1,37 +1,54 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Keyword:</b>
-  <%= @step.keyword %>
-</p>
-
-<p>
-  <b>Name:</b>
-  <%= @step.name %>
-</p>
-
-<p>
-  <b>Duration:</b>
-  <%= @step.duration %>
-</p>
-
-<p>
-  <b>Duration converted:</b>
-  <%= @step.duration_converted %>
-</p>
-
-<p>
-  <b>Status: </b>
-  <%= step_status_show_display %>
-</p>
-
-<%= step_failure_display %>
-
-<p>
-  <b>Scenario:</b>
-  <%= @step.scenario_id %>
-</p>
-
-<%= step_display_failure_image %>
-
-<%= link_to 'Back', [@current_suite,@current_feature,@current_scenario] %>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<ul class="breadcrumb">
+			  <li><%= link_to @current_suite.name, get_tab_path(suites_path,@current_suite.name) %><span class="divider">/</span></li>
+			  <li><%= link_to time_tag(@current_suite.runstamp,:format=>'%B %d, %Y %l:%M %p'), [@current_suite] %><span class="divider">/</span></li>
+			  <li><%= link_to @current_feature.name,[@current_suite,@current_feature] %><span class="divider">/</span></li>
+			  <li><%= link_to keyword_or_name_link(@current_scenario), [@current_suite,@current_feature,@current_scenario] %><span class="divider">/</span></li>
+			  <li class="active"><%= @step.keyword + @step.name %><span class="divider"></li>
+			</ul>
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span12">
+						<p>
+						  <b>Keyword:</b>
+						  <%= @step.keyword %>
+						</p>
+						
+						<p>
+						  <b>Name:</b>
+						  <%= @step.name %>
+						</p>
+						
+						<p>
+						  <b>Duration:</b>
+						  <%= @step.duration %>
+						</p>
+						
+						<p>
+						  <b>Duration converted:</b>
+						  <%= @step.duration_converted %>
+						</p>
+						
+						<p>
+						  <b>Status: </b>
+						  <%= step_status_show_display %>
+						</p>
+						
+						<%= step_failure_display %>
+						
+						<p>
+						  <b>Scenario:</b>
+						  <%= @step.scenario_id %>
+						</p>
+						
+						<%= step_display_failure_image %>
+					</div>
+				</div>
+			</div>
+			<!-- <%= link_to 'Back', [@current_suite,@current_feature,@current_scenario], :class => "btn btn-small" %> -->
+		</div>
+	</div>
+</div>

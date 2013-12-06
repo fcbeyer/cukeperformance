@@ -7,7 +7,7 @@
 
 <% @current_suite.features.each do |feature| %>
   <tr>
-    <td><%= link_to feature.name, [@current_suite,feature] %></td>
+    <td><%= link_to feature.name, [@current_suite,feature], :class => "cuke_results"  %></td>
     <td><%= feature.duration_converted %></td>
     <%= model_status_display(feature) %>
   </tr>

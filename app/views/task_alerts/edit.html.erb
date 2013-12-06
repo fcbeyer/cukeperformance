@@ -1,6 +1,12 @@
-<h1>Editing a <%= display_task_name %> Task Alert</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', [@current_task,@task_alert] %> |
-<%= link_to 'Back', task_task_alerts_path(@current_task) %>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<h1 style="color: orangered">Editing a <%= display_task_name %> Task Alert</h1>
+			
+			<%= render 'form' %>
+			
+			<%= link_to 'Show', [@current_task,@task_alert], :class => "btn btn-small" %> |
+			<%= link_to 'Back', task_task_alerts_path(@current_task), :class => "btn btn-small" %>
+		</div>
+	</div>
+</div>

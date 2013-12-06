@@ -7,12 +7,12 @@ development:
   port: 3306
   adapter: jdbcmysql
   encoding: utf8
-  database: perf_reports
+  reconnect: false
+  database: cukeperf_test
   pool: 5
-  username: cukeperf
-  password: cuke123
-  host: allservers
-  timeout: 5000
+  username: cukeperf_t
+  password: cuke-t-123
+  host: dev-sandbox-1
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

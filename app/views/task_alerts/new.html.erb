@@ -1,5 +1,12 @@
-<h1>New <%= display_task_name %> Automated Task Alert</h1>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
 
-<%= render 'form' %>
-
-<%= link_to 'Back', task_task_alerts_path %>
+			<h1 style="color: orangered">New <%= display_task_name %> Automated Task Alert</h1>
+			
+			<%= render 'form' %>
+			
+			<%= link_to 'Back', task_task_alerts_path, :class => "btn btn-small" %>
+		</div>
+	</div>
+</div>

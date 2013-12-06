@@ -1,73 +1,76 @@
-<h1> Feature Performance Charts</h1>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>    
-    <script type="text/javascript">
-      google.load('visualization', '1.1', {packages: ['controls']});
-    </script>
-  </head>
-<%= loading_bar %>
-<p>
-	<a href="#featureModal" role="button" class="btn btn-primary" data-toggle="modal">Get Data</a>
-</p>
-
-<!-- Modal information -->
-<div id="featureModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<%= render 'graph/feature_form' %>
-</div>
-
-<!-- tab and graph display code -->
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#barChart" data-toggle="tab">Bar Chart</a></li>
-  <li><a href="#lineChart" data-toggle="tab">Line Chart</a></li>
-</ul>
-<div class="tab-content">
-	<div class="tab-pane active" id="barChart">
-	    <script type="text/javascript">	
-	      google.setOnLoadCallback(drawFeatureBarVisualization);
-	    </script>
-	  <body style="font-family: Arial;border: 0 none;">
-	    <div id="dashboard">
-	      <table>
-	        <tr style='vertical-align: top'>
-	          <td style='width: 300px; font-size: 0.9em;'>
-	          	<div id="featureBarFilter"></div>
-	            <div id="control1"></div>
-	            <div id="browser1"></div>
-	            <div id="version1"></div>
-	            <div id="control2"></div>
-	          </td>
-	          <td style='width: 600px'>
-	            <div style="float: left;" id="chart1"></div>
-	          </td>
-	        </tr>
-	      </table>
-	    </div>
-	  </body>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<h1 class="fancy-header"> Feature Performance Charts</h1>
+			  <head>
+			    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+			    <script type="text/javascript" src="http://www.google.com/jsapi"></script>    
+			    <script type="text/javascript">
+			      google.load('visualization', '1.1', {packages: ['controls']});
+			    </script>
+			  </head>
+			<%= loading_bar %>
+			<div align="center">
+				<a href="#featureModal" role="button" class="btn btn-primary" data-toggle="modal">Get Data</a>
+			</div>
+			<!-- Modal information -->
+			<div id="featureModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<%= render 'graph/feature_form' %>
+			</div>
+			
+			<!-- tab and graph display code -->
+			<ul class="nav nav-tabs">
+			  <li class="active"><a href="#barChart" data-toggle="tab">Bar Chart</a></li>
+			  <li><a href="#lineChart" data-toggle="tab">Line Chart</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="barChart">
+				    <script type="text/javascript">	
+				      google.setOnLoadCallback(drawFeatureBarVisualization);
+				    </script>
+				  <body style="font-family: Arial;border: 0 none;">
+				    <div id="dashboard">
+				      <table>
+				        <tr style='vertical-align: top'>
+				          <td style='width: 300px; font-size: 0.9em;'>
+				          	<div id="featureBarFilter"></div>
+				            <div id="control1"></div>
+				            <div id="browser1"></div>
+				            <div id="version1"></div>
+				            <div id="control2"></div>
+				          </td>
+				          <td style='width: 600px'>
+				            <div style="float: left;" id="chart1"></div>
+				          </td>
+				        </tr>
+				      </table>
+				    </div>
+				  </body>
+				</div>
+				<div class="tab-pane" id="lineChart">
+					<script type="text/javascript">	
+				      google.setOnLoadCallback(drawFeatureLineVisualization);
+				    </script>
+				  <body style="font-family: Arial;border: 0 none;">
+				    <div id="dashboard3">
+				      <table>
+				        <tr style='vertical-align: top'>
+				          <td style='width: 300px; font-size: 0.9em;'>
+				            <div id="featureLineFilter"></div>
+				            <div id="statusLineFilter"></div>
+				            <div id="browser2"></div>
+				            <div id="version2"></div>
+				            <div id="suiteRangeFilter"></div>
+				          </td>
+				          <td style='width: 600px'>
+				            <div id="linechart"></div>
+				          </td>
+				        </tr>
+				      </table>
+				    </div>
+				  </body>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="tab-pane" id="lineChart">
-		<script type="text/javascript">	
-	      google.setOnLoadCallback(drawFeatureLineVisualization);
-	    </script>
-	  <body style="font-family: Arial;border: 0 none;">
-	    <div id="dashboard3">
-	      <table>
-	        <tr style='vertical-align: top'>
-	          <td style='width: 300px; font-size: 0.9em;'>
-	            <div id="featureLineFilter"></div>
-	            <div id="statusLineFilter"></div>
-	            <div id="browser2"></div>
-	            <div id="version2"></div>
-	            <div id="suiteRangeFilter"></div>
-	          </td>
-	          <td style='width: 600px'>
-	            <div id="linechart"></div>
-	          </td>
-	        </tr>
-	      </table>
-	    </div>
-	  </body>
-	</div>
 </div>
-
-<br />
